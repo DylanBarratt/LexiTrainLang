@@ -1,0 +1,18 @@
+title: "over unders".
+sport: "cycling".
+author: "Dylan Barratt".
+
+warmup {
+	60min < HRZ2,
+}
+
+main set {
+	5 * {
+		5min > PWZ4 < PWZ6
+		5min > PWZ3 < PWZ4
+	},
+}
+
+cool down {
+	60min < HRZ2,
+}
