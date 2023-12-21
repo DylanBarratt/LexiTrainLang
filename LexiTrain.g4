@@ -2,6 +2,9 @@ grammar LexiTrain;
 
 
 //Parser rules
+lexi
+    : day;
+
 day
     : DATE TEXT;
 
@@ -10,13 +13,13 @@ day
 //Lexer rules
 //TODO: more date formats need to be recognized
 DATE
-    : 'Mon'
-    | 'Tue'
-    | 'Wed'
-    | 'Thu'
-    | 'Fri'
-    | 'Sat'
-    | 'Sun'
+    : 'Mon:'
+    | 'Tue:'
+    | 'Wed:'
+    | 'Thu:'
+    | 'Fri:'
+    | 'Sat:'
+    | 'Sun:'
     ;
 
 TEXT: [a-zA-Z]+; 
