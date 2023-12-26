@@ -1,4 +1,5 @@
 title: "over unders".
+filename: "5overUnders".
 sport: "cycling".
 author: "Dylan Barratt".
 
@@ -7,7 +8,10 @@ warmup {
 }
 
 main set {
-	2hours < HRZ3
+	5 * {
+		5min > PWZ4 < PWZ6
+		5min > PWZ3 < PWZ4
+	},
 }
 
 cool down {
