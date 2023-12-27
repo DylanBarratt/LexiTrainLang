@@ -1,7 +1,7 @@
 #!/bin/bash
 ./out.sh
 
-TEST_FILE="../examples/metadata.lt"
+TEST_FILE="../examples/period.lt"
 
 cd Java
 cp ../*.g4 ./

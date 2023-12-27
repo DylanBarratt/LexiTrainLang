@@ -1,9 +1,7 @@
 weeek {}
-
 weee2k {}
-
 week 1 {Mon: value1 value2}
-
+week 1 {Mon: value1 value2,}
 week 3 {
     Mon: value1 value2,
     Tue: value1 value2,
