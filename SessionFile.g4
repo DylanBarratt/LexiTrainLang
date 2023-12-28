@@ -1,6 +1,8 @@
 grammar SessionFile;
 
-//Parser rules
+import BaseLexer;
 
+//Parser rules
+file: WORD;
 
 //Lexer rules
