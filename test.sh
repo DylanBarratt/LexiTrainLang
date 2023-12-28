@@ -2,10 +2,11 @@
 ./out.sh
 
 TEST_FILE="../examples/period.lt"
+TYPE="PeriodFile"
 
 echo "Testing $TEST_FILE"
 cd Java
-cp ../*.g4 ./
-java -Xmx500M -cp "/usr/local/lib/antlr-4.13.1-complete.jar:$CLASSPATH" org.antlr.v4.gui.TestRig LexiTrain lexi -tokens $TEST_FILE
-java -Xmx500M -cp "/usr/local/lib/antlr-4.13.1-complete.jar:$CLASSPATH" org.antlr.v4.gui.TestRig LexiTrain lexi -gui $TEST_FILE
-rm *.g4
+cp ../$TYPE.g4 ./
+java -Xmx500M -cp "/usr/local/lib/antlr-4.13.1-complete.jar:$CLASSPATH" org.antlr.v4.gui.TestRig $TYPE file -tokens $TEST_FILE
+java -Xmx500M -cp "/usr/local/lib/antlr-4.13.1-complete.jar:$CLASSPATH" org.antlr.v4.gui.TestRig $TYPE file -gui $TEST_FILE
+rm $TYPE.g4

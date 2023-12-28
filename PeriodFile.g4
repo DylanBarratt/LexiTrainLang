@@ -1,7 +1,7 @@
-grammar LexiTrain;
+grammar PeriodFile;
 
 //parser rules
-lexi:(metaData)* periods EOF;
+file:(metaData)* periods EOF;
 
 metaData: WORD ':' WORD '.';
 

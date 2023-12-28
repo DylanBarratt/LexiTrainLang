@@ -4,16 +4,16 @@ sport: "cycling".
 author: "Dylan Barratt".
 
 warmup {
-	60min < HRZ2,
+	1hr HRZ1
 }
 
-main set {
-	5 * {
-		5min > PWZ4 < PWZ6
-		5min > PWZ3 < PWZ4
-	},
+main {
+	5*{
+		5min HRZ5 &&
+		5min HRZ3 - HRZ4
+	}
 }
 
-cool down {
-	60min < HRZ2,
+cooldown {
+	30min HRZ1
 }
