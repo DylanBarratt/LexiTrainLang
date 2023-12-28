@@ -6,7 +6,7 @@ warmup {
 	60min < HRZ2,
 }
 
-main set {
+"main set" {
 	2hours < HRZ3
 }
 

@@ -14,6 +14,6 @@ main {
 	}
 }
 
-cooldown {
+"cool down" {
 	30min HRZ1
 }
