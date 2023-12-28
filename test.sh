@@ -1,8 +1,8 @@
 #!/bin/bash
 ./out.sh
 
-TEST_FILE="../examples/loop_session.s.lt"
-TYPE="SessionFile"
+TEST_FILE="../examples/period.lt"
+TYPE="PeriodFile"
 
 echo "Testing $TEST_FILE"
 cd Java

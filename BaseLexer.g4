@@ -1,7 +1,7 @@
 lexer grammar BaseLexer;
 
 NUM: [0-9]+;
-WORD: [a-zA-Z0-9]+ | '"' (ESC|.)*? '"';
+WORD: [a-zA-Z0-9_]+ | '"' (ESC|.)*? '"';
 LOAD: WORD '=' NUM;
 SPORT: '(' WORD ')';
 

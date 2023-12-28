@@ -1,11 +1,10 @@
-title: "chrimbo".
+title: "chrim\"!bo".
 author:"Dylan Barratt".
 
 //this is a comment!
 
-//no workout imports needed!
-//over_unders = 5overUnders.
-//base = 2hourBase.
+over_unders = 5overUnders.
+base = 2hourBase.
 
 "week 1" {
 	Mon: (bike) 1hr HRZ1 "cool bike yo",

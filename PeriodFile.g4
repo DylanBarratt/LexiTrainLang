@@ -3,9 +3,11 @@ grammar PeriodFile;
 import BaseLexer;
 
 //parser rules
-file:(metaData)* periods EOF;
+file:(metaData)* (sessionImport)* periods EOF;
 
 metaData: WORD ':' WORD '.';
+
+sessionImport: WORD '=' WORD '.';
 
 periods: (period)+;
 
@@ -46,5 +48,5 @@ workload
     | WORD WORD //at intensity
     ; 
 
-    
+
 //lexer rules
