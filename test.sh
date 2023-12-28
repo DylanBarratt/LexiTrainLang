@@ -1,7 +1,7 @@
 #!/bin/bash
 ./out.sh
 
-TEST_FILE="../examples/loop_period.lt"
+TEST_FILE="../examples/period.lt"
 
 echo "Testing $TEST_FILE"
 cd Java

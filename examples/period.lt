@@ -1,5 +1,5 @@
 title: "chrimbo".
-author: "Dylan Barratt".
+author:"Dylan Barratt".
 
 //this is a comment!
 
@@ -7,8 +7,8 @@ author: "Dylan Barratt".
 //over_unders = 5overUnders.
 //base = 2hourBase.
 
-week 1 {
-	Mon: (bike) 1hr HRZ1,
+"week 1" {
+	Mon: (bike) 1hr HRZ1 "cool bike yo",
 	Tue: (bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
 	Wed: (bike) 2hr HRZ2,
 	Thu: (bike) 1hr HRZ2&&(run) 1hr HRZ2,
@@ -16,17 +16,17 @@ week 1 {
 	Sat: (bike) 2hr HRZ2 && (run) 1hr30min HRZ2
 }
 
-week 2 {
-	Mon: (run) 1hr HRZ2 "Chrimbo run!",
-	Tue: (bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
-	Wed: (bike) 2hr HRZ2,
+"week 2"{
+	Mon: (run)1hr HRZ2 "Chrimbo run!",
+	Tue:(bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
+	Wed:(bike)2hr HRZ2,
 	Thu: (bike) 1hr HRZ2 && (run) 1hr HRZ2,
 	Fri: (bike) 2hr30min HRZ2,
 	Sat: (bike) 2hr HRZ2,
 	Sun: (run) 1hr30min HRZ2 && (bike) 1hr HRZ2
 }
 
-week 3 {
+"week 3" {
 	Mon: (note) "10mile tt?",
 	Tue: (bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
 	Wed: (bike) 2hr HRZ2,

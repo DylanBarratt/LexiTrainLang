@@ -3,38 +3,37 @@ grammar LexiTrain;
 //parser rules
 lexi:(metaData)* periods EOF;
 
-metaData: TEXT ': ' VALUE '.';
+metaData: WORD ':' WORD '.';
 
 periods: (period)+;
 
 period
-    : TEXT '{' periodPair (',' periodPair)* '}' 
+    : WORD '{' periodPair (',' periodPair)* '}' 
     ;
 
 periodPair
-    : TEXT ': ' data
+    : WORD ':' data
     | NUM REPEAT '{' data '}'
     | data
     ;
 
 data
-    : dataPair ('&&' (' ')? dataPair)*
+    : dataPair ('&&' dataPair)*
     ;
 
 dataPair
-    : '(' TEXT ')' (' ')? (TEXT)* (VALUE)? (load)?
+    : SPORT (WORD)* (LOAD)? 
     ;
-
-load : TEXT '=' TEXT;
 
 //lexer rules
 REPEAT : '*';
 
-VALUE : '"' (ESC|.)*? '"';
-fragment ESC : '\\"' | '\\\\' ;
-
-NUM : [0-9]+;
-TEXT : [a-zA-Z0-9 ]+ ;
+NUM: [0-9]+;
+WORD: [a-zA-Z0-9]+ | '"' (ESC|.)*? '"';
+LOAD: WORD '=' NUM;
+SPORT: '(' WORD ')';
 
 LINE_COMMENT : '//' .*? '\r'? '\n' -> skip ;
 WS : [ \t\r\n]+ -> skip ;
+
+fragment ESC : '\\"' | '\\\\' ;
