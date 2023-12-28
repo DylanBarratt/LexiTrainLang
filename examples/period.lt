@@ -20,7 +20,23 @@ author:"Dylan Barratt".
 	Mon: (run)1hr HRZ2 "Chrimbo run!",
 	Tue:(bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
 	Wed:(bike)2hr HRZ2,
-	Thu: (bike) 1hr HRZ2 && (run) 1hr HRZ2,
+	Thu: {
+        (bike)
+        warmup {
+            1hr HRZ1
+        }
+
+        main {
+            5*{
+                5min HRZ5 &&
+                5min HRZ3
+            }
+        }
+
+        cooldown {
+            30min HRZ1 - HRZ2
+        }
+    },
 	Fri: (bike) 2hr30min HRZ2,
 	Sat: (bike) 2hr HRZ2,
 	Sun: (run) 1hr30min HRZ2 && (bike) 1hr HRZ2
@@ -34,4 +50,10 @@ author:"Dylan Barratt".
 	Fri: (bike) 2hr30min HRZ2,
 	Sat: (bike) 2hr HRZ2 && (swim) 1hr load=40,
 	Sun: (run) 1hr30min HRZ2 && (bike) 1hr HRZ2
+}
+
+"week 2" {
+	5* {
+		(bike) base
+	}
 }

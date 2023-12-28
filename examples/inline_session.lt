@@ -1,0 +1,34 @@
+week {
+    Mon: {
+        (run)
+        "warmup" {60min HRZ1 - HRZ2}
+
+        "main set" {
+            2hours HRZ2 - HRZ3 &&
+            1hours < HRZ2
+        }
+
+        "cool down" {
+            60min HRZ1 - HRZ2
+        }
+    },
+    Tue: (bike) 1hr30min HRZ2,
+    (bike) 1hr30min HRZ2,
+    Fri: {
+        (bike)
+        warmup {
+            1hr HRZ1
+        }
+
+        main {
+            5*{
+                5min HRZ5 &&
+                5min HRZ3
+            }
+        }
+
+        cooldown {
+            30min HRZ1
+        }
+    }
+}

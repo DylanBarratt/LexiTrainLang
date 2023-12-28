@@ -1,4 +1,5 @@
-loop period
-sessions
-loop sessions
+- loop period
+- inline sessions
+- loop sessions
+file sessions
 importing sessions
