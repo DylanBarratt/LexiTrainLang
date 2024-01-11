@@ -1,42 +1,33 @@
 import antlr4 from 'antlr4';
+const { CommonTokenStream, InputStream } = antlr4;
+
 import LTLexer from './lt/PeriodFileLexer.js';
 import LTParser from './lt/PeriodFileParser.js';
-import LTListener from './lt/PeriodFileListener.js';
+import PeriodListener from './PeriodListener.js';
 
-class Listener extends LTListener {
-	metadata = {};
+import fs from 'node:fs';
 
-	//speech marks need to be removed
-	enterMetaData(ctx) {
-		this.metadata[ctx.children[0].getText()] = ctx.children[2].getText();
-	}
+try {
+	const data = fs.readFileSync('../ANTLR/examples/period.lt', 'utf8');
+	yoyoyo(data);
+} catch (err) {
+	console.error(err);
 }
 
-const input = `title: "yoyoyo".
-author:"Dylan Barratt".
+function yoyoyo(input) {
+	var chars = new InputStream(input, true);
+	var lexer = new LTLexer(chars);
+	var tokens = new CommonTokenStream(lexer);
+	var parser = new LTParser(tokens);
 
-//this is a comment!
+	parser.buildParseTrees = true; 
 
-over_unders = 5overUnders.
-base = 2hourBase.
+	var tree = parser.file();
 
-"week 1" {
-	Mon: (bike) 1hr HRZ1 "cool bike yo",
-	Tue: (bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
-	Wed: (bike) 2hr HRZ2,
-	Thu: (bike) 1hr HRZ2&&(run) 1hr HRZ2,
-	Fri: (bike) 2hr HRZ2,
-	Sat: (bike) 2hr HRZ2 && (run) 1hr30min HRZ2
+	var listener = new PeriodListener();
+	antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
+
+	console.log(listener.metadatas);
+	console.log(listener.sessionimports);
 }
-`
 
-const chars = new antlr4.InputStream(input);
-const lexer = new LTLexer(chars);
-const tokens = new antlr4.CommonTokenStream(lexer);
-const parser = new LTParser(tokens);
-const tree = parser.file();
-
-const listener = new Listener();
-antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
-
-console.log(listener.metadata);
