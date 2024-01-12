@@ -28,6 +28,7 @@ function yoyoyo(input) {
 	antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
 
 	console.log(listener.metadatas);
-	console.log(listener.sessionimports);
+	console.log(listener.sessionImports);
+	console.log(listener.periods);
 }
 
