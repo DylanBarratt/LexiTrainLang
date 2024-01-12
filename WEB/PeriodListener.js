@@ -9,6 +9,8 @@ export default class PeriodListener extends LTListener {
     sessionImports = {};
 
     periods = [];
+    currentPeriod = 0;
+    currentDay = 0;
 
     //speech marks need to be removed
     exitMetaData(ctx) {
@@ -25,9 +27,25 @@ export default class PeriodListener extends LTListener {
         }
         
         this.periods.push(newPeriod);
+        
+    }
+
+    enterPeriodPair(ctx) {
+        // this.periods[this.currentPeriod][this.currentDay] = ctx.getText();
+        var day = {};
+
+        if (ctx.WORD() != null) {
+            day.day = ctx.WORD().getText();
+        } else if (ctx.NUM() != null){
+            console.log(parseInt(ctx.NUM().getText()));
+        } else {
+            console.log('no day');
+        }
+        this.currentDay++ 
     }
 
     exitPeriod(ctx) {
-
+        this.currentPeriod++;
+        this.currentDay = 0;
     }
 }
