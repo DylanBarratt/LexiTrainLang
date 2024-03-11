@@ -519,42 +519,43 @@ var app = (function () {
     // jshint ignore: start
 
 
-    const serializedATN$1 = [4,0,16,114,6,-1,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,
+    const serializedATN$1 = [4,0,17,118,6,-1,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,
     4,7,4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,
-    12,2,13,7,13,2,14,7,14,2,15,7,15,2,16,7,16,1,0,1,0,1,1,1,1,1,2,1,2,1,3,1,
-    3,1,4,1,4,1,5,1,5,1,6,1,6,1,7,1,7,1,7,1,8,1,8,1,9,1,9,1,10,4,10,58,8,10,
-    11,10,12,10,59,1,11,4,11,63,8,11,11,11,12,11,64,1,11,1,11,1,11,5,11,70,8,
-    11,10,11,12,11,73,9,11,1,11,3,11,76,8,11,1,12,1,12,1,12,1,12,1,13,1,13,1,
-    13,1,13,1,14,1,14,1,14,1,14,5,14,90,8,14,10,14,12,14,93,9,14,1,14,3,14,96,
-    8,14,1,14,1,14,1,14,1,14,1,15,4,15,103,8,15,11,15,12,15,104,1,15,1,15,1,
-    16,1,16,1,16,1,16,3,16,113,8,16,2,71,91,0,17,1,1,3,2,5,3,7,4,9,5,11,6,13,
-    7,15,8,17,9,19,10,21,11,23,12,25,13,27,14,29,15,31,16,33,0,1,0,3,1,0,48,
-    57,4,0,48,57,65,90,95,95,97,122,3,0,9,10,13,13,32,32,121,0,1,1,0,0,0,0,3,
-    1,0,0,0,0,5,1,0,0,0,0,7,1,0,0,0,0,9,1,0,0,0,0,11,1,0,0,0,0,13,1,0,0,0,0,
-    15,1,0,0,0,0,17,1,0,0,0,0,19,1,0,0,0,0,21,1,0,0,0,0,23,1,0,0,0,0,25,1,0,
-    0,0,0,27,1,0,0,0,0,29,1,0,0,0,0,31,1,0,0,0,1,35,1,0,0,0,3,37,1,0,0,0,5,39,
-    1,0,0,0,7,41,1,0,0,0,9,43,1,0,0,0,11,45,1,0,0,0,13,47,1,0,0,0,15,49,1,0,
-    0,0,17,52,1,0,0,0,19,54,1,0,0,0,21,57,1,0,0,0,23,75,1,0,0,0,25,77,1,0,0,
-    0,27,81,1,0,0,0,29,85,1,0,0,0,31,102,1,0,0,0,33,112,1,0,0,0,35,36,5,58,0,
-    0,36,2,1,0,0,0,37,38,5,46,0,0,38,4,1,0,0,0,39,40,5,61,0,0,40,6,1,0,0,0,41,
-    42,5,123,0,0,42,8,1,0,0,0,43,44,5,44,0,0,44,10,1,0,0,0,45,46,5,125,0,0,46,
-    12,1,0,0,0,47,48,5,42,0,0,48,14,1,0,0,0,49,50,5,38,0,0,50,51,5,38,0,0,51,
-    16,1,0,0,0,52,53,5,60,0,0,53,18,1,0,0,0,54,55,5,45,0,0,55,20,1,0,0,0,56,
-    58,7,0,0,0,57,56,1,0,0,0,58,59,1,0,0,0,59,57,1,0,0,0,59,60,1,0,0,0,60,22,
-    1,0,0,0,61,63,7,1,0,0,62,61,1,0,0,0,63,64,1,0,0,0,64,62,1,0,0,0,64,65,1,
-    0,0,0,65,76,1,0,0,0,66,71,5,34,0,0,67,70,3,33,16,0,68,70,9,0,0,0,69,67,1,
-    0,0,0,69,68,1,0,0,0,70,73,1,0,0,0,71,72,1,0,0,0,71,69,1,0,0,0,72,74,1,0,
-    0,0,73,71,1,0,0,0,74,76,5,34,0,0,75,62,1,0,0,0,75,66,1,0,0,0,76,24,1,0,0,
-    0,77,78,3,23,11,0,78,79,5,61,0,0,79,80,3,21,10,0,80,26,1,0,0,0,81,82,5,40,
-    0,0,82,83,3,23,11,0,83,84,5,41,0,0,84,28,1,0,0,0,85,86,5,47,0,0,86,87,5,
-    47,0,0,87,91,1,0,0,0,88,90,9,0,0,0,89,88,1,0,0,0,90,93,1,0,0,0,91,92,1,0,
-    0,0,91,89,1,0,0,0,92,95,1,0,0,0,93,91,1,0,0,0,94,96,5,13,0,0,95,94,1,0,0,
-    0,95,96,1,0,0,0,96,97,1,0,0,0,97,98,5,10,0,0,98,99,1,0,0,0,99,100,6,14,0,
-    0,100,30,1,0,0,0,101,103,7,2,0,0,102,101,1,0,0,0,103,104,1,0,0,0,104,102,
-    1,0,0,0,104,105,1,0,0,0,105,106,1,0,0,0,106,107,6,15,0,0,107,32,1,0,0,0,
-    108,109,5,92,0,0,109,113,5,34,0,0,110,111,5,92,0,0,111,113,5,92,0,0,112,
-    108,1,0,0,0,112,110,1,0,0,0,113,34,1,0,0,0,10,0,59,64,69,71,75,91,95,104,
-    112,1,6,0,0];
+    12,2,13,7,13,2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,1,0,1,0,1,1,1,1,1,2,
+    1,2,1,3,1,3,1,4,1,4,1,5,1,5,1,6,1,6,1,7,1,7,1,7,1,8,1,8,1,9,1,9,1,10,1,10,
+    1,11,4,11,62,8,11,11,11,12,11,63,1,12,4,12,67,8,12,11,12,12,12,68,1,12,1,
+    12,1,12,5,12,74,8,12,10,12,12,12,77,9,12,1,12,3,12,80,8,12,1,13,1,13,1,13,
+    1,13,1,14,1,14,1,14,1,14,1,15,1,15,1,15,1,15,5,15,94,8,15,10,15,12,15,97,
+    9,15,1,15,3,15,100,8,15,1,15,1,15,1,15,1,15,1,16,4,16,107,8,16,11,16,12,
+    16,108,1,16,1,16,1,17,1,17,1,17,1,17,3,17,117,8,17,2,75,95,0,18,1,1,3,2,
+    5,3,7,4,9,5,11,6,13,7,15,8,17,9,19,10,21,11,23,12,25,13,27,14,29,15,31,16,
+    33,17,35,0,1,0,3,1,0,48,57,4,0,48,57,65,90,95,95,97,122,3,0,9,10,13,13,32,
+    32,125,0,1,1,0,0,0,0,3,1,0,0,0,0,5,1,0,0,0,0,7,1,0,0,0,0,9,1,0,0,0,0,11,
+    1,0,0,0,0,13,1,0,0,0,0,15,1,0,0,0,0,17,1,0,0,0,0,19,1,0,0,0,0,21,1,0,0,0,
+    0,23,1,0,0,0,0,25,1,0,0,0,0,27,1,0,0,0,0,29,1,0,0,0,0,31,1,0,0,0,0,33,1,
+    0,0,0,1,37,1,0,0,0,3,39,1,0,0,0,5,41,1,0,0,0,7,43,1,0,0,0,9,45,1,0,0,0,11,
+    47,1,0,0,0,13,49,1,0,0,0,15,51,1,0,0,0,17,54,1,0,0,0,19,56,1,0,0,0,21,58,
+    1,0,0,0,23,61,1,0,0,0,25,79,1,0,0,0,27,81,1,0,0,0,29,85,1,0,0,0,31,89,1,
+    0,0,0,33,106,1,0,0,0,35,116,1,0,0,0,37,38,5,58,0,0,38,2,1,0,0,0,39,40,5,
+    46,0,0,40,4,1,0,0,0,41,42,5,61,0,0,42,6,1,0,0,0,43,44,5,123,0,0,44,8,1,0,
+    0,0,45,46,5,44,0,0,46,10,1,0,0,0,47,48,5,125,0,0,48,12,1,0,0,0,49,50,5,42,
+    0,0,50,14,1,0,0,0,51,52,5,38,0,0,52,53,5,38,0,0,53,16,1,0,0,0,54,55,5,45,
+    0,0,55,18,1,0,0,0,56,57,5,60,0,0,57,20,1,0,0,0,58,59,5,62,0,0,59,22,1,0,
+    0,0,60,62,7,0,0,0,61,60,1,0,0,0,62,63,1,0,0,0,63,61,1,0,0,0,63,64,1,0,0,
+    0,64,24,1,0,0,0,65,67,7,1,0,0,66,65,1,0,0,0,67,68,1,0,0,0,68,66,1,0,0,0,
+    68,69,1,0,0,0,69,80,1,0,0,0,70,75,5,34,0,0,71,74,3,35,17,0,72,74,9,0,0,0,
+    73,71,1,0,0,0,73,72,1,0,0,0,74,77,1,0,0,0,75,76,1,0,0,0,75,73,1,0,0,0,76,
+    78,1,0,0,0,77,75,1,0,0,0,78,80,5,34,0,0,79,66,1,0,0,0,79,70,1,0,0,0,80,26,
+    1,0,0,0,81,82,3,25,12,0,82,83,5,61,0,0,83,84,3,23,11,0,84,28,1,0,0,0,85,
+    86,5,40,0,0,86,87,3,25,12,0,87,88,5,41,0,0,88,30,1,0,0,0,89,90,5,47,0,0,
+    90,91,5,47,0,0,91,95,1,0,0,0,92,94,9,0,0,0,93,92,1,0,0,0,94,97,1,0,0,0,95,
+    96,1,0,0,0,95,93,1,0,0,0,96,99,1,0,0,0,97,95,1,0,0,0,98,100,5,13,0,0,99,
+    98,1,0,0,0,99,100,1,0,0,0,100,101,1,0,0,0,101,102,5,10,0,0,102,103,1,0,0,
+    0,103,104,6,15,0,0,104,32,1,0,0,0,105,107,7,2,0,0,106,105,1,0,0,0,107,108,
+    1,0,0,0,108,106,1,0,0,0,108,109,1,0,0,0,109,110,1,0,0,0,110,111,6,16,0,0,
+    111,34,1,0,0,0,112,113,5,92,0,0,113,117,5,34,0,0,114,115,5,92,0,0,115,117,
+    5,92,0,0,116,112,1,0,0,0,116,114,1,0,0,0,117,36,1,0,0,0,10,0,63,68,73,75,
+    79,95,99,108,116,1,6,0,0];
 
 
     const atn$1 = new M.atn.ATNDeserializer().deserialize(serializedATN$1);
@@ -567,13 +568,13 @@ var app = (function () {
         static channelNames = [ "DEFAULT_TOKEN_CHANNEL", "HIDDEN" ];
     	static modeNames = [ "DEFAULT_MODE" ];
     	static literalNames = [ null, "':'", "'.'", "'='", "'{'", "','", "'}'", 
-                             "'*'", "'&&'", "'<'", "'-'" ];
+                             "'*'", "'&&'", "'-'", "'<'", "'>'" ];
     	static symbolicNames = [ null, null, null, null, null, null, null, null, 
-                              null, null, null, "NUM", "WORD", "LOAD", "SPORT", 
-                              "LINE_COMMENT", "WS" ];
+                              null, null, "LT", "GT", "NUM", "WORD", "LOAD", 
+                              "SPORT", "LINE_COMMENT", "WS" ];
     	static ruleNames = [ "T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", 
-                          "T__7", "T__8", "T__9", "NUM", "WORD", "LOAD", "SPORT", 
-                          "LINE_COMMENT", "WS", "ESC" ];
+                          "T__7", "T__8", "LT", "GT", "NUM", "WORD", "LOAD", 
+                          "SPORT", "LINE_COMMENT", "WS", "ESC" ];
 
         constructor(input) {
             super(input);
@@ -591,13 +592,14 @@ var app = (function () {
     PeriodFileLexer.T__6 = 7;
     PeriodFileLexer.T__7 = 8;
     PeriodFileLexer.T__8 = 9;
-    PeriodFileLexer.T__9 = 10;
-    PeriodFileLexer.NUM = 11;
-    PeriodFileLexer.WORD = 12;
-    PeriodFileLexer.LOAD = 13;
-    PeriodFileLexer.SPORT = 14;
-    PeriodFileLexer.LINE_COMMENT = 15;
-    PeriodFileLexer.WS = 16;
+    PeriodFileLexer.LT = 10;
+    PeriodFileLexer.GT = 11;
+    PeriodFileLexer.NUM = 12;
+    PeriodFileLexer.WORD = 13;
+    PeriodFileLexer.LOAD = 14;
+    PeriodFileLexer.SPORT = 15;
+    PeriodFileLexer.LINE_COMMENT = 16;
+    PeriodFileLexer.WS = 17;
 
     // Generated from ./PeriodFile.g4 by ANTLR 4.13.1
     // jshint ignore: start
@@ -727,7 +729,7 @@ var app = (function () {
 
     // Generated from ./PeriodFile.g4 by ANTLR 4.13.1
     // jshint ignore: start
-    const serializedATN = [4,1,16,144,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
+    const serializedATN = [4,1,17,144,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
     4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,
     1,0,5,0,28,8,0,10,0,12,0,31,9,0,1,0,5,0,34,8,0,10,0,12,0,37,9,0,1,0,1,0,
     1,0,1,1,1,1,1,1,1,1,1,1,1,2,1,2,1,2,1,2,1,2,1,3,4,3,53,8,3,11,3,12,3,54,
@@ -737,38 +739,38 @@ var app = (function () {
     1,9,1,9,1,9,4,9,106,8,9,11,9,12,9,107,1,9,1,9,1,10,1,10,1,10,1,10,1,10,1,
     10,1,10,1,10,1,10,3,10,121,8,10,1,10,1,10,1,11,1,11,1,11,5,11,128,8,11,10,
     11,12,11,131,9,11,1,12,1,12,1,12,1,12,1,12,1,12,1,12,1,12,1,12,3,12,142,
-    8,12,1,12,0,0,13,0,2,4,6,8,10,12,14,16,18,20,22,24,0,0,145,0,29,1,0,0,0,
-    2,41,1,0,0,0,4,46,1,0,0,0,6,52,1,0,0,0,8,56,1,0,0,0,10,78,1,0,0,0,12,82,
-    1,0,0,0,14,84,1,0,0,0,16,92,1,0,0,0,18,102,1,0,0,0,20,111,1,0,0,0,22,124,
-    1,0,0,0,24,141,1,0,0,0,26,28,3,2,1,0,27,26,1,0,0,0,28,31,1,0,0,0,29,27,1,
-    0,0,0,29,30,1,0,0,0,30,35,1,0,0,0,31,29,1,0,0,0,32,34,3,4,2,0,33,32,1,0,
-    0,0,34,37,1,0,0,0,35,33,1,0,0,0,35,36,1,0,0,0,36,38,1,0,0,0,37,35,1,0,0,
-    0,38,39,3,6,3,0,39,40,5,0,0,1,40,1,1,0,0,0,41,42,5,12,0,0,42,43,5,1,0,0,
-    43,44,5,12,0,0,44,45,5,2,0,0,45,3,1,0,0,0,46,47,5,12,0,0,47,48,5,3,0,0,48,
-    49,5,12,0,0,49,50,5,2,0,0,50,5,1,0,0,0,51,53,3,8,4,0,52,51,1,0,0,0,53,54,
-    1,0,0,0,54,52,1,0,0,0,54,55,1,0,0,0,55,7,1,0,0,0,56,57,5,12,0,0,57,58,5,
-    4,0,0,58,63,3,10,5,0,59,60,5,5,0,0,60,62,3,10,5,0,61,59,1,0,0,0,62,65,1,
-    0,0,0,63,61,1,0,0,0,63,64,1,0,0,0,64,66,1,0,0,0,65,63,1,0,0,0,66,67,5,6,
-    0,0,67,9,1,0,0,0,68,69,5,12,0,0,69,70,5,1,0,0,70,79,3,12,6,0,71,72,5,11,
-    0,0,72,73,5,7,0,0,73,74,5,4,0,0,74,75,3,12,6,0,75,76,5,6,0,0,76,79,1,0,0,
-    0,77,79,3,12,6,0,78,68,1,0,0,0,78,71,1,0,0,0,78,77,1,0,0,0,79,11,1,0,0,0,
-    80,83,3,14,7,0,81,83,3,18,9,0,82,80,1,0,0,0,82,81,1,0,0,0,83,13,1,0,0,0,
-    84,89,3,16,8,0,85,86,5,8,0,0,86,88,3,16,8,0,87,85,1,0,0,0,88,91,1,0,0,0,
-    89,87,1,0,0,0,89,90,1,0,0,0,90,15,1,0,0,0,91,89,1,0,0,0,92,96,5,14,0,0,93,
-    95,5,12,0,0,94,93,1,0,0,0,95,98,1,0,0,0,96,94,1,0,0,0,96,97,1,0,0,0,97,100,
-    1,0,0,0,98,96,1,0,0,0,99,101,5,13,0,0,100,99,1,0,0,0,100,101,1,0,0,0,101,
-    17,1,0,0,0,102,103,5,4,0,0,103,105,5,14,0,0,104,106,3,20,10,0,105,104,1,
-    0,0,0,106,107,1,0,0,0,107,105,1,0,0,0,107,108,1,0,0,0,108,109,1,0,0,0,109,
-    110,5,6,0,0,110,19,1,0,0,0,111,112,5,12,0,0,112,120,5,4,0,0,113,121,3,22,
-    11,0,114,115,5,11,0,0,115,116,5,7,0,0,116,117,5,4,0,0,117,118,3,22,11,0,
-    118,119,5,6,0,0,119,121,1,0,0,0,120,113,1,0,0,0,120,114,1,0,0,0,121,122,
-    1,0,0,0,122,123,5,6,0,0,123,21,1,0,0,0,124,129,3,24,12,0,125,126,5,8,0,0,
-    126,128,3,24,12,0,127,125,1,0,0,0,128,131,1,0,0,0,129,127,1,0,0,0,129,130,
-    1,0,0,0,130,23,1,0,0,0,131,129,1,0,0,0,132,133,5,12,0,0,133,134,5,9,0,0,
-    134,142,5,12,0,0,135,136,5,12,0,0,136,137,5,12,0,0,137,138,5,10,0,0,138,
-    142,5,12,0,0,139,140,5,12,0,0,140,142,5,12,0,0,141,132,1,0,0,0,141,135,1,
-    0,0,0,141,139,1,0,0,0,142,25,1,0,0,0,13,29,35,54,63,78,82,89,96,100,107,
-    120,129,141];
+    8,12,1,12,0,0,13,0,2,4,6,8,10,12,14,16,18,20,22,24,0,1,1,0,10,11,145,0,29,
+    1,0,0,0,2,41,1,0,0,0,4,46,1,0,0,0,6,52,1,0,0,0,8,56,1,0,0,0,10,78,1,0,0,
+    0,12,82,1,0,0,0,14,84,1,0,0,0,16,92,1,0,0,0,18,102,1,0,0,0,20,111,1,0,0,
+    0,22,124,1,0,0,0,24,141,1,0,0,0,26,28,3,2,1,0,27,26,1,0,0,0,28,31,1,0,0,
+    0,29,27,1,0,0,0,29,30,1,0,0,0,30,35,1,0,0,0,31,29,1,0,0,0,32,34,3,4,2,0,
+    33,32,1,0,0,0,34,37,1,0,0,0,35,33,1,0,0,0,35,36,1,0,0,0,36,38,1,0,0,0,37,
+    35,1,0,0,0,38,39,3,6,3,0,39,40,5,0,0,1,40,1,1,0,0,0,41,42,5,13,0,0,42,43,
+    5,1,0,0,43,44,5,13,0,0,44,45,5,2,0,0,45,3,1,0,0,0,46,47,5,13,0,0,47,48,5,
+    3,0,0,48,49,5,13,0,0,49,50,5,2,0,0,50,5,1,0,0,0,51,53,3,8,4,0,52,51,1,0,
+    0,0,53,54,1,0,0,0,54,52,1,0,0,0,54,55,1,0,0,0,55,7,1,0,0,0,56,57,5,13,0,
+    0,57,58,5,4,0,0,58,63,3,10,5,0,59,60,5,5,0,0,60,62,3,10,5,0,61,59,1,0,0,
+    0,62,65,1,0,0,0,63,61,1,0,0,0,63,64,1,0,0,0,64,66,1,0,0,0,65,63,1,0,0,0,
+    66,67,5,6,0,0,67,9,1,0,0,0,68,69,5,13,0,0,69,70,5,1,0,0,70,79,3,12,6,0,71,
+    72,5,12,0,0,72,73,5,7,0,0,73,74,5,4,0,0,74,75,3,12,6,0,75,76,5,6,0,0,76,
+    79,1,0,0,0,77,79,3,12,6,0,78,68,1,0,0,0,78,71,1,0,0,0,78,77,1,0,0,0,79,11,
+    1,0,0,0,80,83,3,14,7,0,81,83,3,18,9,0,82,80,1,0,0,0,82,81,1,0,0,0,83,13,
+    1,0,0,0,84,89,3,16,8,0,85,86,5,8,0,0,86,88,3,16,8,0,87,85,1,0,0,0,88,91,
+    1,0,0,0,89,87,1,0,0,0,89,90,1,0,0,0,90,15,1,0,0,0,91,89,1,0,0,0,92,96,5,
+    15,0,0,93,95,5,13,0,0,94,93,1,0,0,0,95,98,1,0,0,0,96,94,1,0,0,0,96,97,1,
+    0,0,0,97,100,1,0,0,0,98,96,1,0,0,0,99,101,5,14,0,0,100,99,1,0,0,0,100,101,
+    1,0,0,0,101,17,1,0,0,0,102,103,5,4,0,0,103,105,5,15,0,0,104,106,3,20,10,
+    0,105,104,1,0,0,0,106,107,1,0,0,0,107,105,1,0,0,0,107,108,1,0,0,0,108,109,
+    1,0,0,0,109,110,5,6,0,0,110,19,1,0,0,0,111,112,5,13,0,0,112,120,5,4,0,0,
+    113,121,3,22,11,0,114,115,5,12,0,0,115,116,5,7,0,0,116,117,5,4,0,0,117,118,
+    3,22,11,0,118,119,5,6,0,0,119,121,1,0,0,0,120,113,1,0,0,0,120,114,1,0,0,
+    0,121,122,1,0,0,0,122,123,5,6,0,0,123,21,1,0,0,0,124,129,3,24,12,0,125,126,
+    5,8,0,0,126,128,3,24,12,0,127,125,1,0,0,0,128,131,1,0,0,0,129,127,1,0,0,
+    0,129,130,1,0,0,0,130,23,1,0,0,0,131,129,1,0,0,0,132,133,5,13,0,0,133,134,
+    7,0,0,0,134,142,5,13,0,0,135,136,5,13,0,0,136,137,5,13,0,0,137,138,5,9,0,
+    0,138,142,5,13,0,0,139,140,5,13,0,0,140,142,5,13,0,0,141,132,1,0,0,0,141,
+    135,1,0,0,0,141,139,1,0,0,0,142,25,1,0,0,0,13,29,35,54,63,78,82,89,96,100,
+    107,120,129,141];
 
 
     const atn = new M.atn.ATNDeserializer().deserialize(serializedATN);
@@ -781,10 +783,10 @@ var app = (function () {
 
         static grammarFileName = "PeriodFile.g4";
         static literalNames = [ null, "':'", "'.'", "'='", "'{'", "','", "'}'", 
-                                "'*'", "'&&'", "'<'", "'-'" ];
+                                "'*'", "'&&'", "'-'", "'<'", "'>'" ];
         static symbolicNames = [ null, null, null, null, null, null, null, null, 
-                                 null, null, null, "NUM", "WORD", "LOAD", "SPORT", 
-                                 "LINE_COMMENT", "WS" ];
+                                 null, null, "LT", "GT", "NUM", "WORD", "LOAD", 
+                                 "SPORT", "LINE_COMMENT", "WS" ];
         static ruleNames = [ "file", "metaData", "sessionImport", "periods", 
                              "period", "periodPair", "data", "workouts", "workout", 
                              "session", "sessionSection", "workloads", "workload" ];
@@ -923,7 +925,7 @@ var app = (function () {
     	            this.state = 54; 
     	            this._errHandler.sync(this);
     	            _la = this._input.LA(1);
-    	        } while(_la===12);
+    	        } while(_la===13);
     	    } catch (re) {
     	    	if(re instanceof M.error.RecognitionException) {
     		        localctx.exception = re;
@@ -989,7 +991,7 @@ var app = (function () {
     	        this.state = 78;
     	        this._errHandler.sync(this);
     	        switch(this._input.LA(1)) {
-    	        case 12:
+    	        case 13:
     	            this.enterOuterAlt(localctx, 1);
     	            this.state = 68;
     	            this.match(PeriodFileParser.WORD);
@@ -998,7 +1000,7 @@ var app = (function () {
     	            this.state = 70;
     	            this.data();
     	            break;
-    	        case 11:
+    	        case 12:
     	            this.enterOuterAlt(localctx, 2);
     	            this.state = 71;
     	            this.match(PeriodFileParser.NUM);
@@ -1012,7 +1014,7 @@ var app = (function () {
     	            this.match(PeriodFileParser.T__5);
     	            break;
     	        case 4:
-    	        case 14:
+    	        case 15:
     	            this.enterOuterAlt(localctx, 3);
     	            this.state = 77;
     	            this.data();
@@ -1043,7 +1045,7 @@ var app = (function () {
     	        this.state = 82;
     	        this._errHandler.sync(this);
     	        switch(this._input.LA(1)) {
-    	        case 14:
+    	        case 15:
     	            this.enterOuterAlt(localctx, 1);
     	            this.state = 80;
     	            this.workouts();
@@ -1119,7 +1121,7 @@ var app = (function () {
     	        this.state = 96;
     	        this._errHandler.sync(this);
     	        _la = this._input.LA(1);
-    	        while(_la===12) {
+    	        while(_la===13) {
     	            this.state = 93;
     	            this.match(PeriodFileParser.WORD);
     	            this.state = 98;
@@ -1129,7 +1131,7 @@ var app = (function () {
     	        this.state = 100;
     	        this._errHandler.sync(this);
     	        _la = this._input.LA(1);
-    	        if(_la===13) {
+    	        if(_la===14) {
     	            this.state = 99;
     	            this.match(PeriodFileParser.LOAD);
     	        }
@@ -1169,7 +1171,7 @@ var app = (function () {
     	            this.state = 107; 
     	            this._errHandler.sync(this);
     	            _la = this._input.LA(1);
-    	        } while(_la===12);
+    	        } while(_la===13);
     	        this.state = 109;
     	        this.match(PeriodFileParser.T__5);
     	    } catch (re) {
@@ -1200,11 +1202,11 @@ var app = (function () {
     	        this.state = 120;
     	        this._errHandler.sync(this);
     	        switch(this._input.LA(1)) {
-    	        case 12:
+    	        case 13:
     	            this.state = 113;
     	            this.workloads();
     	            break;
-    	        case 11:
+    	        case 12:
     	            this.state = 114;
     	            this.match(PeriodFileParser.NUM);
     	            this.state = 115;
@@ -1276,6 +1278,7 @@ var app = (function () {
     	workload() {
     	    let localctx = new WorkloadContext(this, this._ctx, this.state);
     	    this.enterRule(localctx, 24, PeriodFileParser.RULE_workload);
+    	    var _la = 0;
     	    try {
     	        this.state = 141;
     	        this._errHandler.sync(this);
@@ -1286,7 +1289,14 @@ var app = (function () {
     	            this.state = 132;
     	            this.match(PeriodFileParser.WORD);
     	            this.state = 133;
-    	            this.match(PeriodFileParser.T__8);
+    	            _la = this._input.LA(1);
+    	            if(!(_la===10 || _la===11)) {
+    	            this._errHandler.recoverInline(this);
+    	            }
+    	            else {
+    	            	this._errHandler.reportMatch(this);
+    	                this.consume();
+    	            }
     	            this.state = 134;
     	            this.match(PeriodFileParser.WORD);
     	            break;
@@ -1298,7 +1308,7 @@ var app = (function () {
     	            this.state = 136;
     	            this.match(PeriodFileParser.WORD);
     	            this.state = 137;
-    	            this.match(PeriodFileParser.T__9);
+    	            this.match(PeriodFileParser.T__8);
     	            this.state = 138;
     	            this.match(PeriodFileParser.WORD);
     	            break;
@@ -1339,13 +1349,14 @@ var app = (function () {
     PeriodFileParser.T__6 = 7;
     PeriodFileParser.T__7 = 8;
     PeriodFileParser.T__8 = 9;
-    PeriodFileParser.T__9 = 10;
-    PeriodFileParser.NUM = 11;
-    PeriodFileParser.WORD = 12;
-    PeriodFileParser.LOAD = 13;
-    PeriodFileParser.SPORT = 14;
-    PeriodFileParser.LINE_COMMENT = 15;
-    PeriodFileParser.WS = 16;
+    PeriodFileParser.LT = 10;
+    PeriodFileParser.GT = 11;
+    PeriodFileParser.NUM = 12;
+    PeriodFileParser.WORD = 13;
+    PeriodFileParser.LOAD = 14;
+    PeriodFileParser.SPORT = 15;
+    PeriodFileParser.LINE_COMMENT = 16;
+    PeriodFileParser.WS = 17;
 
     PeriodFileParser.RULE_file = 0;
     PeriodFileParser.RULE_metaData = 1;
@@ -1928,6 +1939,14 @@ var app = (function () {
     	};
 
 
+    	LT() {
+    	    return this.getToken(PeriodFileParser.LT, 0);
+    	};
+
+    	GT() {
+    	    return this.getToken(PeriodFileParser.GT, 0);
+    	};
+
     	enterRule(listener) {
     	    if(listener instanceof PeriodFileListener ) {
     	        listener.enterWorkload(this);
@@ -1968,7 +1987,16 @@ var app = (function () {
         currentPeriod = 0;
         currentDay = 0;
 
-        //speech marks need to be removed
+        visit(ctx) {
+            if (ctx.children) {
+                const childResults = ctx.children.map(child => this.visit(child));
+                return childResults;
+            } else {
+                return ctx.getText().replace(/"/g, '');
+            }
+        }
+
+        //TODO: speech marks need to be removed
         exitMetaData(ctx) {
             this.metadatas[ctx.children[0].getText()] = ctx.children[2].getText();
         }
@@ -1983,23 +2011,68 @@ var app = (function () {
             };
             
             this.periods.push(newPeriod);
+            this.currentPeriod = this.periods.length - 1;
         }
 
         enterPeriodPair(ctx) {
+            var day;
 
-            if (ctx.WORD() != null) {
-                ctx.WORD().getText();
-            } else if (ctx.NUM() != null){
-                console.log(parseInt(ctx.NUM().getText()));
+            if (ctx.WORD()) {
+                day = ctx.WORD().getText();
+            } else if (ctx.NUM()){
+                day = parseInt(ctx.NUM().getText()); //num of loops
             } else {
-                console.log('no day');
+                day = null;
             }
-            this.currentDay++; 
+
+            this.periods[this.currentPeriod][this.currentDay] = {Day: day, Data: null} ;
         }
 
-        exitPeriod(ctx) {
-            this.currentPeriod++;
-            this.currentDay = 0;
+        exitPeriodPair(ctx) {
+            this.currentDay++;
+        }
+
+        exitWorkouts(ctx) {
+            const workouts = ctx.workout()
+                .map(workoutCtx => this.visit(workoutCtx));
+
+            var finalWorkouts = [];
+            workouts.forEach(workout => {
+                finalWorkouts.push({Sport: workout[0].replace(/[()]/g, ''), Data: workout[1]});
+            });
+
+            this.periods[this.currentPeriod][this.currentDay].Data = finalWorkouts;
+        }
+
+        exitSession(ctx) {
+            const sport = ctx.SPORT().getText().replace(/[()]/g, '');
+            const sessionSections = ctx.sessionSection()
+                .map(sessionSectionCtx => this.visit(sessionSectionCtx));
+
+            var finalSections = [];
+            sessionSections.forEach(section => {
+
+                var workloads = [];
+                section[2].forEach(workload => {
+                    if (workload != '&&') {
+                        if (workload.length == 3) {
+                            workloads.push({Type: "lg", Data: workload});
+                        } else if (workload.length == 4) {
+                            workloads.push({Type: "between", Data: workload});
+                        } else {
+                            workloads.push({Type: "ar", Data: workload});
+                        }
+                    }
+                });
+
+                finalSections.push({Title: section[0], Workloads: workloads});
+            });
+
+            this.periods[this.currentPeriod][this.currentDay].Data = [{Sport: sport, Sections: finalSections}];
+        }
+
+        result() {
+            return {Metadata: this.metadatas, SessionImports: this.sessionImports, Periods: this.periods};
         }
     }
 
@@ -2043,7 +2116,7 @@ var app = (function () {
     	var listener = new PeriodListener();
     	M.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
 
-    	return listener;
+    	return listener.result();
     }
 
     /* src/App.svelte generated by Svelte v3.59.2 */
@@ -2058,7 +2131,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (62:8) {#each textareaData.split('\n') as line, i (i)}
+    // (86:8) {#each textareaData.split('\n') as line, i (i)}
     function create_each_block(key_1, ctx) {
     	let div;
     	let t_value = /*i*/ ctx[7] + 1 + "";
@@ -2070,7 +2143,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			t = text(t_value);
-    			add_location(div, file, 62, 10, 1191);
+    			add_location(div, file, 86, 10, 1633);
     			this.first = div;
     		},
     		m: function mount(target, anchor) {
@@ -2090,14 +2163,14 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(62:8) {#each textareaData.split('\\n') as line, i (i)}",
+    		source: "(86:8) {#each textareaData.split('\\n') as line, i (i)}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (74:2) {#if antlrError}
+    // (98:2) {#if antlrError}
     function create_if_block_1(ctx) {
     	let br;
     	let t0;
@@ -2112,9 +2185,9 @@ var app = (function () {
     			p = element("p");
     			t1 = text("ANTLR Error: ");
     			t2 = text(/*antlrError*/ ctx[1]);
-    			add_location(br, file, 74, 4, 1445);
+    			add_location(br, file, 98, 4, 1887);
     			set_style(p, "color", "red");
-    			add_location(p, file, 75, 4, 1455);
+    			add_location(p, file, 99, 4, 1897);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, br, anchor);
@@ -2137,18 +2210,19 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(74:2) {#if antlrError}",
+    		source: "(98:2) {#if antlrError}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (79:2) {#if antlrResult}
+    // (103:2) {#if antlrResult}
     function create_if_block(ctx) {
     	let br;
     	let t0;
     	let p;
+    	let t1_value = /*antlrResult*/ ctx[2].Periods[0].title + "";
     	let t1;
 
     	const block = {
@@ -2156,9 +2230,9 @@ var app = (function () {
     			br = element("br");
     			t0 = space();
     			p = element("p");
-    			t1 = text(/*antlrResult*/ ctx[2]);
-    			add_location(br, file, 79, 4, 1541);
-    			add_location(p, file, 80, 4, 1551);
+    			t1 = text(t1_value);
+    			add_location(br, file, 103, 4, 1983);
+    			add_location(p, file, 104, 4, 1993);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, br, anchor);
@@ -2167,7 +2241,7 @@ var app = (function () {
     			append_dev(p, t1);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*antlrResult*/ 4) set_data_dev(t1, /*antlrResult*/ ctx[2]);
+    			if (dirty & /*antlrResult*/ 4 && t1_value !== (t1_value = /*antlrResult*/ ctx[2].Periods[0].title + "")) set_data_dev(t1, t1_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(br);
@@ -2180,7 +2254,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(79:2) {#if antlrResult}",
+    		source: "(103:2) {#if antlrResult}",
     		ctx
     	});
 
@@ -2247,20 +2321,20 @@ var app = (function () {
     			if (if_block0) if_block0.c();
     			t7 = space();
     			if (if_block1) if_block1.c();
-    			add_location(h1, file, 56, 2, 981);
+    			add_location(h1, file, 80, 2, 1423);
     			attr_dev(div0, "class", "line-numbers svelte-zqls6p");
-    			add_location(div0, file, 60, 6, 1098);
+    			add_location(div0, file, 84, 6, 1540);
     			attr_dev(textarea, "class", "svelte-zqls6p");
-    			add_location(textarea, file, 66, 8, 1286);
+    			add_location(textarea, file, 90, 8, 1728);
     			attr_dev(div1, "class", "textarea-container svelte-zqls6p");
-    			add_location(div1, file, 65, 6, 1245);
+    			add_location(div1, file, 89, 6, 1687);
     			attr_dev(div2, "class", "container svelte-zqls6p");
-    			add_location(div2, file, 59, 4, 1068);
-    			add_location(br, file, 69, 4, 1362);
+    			add_location(div2, file, 83, 4, 1510);
+    			add_location(br, file, 93, 4, 1804);
     			attr_dev(button, "type", "submit");
-    			add_location(button, file, 70, 4, 1373);
-    			add_location(form, file, 58, 2, 1022);
-    			add_location(main, file, 55, 0, 972);
+    			add_location(button, file, 94, 4, 1815);
+    			add_location(form, file, 82, 2, 1464);
+    			add_location(main, file, 79, 0, 1414);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2373,12 +2447,36 @@ var app = (function () {
     	let textareaData = `hello: "123".
 
 "week 1" {
-  Mon: (bike) 1hr HRZ1 "cool bike yo",
+  Mon: {
+        (run)
+        "warmup" {60min HRZ1 - HRZ2}
+
+        "main set" {
+            2hours HRZ2 - HRZ3 &&
+            1hours < HRZ2
+        }
+
+        "cool down" {
+            60min HRZ1 - HRZ2
+        }
+  },
   Tue: (bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
   Wed: (bike) 2hr HRZ2,
   Thu: (bike) 1hr HRZ2&&(run) 1hr HRZ2,
   Fri: (bike) 2hr HRZ2,
   Sat: (bike) 2hr HRZ2 && (run) 1hr30min HRZ2
+}
+
+"week 2" {
+  Mon: (bike) 1hr HRZ1 "cool bike yo",
+  Tue: (bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
+  Wed: (bike) 2hr HRZ2,
+  Thu: (bike) 1hr HRZ2&&(run) 1hr HRZ2,
+  Fri: (bike) 2hr HRZ2,
+  Sat: (bike) 2hr HRZ2 && (run) 1hr30min HRZ2,
+  2*{
+    (run) base 
+  }
 }`;
 
     	let antlrError = null;

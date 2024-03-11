@@ -2,21 +2,21 @@
 // jshint ignore: start
 import antlr4 from 'antlr4';
 import SessionFileListener from './SessionFileListener.js';
-const serializedATN = [4,1,14,58,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,
+const serializedATN = [4,1,15,58,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,
 1,0,4,0,12,8,0,11,0,12,0,13,1,0,4,0,17,8,0,11,0,12,0,18,1,1,1,1,1,1,1,1,
 1,1,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,3,2,35,8,2,1,2,1,2,1,3,1,3,1,3,5,
 3,42,8,3,10,3,12,3,45,9,3,1,4,1,4,1,4,1,4,1,4,1,4,1,4,1,4,1,4,3,4,56,8,4,
 1,4,0,0,5,0,2,4,6,8,0,0,58,0,11,1,0,0,0,2,20,1,0,0,0,4,25,1,0,0,0,6,38,1,
 0,0,0,8,55,1,0,0,0,10,12,3,2,1,0,11,10,1,0,0,0,12,13,1,0,0,0,13,11,1,0,0,
 0,13,14,1,0,0,0,14,16,1,0,0,0,15,17,3,4,2,0,16,15,1,0,0,0,17,18,1,0,0,0,
-18,16,1,0,0,0,18,19,1,0,0,0,19,1,1,0,0,0,20,21,5,10,0,0,21,22,5,1,0,0,22,
-23,5,10,0,0,23,24,5,2,0,0,24,3,1,0,0,0,25,26,5,10,0,0,26,34,5,3,0,0,27,35,
-3,6,3,0,28,29,5,9,0,0,29,30,5,4,0,0,30,31,5,3,0,0,31,32,3,6,3,0,32,33,5,
+18,16,1,0,0,0,18,19,1,0,0,0,19,1,1,0,0,0,20,21,5,11,0,0,21,22,5,1,0,0,22,
+23,5,11,0,0,23,24,5,2,0,0,24,3,1,0,0,0,25,26,5,11,0,0,26,34,5,3,0,0,27,35,
+3,6,3,0,28,29,5,10,0,0,29,30,5,4,0,0,30,31,5,3,0,0,31,32,3,6,3,0,32,33,5,
 5,0,0,33,35,1,0,0,0,34,27,1,0,0,0,34,28,1,0,0,0,35,36,1,0,0,0,36,37,5,5,
 0,0,37,5,1,0,0,0,38,43,3,8,4,0,39,40,5,6,0,0,40,42,3,8,4,0,41,39,1,0,0,0,
 42,45,1,0,0,0,43,41,1,0,0,0,43,44,1,0,0,0,44,7,1,0,0,0,45,43,1,0,0,0,46,
-47,5,10,0,0,47,48,5,7,0,0,48,56,5,10,0,0,49,50,5,10,0,0,50,51,5,10,0,0,51,
-52,5,8,0,0,52,56,5,10,0,0,53,54,5,10,0,0,54,56,5,10,0,0,55,46,1,0,0,0,55,
+47,5,11,0,0,47,48,5,8,0,0,48,56,5,11,0,0,49,50,5,11,0,0,50,51,5,11,0,0,51,
+52,5,7,0,0,52,56,5,11,0,0,53,54,5,11,0,0,54,56,5,11,0,0,55,46,1,0,0,0,55,
 49,1,0,0,0,55,53,1,0,0,0,56,9,1,0,0,0,5,13,18,34,43,55];
 
 
@@ -30,10 +30,10 @@ export default class SessionFileParser extends antlr4.Parser {
 
     static grammarFileName = "SessionFile.g4";
     static literalNames = [ null, "':'", "'.'", "'{'", "'*'", "'}'", "'&&'", 
-                            "'<'", "'-'" ];
+                            "'-'", "'<'", "'>'" ];
     static symbolicNames = [ null, null, null, null, null, null, null, null, 
-                             null, "NUM", "WORD", "LOAD", "SPORT", "LINE_COMMENT", 
-                             "WS" ];
+                             "LT", "GT", "NUM", "WORD", "LOAD", "SPORT", 
+                             "LINE_COMMENT", "WS" ];
     static ruleNames = [ "file", "metaData", "section", "workloads", "workload" ];
 
     constructor(input) {
@@ -77,7 +77,7 @@ export default class SessionFileParser extends antlr4.Parser {
 	            this.state = 18; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	        } while(_la===10);
+	        } while(_la===11);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
 		        localctx.exception = re;
@@ -135,11 +135,11 @@ export default class SessionFileParser extends antlr4.Parser {
 	        this.state = 34;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
-	        case 10:
+	        case 11:
 	            this.state = 27;
 	            this.workloads();
 	            break;
-	        case 9:
+	        case 10:
 	            this.state = 28;
 	            this.match(SessionFileParser.NUM);
 	            this.state = 29;
@@ -221,7 +221,7 @@ export default class SessionFileParser extends antlr4.Parser {
 	            this.state = 46;
 	            this.match(SessionFileParser.WORD);
 	            this.state = 47;
-	            this.match(SessionFileParser.T__6);
+	            this.match(SessionFileParser.LT);
 	            this.state = 48;
 	            this.match(SessionFileParser.WORD);
 	            break;
@@ -233,7 +233,7 @@ export default class SessionFileParser extends antlr4.Parser {
 	            this.state = 50;
 	            this.match(SessionFileParser.WORD);
 	            this.state = 51;
-	            this.match(SessionFileParser.T__7);
+	            this.match(SessionFileParser.T__6);
 	            this.state = 52;
 	            this.match(SessionFileParser.WORD);
 	            break;
@@ -272,13 +272,14 @@ SessionFileParser.T__3 = 4;
 SessionFileParser.T__4 = 5;
 SessionFileParser.T__5 = 6;
 SessionFileParser.T__6 = 7;
-SessionFileParser.T__7 = 8;
-SessionFileParser.NUM = 9;
-SessionFileParser.WORD = 10;
-SessionFileParser.LOAD = 11;
-SessionFileParser.SPORT = 12;
-SessionFileParser.LINE_COMMENT = 13;
-SessionFileParser.WS = 14;
+SessionFileParser.LT = 8;
+SessionFileParser.GT = 9;
+SessionFileParser.NUM = 10;
+SessionFileParser.WORD = 11;
+SessionFileParser.LOAD = 12;
+SessionFileParser.SPORT = 13;
+SessionFileParser.LINE_COMMENT = 14;
+SessionFileParser.WS = 15;
 
 SessionFileParser.RULE_file = 0;
 SessionFileParser.RULE_metaData = 1;
@@ -492,6 +493,10 @@ class WorkloadContext extends antlr4.ParserRuleContext {
 	    }
 	};
 
+
+	LT() {
+	    return this.getToken(SessionFileParser.LT, 0);
+	};
 
 	enterRule(listener) {
 	    if(listener instanceof SessionFileListener ) {

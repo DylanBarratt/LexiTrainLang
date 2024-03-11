@@ -43,5 +43,5 @@ export function Parse(input) {
 	var listener = new PeriodListener();
 	antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
 
-	return listener;
+	return listener.result();
 }

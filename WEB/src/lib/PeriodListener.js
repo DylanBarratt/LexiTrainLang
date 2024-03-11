@@ -1,7 +1,3 @@
-import antlr4 from 'antlr4';
-
-import LTLexer from './lt/PeriodFileLexer.js';
-import LTParser from './lt/PeriodFileParser.js';
 import LTListener  from './lt/PeriodFileListener.js';
 
 export default class PeriodListener extends LTListener { 
@@ -12,7 +8,16 @@ export default class PeriodListener extends LTListener {
     currentPeriod = 0;
     currentDay = 0;
 
-    //speech marks need to be removed
+    visit(ctx) {
+        if (ctx.children) {
+            const childResults = ctx.children.map(child => this.visit(child));
+            return childResults;
+        } else {
+            return ctx.getText().replace(/"/g, '');
+        }
+    }
+
+    //TODO: speech marks need to be removed
     exitMetaData(ctx) {
         this.metadatas[ctx.children[0].getText()] = ctx.children[2].getText();
     }
@@ -27,24 +32,67 @@ export default class PeriodListener extends LTListener {
         }
         
         this.periods.push(newPeriod);
+        this.currentPeriod = this.periods.length - 1;
     }
 
     enterPeriodPair(ctx) {
-        // this.periods[this.currentPeriod][this.currentDay] = ctx.getText();
-        var day = {};
+        var day;
 
-        if (ctx.WORD() != null) {
-            day.day = ctx.WORD().getText();
-        } else if (ctx.NUM() != null){
-            console.log(parseInt(ctx.NUM().getText()));
+        if (ctx.WORD()) {
+            day = ctx.WORD().getText();
+        } else if (ctx.NUM()){
+            day = parseInt(ctx.NUM().getText()); //num of loops
         } else {
-            console.log('no day');
+            day = null;
         }
-        this.currentDay++ 
+
+        this.periods[this.currentPeriod][this.currentDay] = {Day: day, Data: null} ;
     }
 
-    exitPeriod(ctx) {
-        this.currentPeriod++;
-        this.currentDay = 0;
+    exitPeriodPair(ctx) {
+        this.currentDay++;
+    }
+
+    exitWorkouts(ctx) {
+        const workouts = ctx.workout()
+            .map(workoutCtx => this.visit(workoutCtx));
+
+        var finalWorkouts = [];
+        workouts.forEach(workout => {
+            finalWorkouts.push({Sport: workout[0].replace(/[()]/g, ''), Data: workout[1]})
+        });
+
+        this.periods[this.currentPeriod][this.currentDay].Data = finalWorkouts;
+    }
+
+    exitSession(ctx) {
+        const sport = ctx.SPORT().getText().replace(/[()]/g, '');
+        const sessionSections = ctx.sessionSection()
+            .map(sessionSectionCtx => this.visit(sessionSectionCtx));
+
+        var finalSections = [];
+        sessionSections.forEach(section => {
+
+            var workloads = [];
+            section[2].forEach(workload => {
+                if (workload != '&&') {
+                    if (workload.length == 3) {
+                        workloads.push({Type: "lg", Data: workload});
+                    } else if (workload.length == 4) {
+                        workloads.push({Type: "between", Data: workload});
+                    } else {
+                        workloads.push({Type: "ar", Data: workload});
+                    }
+                }
+            })
+
+            finalSections.push({Title: section[0], Workloads: workloads})
+        });
+
+        this.periods[this.currentPeriod][this.currentDay].Data = [{Sport: sport, Sections: finalSections}];
+    }
+
+    result() {
+        return {Metadata: this.metadatas, SessionImports: this.sessionImports, Periods: this.periods};
     }
 }

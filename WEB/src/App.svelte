@@ -5,12 +5,36 @@
   let textareaData = `hello: "123".
 
 "week 1" {
-  Mon: (bike) 1hr HRZ1 "cool bike yo",
+  Mon: {
+        (run)
+        "warmup" {60min HRZ1 - HRZ2}
+
+        "main set" {
+            2hours HRZ2 - HRZ3 &&
+            1hours < HRZ2
+        }
+
+        "cool down" {
+            60min HRZ1 - HRZ2
+        }
+  },
   Tue: (bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
   Wed: (bike) 2hr HRZ2,
   Thu: (bike) 1hr HRZ2&&(run) 1hr HRZ2,
   Fri: (bike) 2hr HRZ2,
   Sat: (bike) 2hr HRZ2 && (run) 1hr30min HRZ2
+}
+
+"week 2" {
+  Mon: (bike) 1hr HRZ1 "cool bike yo",
+  Tue: (bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
+  Wed: (bike) 2hr HRZ2,
+  Thu: (bike) 1hr HRZ2&&(run) 1hr HRZ2,
+  Fri: (bike) 2hr HRZ2,
+  Sat: (bike) 2hr HRZ2 && (run) 1hr30min HRZ2,
+  2*{
+    (run) base 
+  }
 }`;
 
   let antlrError = null;
@@ -78,6 +102,6 @@
 
   {#if antlrResult}
     <br/>
-    <p>{antlrResult}</p>
+    <p>{antlrResult.Periods[0].title}</p>
   {/if}
 </main>
