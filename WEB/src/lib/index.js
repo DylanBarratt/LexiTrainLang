@@ -1,3 +1,5 @@
+// place files you want to import through the `$lib` alias in this folder.
+
 import antlr4 from 'antlr4';
 const { CommonTokenStream, InputStream } = antlr4;
 
