@@ -43,7 +43,7 @@ sessionSection
 workloads: workload ('&&' workload)*;
 
 workload
-    : WORD '<' WORD //less than intensities
+    : WORD (LT | GT) WORD //lt or gt intensities
     | WORD WORD '-' WORD //between intensities
     | WORD WORD //at intensity
     ; 

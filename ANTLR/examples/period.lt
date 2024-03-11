@@ -8,7 +8,19 @@ base = 2hourBase.
 
 "week 1" {
 	Mon: (bike) 1hr HRZ1 "cool bike yo",
-	Tue: (bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
+	Tue: {
+        (run)
+        "warmup" {60min HRZ1 - HRZ2}
+
+        "main set" {
+            2hours HRZ2 - HRZ3 &&
+            1hours > HRZ2
+        }
+
+        "cool down" {
+            60min HRZ1 - HRZ2
+        }
+    },
 	Wed: (bike) 2hr HRZ2,
 	Thu: (bike) 1hr HRZ2&&(run) 1hr HRZ2,
 	Fri: (bike) 2hr HRZ2,
