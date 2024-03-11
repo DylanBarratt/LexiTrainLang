@@ -27,7 +27,6 @@ export default class PeriodListener extends LTListener {
         }
         
         this.periods.push(newPeriod);
-        
     }
 
     enterPeriodPair(ctx) {
