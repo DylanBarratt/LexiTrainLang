@@ -1,12 +1,16 @@
 import LTListener  from './lt/PeriodFileListener.js';
 
+function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}   
+
 export default class PeriodListener extends LTListener { 
     metadatas = {};
     sessionImports = {};
 
     periods = [];
     currentPeriod = 0;
-    currentDay = 0;
+    currentDay = 0; 
 
     visit(ctx) {
         if (ctx.children) {
@@ -19,11 +23,11 @@ export default class PeriodListener extends LTListener {
 
     //TODO: speech marks need to be removed
     exitMetaData(ctx) {
-        this.metadatas[ctx.children[0].getText()] = ctx.children[2].getText();
+        this.metadatas[capitalizeFirstLetter(ctx.children[0].getText())] = ctx.children[2].getText().replace(/"/g, '');
     }
 
     exitSessionImport(ctx) {
-        this.sessionImports[ctx.children[0].getText()] = ctx.children[2].getText();
+        this.sessionImports[ctx.children[0].getText()] = ctx.children[2].getText().replace(/"/g, '');
     }
 
     enterPeriod(ctx) {

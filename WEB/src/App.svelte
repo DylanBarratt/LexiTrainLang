@@ -1,8 +1,11 @@
 <!-- App.svelte -->
 <script>
   import { Parse } from './lib/Antlr';
+  import Calendar from './Components/Calendar.svelte';
 
-  let textareaData = `hello: "123".
+  let textareaData = `Name: "123".
+author: "Dylan".
+date: "19/01/2003".
 
 "week 1" {
   Mon: {
@@ -38,14 +41,14 @@
 }`;
 
   let antlrError = null;
-  let antlrResult = null;
+  let calendarData = null;
 
   function ParseTA() {
-    antlrResult = null;
+    calendarData = null;
 
     try {
-      antlrResult = Parse(textareaData);
-      console.log(antlrResult);
+      calendarData = Parse(textareaData);
+      console.log(calendarData);
       antlrError = null; //no error yay!
     } catch (error) {
       antlrError = error.message;
@@ -100,8 +103,8 @@
     <p style="color: red;">ANTLR Error: {antlrError}</p>
   {/if}
 
-  {#if antlrResult}
+  {#if calendarData}
     <br/>
-    <p>{antlrResult.Periods[0].title}</p>
+    <Calendar {calendarData} />
   {/if}
 </main>
