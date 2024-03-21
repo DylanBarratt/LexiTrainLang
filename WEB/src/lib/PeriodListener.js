@@ -4,6 +4,10 @@ function capitalizeFirstLetter(str) {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }   
 
+function removeSpeechMarks(str) {
+    return str.replace(/"/g, '');
+}
+
 export default class PeriodListener extends LTListener { 
     metadatas = {};
     sessionImports = {};
@@ -32,7 +36,7 @@ export default class PeriodListener extends LTListener {
 
     enterPeriod(ctx) {
         var newPeriod = {
-            'title': ctx.WORD().getText(),
+            'title': removeSpeechMarks(ctx.WORD().getText()),
         }
         
         this.periods.push(newPeriod);

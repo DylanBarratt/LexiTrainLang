@@ -44,6 +44,12 @@ var app = (function () {
             node.parentNode.removeChild(node);
         }
     }
+    function destroy_each(iterations, detaching) {
+        for (let i = 0; i < iterations.length; i += 1) {
+            if (iterations[i])
+                iterations[i].d(detaching);
+        }
+    }
     function element(name) {
         return document.createElement(name);
     }
@@ -2019,6 +2025,10 @@ var app = (function () {
         return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
     }   
 
+    function removeSpeechMarks(str) {
+        return str.replace(/"/g, '');
+    }
+
     class PeriodListener extends PeriodFileListener { 
         metadatas = {};
         sessionImports = {};
@@ -2047,7 +2057,7 @@ var app = (function () {
 
         enterPeriod(ctx) {
             var newPeriod = {
-                'title': ctx.WORD().getText(),
+                'title': removeSpeechMarks(ctx.WORD().getText()),
             };
             
             this.periods.push(newPeriod);
@@ -2163,108 +2173,86 @@ var app = (function () {
 
     const file$1 = "src/Components/Calendar.svelte";
 
-    // (9:8) {#if calendarData.Metadata.Name}
-    function create_if_block_2(ctx) {
-    	let h2;
-    	let t_value = /*calendarData*/ ctx[0].Metadata.Name + "";
-    	let t;
-
-    	const block = {
-    		c: function create() {
-    			h2 = element("h2");
-    			t = text(t_value);
-    			add_location(h2, file$1, 9, 12, 120);
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, h2, anchor);
-    			append_dev(h2, t);
-    		},
-    		p: function update(ctx, dirty) {
-    			if (dirty & /*calendarData*/ 1 && t_value !== (t_value = /*calendarData*/ ctx[0].Metadata.Name + "")) set_data_dev(t, t_value);
-    		},
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(h2);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_if_block_2.name,
-    		type: "if",
-    		source: "(9:8) {#if calendarData.Metadata.Name}",
-    		ctx
-    	});
-
-    	return block;
+    function get_each_context$1(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[8] = list[i];
+    	return child_ctx;
     }
 
-    // (12:8) {#if calendarData.Metadata.Author}
-    function create_if_block_1$1(ctx) {
-    	let h3;
+    // (102:6) {#each Array.from({ length: getDaysInMonth(currentDate.getFullYear(), currentDate.getMonth()) }, (_, i) => i + 1) as day}
+    function create_each_block$1(ctx) {
+    	let div1;
+    	let div0;
+    	let t0_value = /*day*/ ctx[8] + "";
     	let t0;
-    	let t1_value = /*calendarData*/ ctx[0].Metadata.Author + "";
     	let t1;
+    	let div1_class_value;
+    	let mounted;
+    	let dispose;
+
+    	function click_handler() {
+    		return /*click_handler*/ ctx[6](/*day*/ ctx[8]);
+    	}
+
+    	function keypress_handler() {
+    		return /*keypress_handler*/ ctx[7](/*day*/ ctx[8]);
+    	}
 
     	const block = {
     		c: function create() {
-    			h3 = element("h3");
-    			t0 = text("By ");
-    			t1 = text(t1_value);
-    			add_location(h3, file$1, 12, 12, 227);
+    			div1 = element("div");
+    			div0 = element("div");
+    			t0 = text(t0_value);
+    			t1 = space();
+    			add_location(div0, file$1, 106, 12, 2481);
+
+    			attr_dev(div1, "class", div1_class_value = "day " + (/*selectedDate*/ ctx[1] && /*selectedDate*/ ctx[1].getDate() === /*day*/ ctx[8]
+    			? 'selected'
+    			: '') + " " + (new Date().getDate() === /*day*/ ctx[8] && new Date().getMonth() === /*currentDate*/ ctx[0].getMonth()
+    			? 'current-day'
+    			: '') + " svelte-14ahsgu");
+
+    			add_location(div1, file$1, 102, 8, 2174);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, h3, anchor);
-    			append_dev(h3, t0);
-    			append_dev(h3, t1);
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+    			append_dev(div0, t0);
+    			append_dev(div1, t1);
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(div1, "click", click_handler, false, false, false, false),
+    					listen_dev(div1, "keypress", keypress_handler, false, false, false, false)
+    				];
+
+    				mounted = true;
+    			}
     		},
-    		p: function update(ctx, dirty) {
-    			if (dirty & /*calendarData*/ 1 && t1_value !== (t1_value = /*calendarData*/ ctx[0].Metadata.Author + "")) set_data_dev(t1, t1_value);
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+    			if (dirty & /*currentDate*/ 1 && t0_value !== (t0_value = /*day*/ ctx[8] + "")) set_data_dev(t0, t0_value);
+
+    			if (dirty & /*selectedDate, currentDate*/ 3 && div1_class_value !== (div1_class_value = "day " + (/*selectedDate*/ ctx[1] && /*selectedDate*/ ctx[1].getDate() === /*day*/ ctx[8]
+    			? 'selected'
+    			: '') + " " + (new Date().getDate() === /*day*/ ctx[8] && new Date().getMonth() === /*currentDate*/ ctx[0].getMonth()
+    			? 'current-day'
+    			: '') + " svelte-14ahsgu")) {
+    				attr_dev(div1, "class", div1_class_value);
+    			}
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(h3);
+    			if (detaching) detach_dev(div1);
+    			mounted = false;
+    			run_all(dispose);
     		}
     	};
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$1.name,
-    		type: "if",
-    		source: "(12:8) {#if calendarData.Metadata.Author}",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (15:8) {#if calendarData.Metadata.Date}
-    function create_if_block$1(ctx) {
-    	let h4;
-    	let t_value = /*calendarData*/ ctx[0].Metadata.Date + "";
-    	let t;
-
-    	const block = {
-    		c: function create() {
-    			h4 = element("h4");
-    			t = text(t_value);
-    			add_location(h4, file$1, 15, 12, 337);
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, h4, anchor);
-    			append_dev(h4, t);
-    		},
-    		p: function update(ctx, dirty) {
-    			if (dirty & /*calendarData*/ 1 && t_value !== (t_value = /*calendarData*/ ctx[0].Metadata.Date + "")) set_data_dev(t, t_value);
-    		},
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(h4);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_if_block$1.name,
-    		type: "if",
-    		source: "(15:8) {#if calendarData.Metadata.Date}",
+    		id: create_each_block$1.name,
+    		type: "each",
+    		source: "(102:6) {#each Array.from({ length: getDaysInMonth(currentDate.getFullYear(), currentDate.getMonth()) }, (_, i) => i + 1) as day}",
     		ctx
     	});
 
@@ -2272,85 +2260,233 @@ var app = (function () {
     }
 
     function create_fragment$1(ctx) {
+    	let div11;
     	let div1;
     	let div0;
+    	let t0_value = /*currentDate*/ ctx[0].toLocaleString('default', { month: 'long' }) + "";
     	let t0;
     	let t1;
-    	let if_block0 = /*calendarData*/ ctx[0].Metadata.Name && create_if_block_2(ctx);
-    	let if_block1 = /*calendarData*/ ctx[0].Metadata.Author && create_if_block_1$1(ctx);
-    	let if_block2 = /*calendarData*/ ctx[0].Metadata.Date && create_if_block$1(ctx);
+    	let t2_value = /*currentDate*/ ctx[0].getFullYear() + "";
+    	let t2;
+    	let t3;
+    	let button0;
+    	let t5;
+    	let button1;
+    	let t7;
+    	let div9;
+    	let div2;
+    	let t9;
+    	let div3;
+    	let t11;
+    	let div4;
+    	let t13;
+    	let div5;
+    	let t15;
+    	let div6;
+    	let t17;
+    	let div7;
+    	let t19;
+    	let div8;
+    	let t21;
+    	let div10;
+    	let t22;
+    	let p;
+    	let t23;
+
+    	let t24_value = (/*selectedDate*/ ctx[1]
+    	? /*selectedDate*/ ctx[1].toLocaleDateString()
+    	: 'None') + "";
+
+    	let t24;
+    	let mounted;
+    	let dispose;
+
+    	let each_value = Array.from(
+    		{
+    			length: getDaysInMonth(/*currentDate*/ ctx[0].getFullYear(), /*currentDate*/ ctx[0].getMonth())
+    		},
+    		func
+    	);
+
+    	validate_each_argument(each_value);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block$1(get_each_context$1(ctx, each_value, i));
+    	}
 
     	const block = {
     		c: function create() {
+    			div11 = element("div");
     			div1 = element("div");
     			div0 = element("div");
-    			if (if_block0) if_block0.c();
-    			t0 = space();
-    			if (if_block1) if_block1.c();
+    			t0 = text(t0_value);
     			t1 = space();
-    			if (if_block2) if_block2.c();
-    			add_location(div0, file$1, 7, 4, 61);
-    			add_location(div1, file$1, 6, 0, 51);
+    			t2 = text(t2_value);
+    			t3 = space();
+    			button0 = element("button");
+    			button0.textContent = "<";
+    			t5 = space();
+    			button1 = element("button");
+    			button1.textContent = ">";
+    			t7 = space();
+    			div9 = element("div");
+    			div2 = element("div");
+    			div2.textContent = "Monday";
+    			t9 = space();
+    			div3 = element("div");
+    			div3.textContent = "Tuesday";
+    			t11 = space();
+    			div4 = element("div");
+    			div4.textContent = "Wednesday";
+    			t13 = space();
+    			div5 = element("div");
+    			div5.textContent = "Thursday";
+    			t15 = space();
+    			div6 = element("div");
+    			div6.textContent = "Friday";
+    			t17 = space();
+    			div7 = element("div");
+    			div7.textContent = "Saturday";
+    			t19 = space();
+    			div8 = element("div");
+    			div8.textContent = "Sunday";
+    			t21 = space();
+    			div10 = element("div");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			t22 = space();
+    			p = element("p");
+    			t23 = text("Selected Date: ");
+    			t24 = text(t24_value);
+    			attr_dev(div0, "class", "month-year svelte-14ahsgu");
+    			add_location(div0, file$1, 85, 6, 1554);
+    			add_location(button0, file$1, 86, 6, 1677);
+    			add_location(button1, file$1, 87, 6, 1726);
+    			attr_dev(div1, "class", "header svelte-14ahsgu");
+    			add_location(div1, file$1, 84, 4, 1527);
+    			attr_dev(div2, "class", "svelte-14ahsgu");
+    			add_location(div2, file$1, 91, 8, 1819);
+    			attr_dev(div3, "class", "svelte-14ahsgu");
+    			add_location(div3, file$1, 92, 8, 1845);
+    			attr_dev(div4, "class", "svelte-14ahsgu");
+    			add_location(div4, file$1, 93, 8, 1872);
+    			attr_dev(div5, "class", "svelte-14ahsgu");
+    			add_location(div5, file$1, 94, 8, 1901);
+    			attr_dev(div6, "class", "svelte-14ahsgu");
+    			add_location(div6, file$1, 95, 8, 1929);
+    			attr_dev(div7, "class", "svelte-14ahsgu");
+    			add_location(div7, file$1, 96, 8, 1955);
+    			attr_dev(div8, "class", "svelte-14ahsgu");
+    			add_location(div8, file$1, 97, 8, 1983);
+    			attr_dev(div9, "class", "day-names svelte-14ahsgu");
+    			add_location(div9, file$1, 90, 4, 1787);
+    			attr_dev(div10, "class", "days svelte-14ahsgu");
+    			add_location(div10, file$1, 100, 4, 2019);
+    			add_location(p, file$1, 112, 4, 2558);
+    			attr_dev(div11, "class", "calendar svelte-14ahsgu");
+    			add_location(div11, file$1, 83, 0, 1500);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div1, anchor);
+    			insert_dev(target, div11, anchor);
+    			append_dev(div11, div1);
     			append_dev(div1, div0);
-    			if (if_block0) if_block0.m(div0, null);
     			append_dev(div0, t0);
-    			if (if_block1) if_block1.m(div0, null);
     			append_dev(div0, t1);
-    			if (if_block2) if_block2.m(div0, null);
+    			append_dev(div0, t2);
+    			append_dev(div1, t3);
+    			append_dev(div1, button0);
+    			append_dev(div1, t5);
+    			append_dev(div1, button1);
+    			append_dev(div11, t7);
+    			append_dev(div11, div9);
+    			append_dev(div9, div2);
+    			append_dev(div9, t9);
+    			append_dev(div9, div3);
+    			append_dev(div9, t11);
+    			append_dev(div9, div4);
+    			append_dev(div9, t13);
+    			append_dev(div9, div5);
+    			append_dev(div9, t15);
+    			append_dev(div9, div6);
+    			append_dev(div9, t17);
+    			append_dev(div9, div7);
+    			append_dev(div9, t19);
+    			append_dev(div9, div8);
+    			append_dev(div11, t21);
+    			append_dev(div11, div10);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				if (each_blocks[i]) {
+    					each_blocks[i].m(div10, null);
+    				}
+    			}
+
+    			append_dev(div11, t22);
+    			append_dev(div11, p);
+    			append_dev(p, t23);
+    			append_dev(p, t24);
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(button0, "click", /*prevMonth*/ ctx[3], false, false, false, false),
+    					listen_dev(button1, "click", /*nextMonth*/ ctx[4], false, false, false, false)
+    				];
+
+    				mounted = true;
+    			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (/*calendarData*/ ctx[0].Metadata.Name) {
-    				if (if_block0) {
-    					if_block0.p(ctx, dirty);
-    				} else {
-    					if_block0 = create_if_block_2(ctx);
-    					if_block0.c();
-    					if_block0.m(div0, t0);
+    			if (dirty & /*currentDate*/ 1 && t0_value !== (t0_value = /*currentDate*/ ctx[0].toLocaleString('default', { month: 'long' }) + "")) set_data_dev(t0, t0_value);
+    			if (dirty & /*currentDate*/ 1 && t2_value !== (t2_value = /*currentDate*/ ctx[0].getFullYear() + "")) set_data_dev(t2, t2_value);
+
+    			if (dirty & /*selectedDate, Array, getDaysInMonth, currentDate, Date, setSelectedDate*/ 7) {
+    				each_value = Array.from(
+    					{
+    						length: getDaysInMonth(/*currentDate*/ ctx[0].getFullYear(), /*currentDate*/ ctx[0].getMonth())
+    					},
+    					func
+    				);
+
+    				validate_each_argument(each_value);
+    				let i;
+
+    				for (i = 0; i < each_value.length; i += 1) {
+    					const child_ctx = get_each_context$1(ctx, each_value, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block$1(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(div10, null);
+    					}
     				}
-    			} else if (if_block0) {
-    				if_block0.d(1);
-    				if_block0 = null;
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value.length;
     			}
 
-    			if (/*calendarData*/ ctx[0].Metadata.Author) {
-    				if (if_block1) {
-    					if_block1.p(ctx, dirty);
-    				} else {
-    					if_block1 = create_if_block_1$1(ctx);
-    					if_block1.c();
-    					if_block1.m(div0, t1);
-    				}
-    			} else if (if_block1) {
-    				if_block1.d(1);
-    				if_block1 = null;
-    			}
-
-    			if (/*calendarData*/ ctx[0].Metadata.Date) {
-    				if (if_block2) {
-    					if_block2.p(ctx, dirty);
-    				} else {
-    					if_block2 = create_if_block$1(ctx);
-    					if_block2.c();
-    					if_block2.m(div0, null);
-    				}
-    			} else if (if_block2) {
-    				if_block2.d(1);
-    				if_block2 = null;
-    			}
+    			if (dirty & /*selectedDate*/ 2 && t24_value !== (t24_value = (/*selectedDate*/ ctx[1]
+    			? /*selectedDate*/ ctx[1].toLocaleDateString()
+    			: 'None') + "")) set_data_dev(t24, t24_value);
     		},
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div1);
-    			if (if_block0) if_block0.d();
-    			if (if_block1) if_block1.d();
-    			if (if_block2) if_block2.d();
+    			if (detaching) detach_dev(div11);
+    			destroy_each(each_blocks, detaching);
+    			mounted = false;
+    			run_all(dispose);
     		}
     	};
 
@@ -2365,10 +2501,34 @@ var app = (function () {
     	return block;
     }
 
+    function getDaysInMonth(year, month) {
+    	return new Date(year, month + 1, 0).getDate();
+    }
+
+    const func = (_, i) => i + 1;
+
     function instance$1($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Calendar', slots, []);
+    	let currentDate = new Date();
+    	let selectedDate = null;
     	let { calendarData } = $$props;
+
+    	function setSelectedDate(day) {
+    		$$invalidate(1, selectedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day));
+    	}
+
+    	function prevMonth() {
+    		currentDate.setMonth(currentDate.getMonth() - 1);
+    		$$invalidate(0, currentDate = new Date(currentDate));
+    		$$invalidate(1, selectedDate = null);
+    	}
+
+    	function nextMonth() {
+    		currentDate.setMonth(currentDate.getMonth() + 1);
+    		$$invalidate(0, currentDate = new Date(currentDate));
+    		$$invalidate(1, selectedDate = null);
+    	}
 
     	$$self.$$.on_mount.push(function () {
     		if (calendarData === undefined && !('calendarData' in $$props || $$self.$$.bound[$$self.$$.props['calendarData']])) {
@@ -2382,27 +2542,49 @@ var app = (function () {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Calendar> was created with unknown prop '${key}'`);
     	});
 
+    	const click_handler = day => setSelectedDate(day);
+    	const keypress_handler = day => setSelectedDate(day);
+
     	$$self.$$set = $$props => {
-    		if ('calendarData' in $$props) $$invalidate(0, calendarData = $$props.calendarData);
+    		if ('calendarData' in $$props) $$invalidate(5, calendarData = $$props.calendarData);
     	};
 
-    	$$self.$capture_state = () => ({ calendarData });
+    	$$self.$capture_state = () => ({
+    		currentDate,
+    		selectedDate,
+    		calendarData,
+    		setSelectedDate,
+    		prevMonth,
+    		nextMonth,
+    		getDaysInMonth
+    	});
 
     	$$self.$inject_state = $$props => {
-    		if ('calendarData' in $$props) $$invalidate(0, calendarData = $$props.calendarData);
+    		if ('currentDate' in $$props) $$invalidate(0, currentDate = $$props.currentDate);
+    		if ('selectedDate' in $$props) $$invalidate(1, selectedDate = $$props.selectedDate);
+    		if ('calendarData' in $$props) $$invalidate(5, calendarData = $$props.calendarData);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [calendarData];
+    	return [
+    		currentDate,
+    		selectedDate,
+    		setSelectedDate,
+    		prevMonth,
+    		nextMonth,
+    		calendarData,
+    		click_handler,
+    		keypress_handler
+    	];
     }
 
     class Calendar extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$1, create_fragment$1, safe_not_equal, { calendarData: 0 });
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, { calendarData: 5 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
