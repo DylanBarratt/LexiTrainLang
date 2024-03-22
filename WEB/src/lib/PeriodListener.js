@@ -45,16 +45,19 @@ export default class PeriodListener extends LTListener {
 
     enterPeriodPair(ctx) {
         var day;
+        var repeats;
 
         if (ctx.WORD()) {
             day = ctx.WORD().getText();
         } else if (ctx.NUM()){
-            day = parseInt(ctx.NUM().getText()); //num of loops
+            day = null;
+            repeats = parseInt(ctx.NUM().getText(), 10);  //num of loops
         } else {
             day = null;
         }
 
-        this.periods[this.currentPeriod][this.currentDay] = {Day: day, Data: null} ;
+        this.periods[this.currentPeriod][this.currentDay] 
+            = {Day: day, Repeats: repeats, Data: null};
     }
 
     exitPeriodPair(ctx) {

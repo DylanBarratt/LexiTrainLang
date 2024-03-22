@@ -68,11 +68,19 @@ date: "19/01/2003".
     metaData = rawData.Metadata;
   }
 
+  function isValidDate(day: string) {
+    const daysOfWeek = ["mon", "tue", "wed", "thu", "fri", "sat", "sun", 
+    "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
+    const lowercaseDay = day.toLowerCase();
+    return daysOfWeek.includes(lowercaseDay);
+  }
+
   function loadCalendarData(rawData) {
     let periods = rawData.Periods;
 
     let days = [];
-    periods.forEach(week => {
+    // combine weeks into single array with missed days as null
+    periods.forEach(week => { 
       let weekData = Object.values(week);
       weekData.pop();
 
@@ -85,7 +93,31 @@ date: "19/01/2003".
       }
     }); 
 
-    calendarData = days;
+    let dates = [];
+    let undatedDays = [];
+    let date: Date = new Date();
+
+    // give each day a date starting with the first available date that 
+    // matches the specified day. If day not recognised, error?
+    days.forEach(day => {
+      if (day == null) { //ignore empty days
+        return;
+      } else if (day.Day == null && !(typeof day.Repeats === 'undefined')) {
+        for (let i = 0; i < day.Repeats; i++) {
+          undatedDays.push({Date: new Date(date), Data: day.Data})
+        }
+      } else {
+        if (isValidDate(day.Day)) {
+          dates.push({Date: new Date(date), Data: day.Data});
+        } else {
+          console.error("Invalid day: " + day);
+        }
+      }
+      
+      date.setDate(date.getDate() + 1);
+    });
+
+    calendarData = [...dates, ...undatedDays];
   }
 </script>
 
