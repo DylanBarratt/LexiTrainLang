@@ -1,7 +1,7 @@
 <!-- App.svelte -->
 <script>
-  import { Parse } from './lib/Antlr';
-  import Calendar from './Components/Calendar.svelte';
+  import { Parse } from './lib/Antlr.js';
+  import Calendar from './components/Calendar.svelte';
 
   let textareaData = `Name: "123".
 author: "Dylan".
