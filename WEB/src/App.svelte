@@ -1,5 +1,5 @@
 <!-- App.svelte -->
-<script>
+<script lang="ts">
   import { Parse } from './lib/Antlr.js';
   import Calendar from './components/Calendar.svelte';
 
@@ -41,19 +41,51 @@ date: "19/01/2003".
 }`;
 
   let antlrError = null;
+
+
   let calendarData = null;
 
-  function ParseTA() {
-    calendarData = null;
+  let metaData = null;
+
+
+  function parseTA() {
+    let rawData = null;
 
     try {
-      calendarData = Parse(textareaData);
-      console.log(calendarData);
+      rawData = Parse(textareaData);
       antlrError = null; //no error yay!
     } catch (error) {
       antlrError = error.message;
       console.log(antlrError);
+      return;
     }
+
+    loadMetaData(rawData);
+    loadCalendarData(rawData);
+  }
+
+  function loadMetaData(rawData) {
+    metaData = rawData.Metadata;
+  }
+
+  function loadCalendarData(rawData) {
+    let periods = rawData.Periods;
+
+    let days = [];
+    periods.forEach(week => {
+      let weekData = Object.values(week);
+      weekData.pop();
+
+      for (let i = 0; i < 7; i++) {
+        if ((typeof weekData[i] === 'undefined')) { 
+          days.push(null);
+        } else {
+          days.push(weekData[i]);
+        }
+      }
+    }); 
+
+    calendarData = days;
   }
 </script>
 
@@ -83,7 +115,7 @@ date: "19/01/2003".
 <main>
   <h1> Please enter ur training yo</h1>
 
-  <form on:submit|preventDefault={ParseTA}>
+  <form on:submit|preventDefault={parseTA}>
     <div class="container">
       <div class="line-numbers">
         {#each textareaData.split('\n') as line, i (i)}
@@ -101,6 +133,20 @@ date: "19/01/2003".
   {#if antlrError}
     <br/>
     <p style="color: red;">ANTLR Error: {antlrError}</p>
+  {/if}
+
+  {#if metaData}
+    <div>
+    {#if metaData.Name}
+        <h2>Title: {metaData.Name}</h2>
+    {/if}
+    {#if metaData.Author}
+        <h3>By {metaData.Author}</h3>
+    {/if}
+    {#if metaData.Date}
+        <h4>Written on: {metaData.Date}</h4>
+    {/if}
+    </div>
   {/if}
 
   {#if calendarData}

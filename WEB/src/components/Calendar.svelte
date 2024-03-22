@@ -1,11 +1,12 @@
-<script>
-let currentDate = new Date();
-let selectedDate = null;
+<script lang="ts">
 
-export let calendarData;
+export let calendarData : any;
+
+let currentDate : Date = new Date();
+let selectedDate : Date = null;
 
 
-function setSelectedDate(day) {
+function setSelectedDate(day: number) {
   selectedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
 }
 
@@ -21,8 +22,18 @@ function nextMonth() {
   selectedDate = null;
 }
 
-function getDaysInMonth(year, month) {
+function getDaysInMonth(year: number, month: number) {
   return new Date(year, month + 1, 0).getDate();
+}
+
+
+function getDataForDay(day: number) {
+  day--; //move to starting from 0
+  if (calendarData[day] == null || typeof calendarData[day] === 'undefined') {
+    return null;
+  }
+
+  return calendarData[day].Data;
 }
 </script>
 <style>
@@ -98,17 +109,26 @@ function getDaysInMonth(year, month) {
         <div>Sunday</div>
       </div>
 
-    <div class="days">
-      {#each Array.from({ length: getDaysInMonth(currentDate.getFullYear(), currentDate.getMonth()) }, (_, i) => i + 1) as day}
-        <div class="day {selectedDate && selectedDate.getDate() === day ? 'selected' : ''} {new Date().getDate() === day && new Date().getMonth() === currentDate.getMonth() ? 'current-day' : ''}" 
-        on:click={() => setSelectedDate(day)}
-        on:keypress={() => setSelectedDate(day)}>
-         
-            <div>{day}</div>
-            
-          </div>
-      {/each}
-    </div>
-
-    <p>Selected Date: {selectedDate ? selectedDate.toLocaleDateString() : 'None'}</p>
-  </div>
+      <div class="days">
+        <!-- Loop through each day in the month -->
+        {#each Array.from({ length: getDaysInMonth(currentDate.getFullYear(), currentDate.getMonth()) }, (_, i) => i + 1) as day}
+            <!-- Render the day with its data -->
+            <div class="day {selectedDate && selectedDate.getDate() === day ? 'selected' : ''} {new Date().getDate() === day && new Date().getMonth() === currentDate.getMonth() ? 'current-day' : ''}" 
+            on:click={() => setSelectedDate(day)}
+            on:keypress={() => setSelectedDate(day)}
+            role="button" aria-pressed="false" tabindex={day}>
+              <div>
+                {day}
+                <br />
+                <br />
+                {#if getDataForDay(day) !== null}
+                  {#each getDataForDay(day) as activity}
+                    <div>{activity.Sport}: {activity.Data}</div>
+                  {/each}
+                {/if}
+              </div>
+            </div>
+        {/each}
+      </div>
+      <p>Selected Date: {selectedDate ? selectedDate.toLocaleDateString() : 'None'}</p>
+</div>
