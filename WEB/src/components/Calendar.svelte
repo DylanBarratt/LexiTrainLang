@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Day  from "./Day.svelte";
+
 
 export let calendarData : any;
 
@@ -38,20 +40,23 @@ function getDaysInMonth(year: number, month: number) {
 }
 
 function filterDataByDate(targetDate: Date) {
-  return calendarData.filter(item => {
-      const itemDate = new Date(item.Date);
-      // Extract year, month, and day from the target date and the item's date
-      const targetYear = targetDate.getFullYear();
-      const targetMonth = targetDate.getMonth();
-      const targetDay = targetDate.getDate();
+  const filteredData = calendarData.filter(item => {
+    const itemDate = new Date(item.Date);
+    // Extract year, month, and day from the target date and the item's date
+    const targetYear = targetDate.getFullYear();
+    const targetMonth = targetDate.getMonth();
+    const targetDay = targetDate.getDate();
 
-      const itemYear = itemDate.getFullYear();
-      const itemMonth = itemDate.getMonth();
-      const itemDay = itemDate.getDate();
+    const itemYear = itemDate.getFullYear();
+    const itemMonth = itemDate.getMonth();
+    const itemDay = itemDate.getDate();
 
-      // Compare year, month, and day
-      return targetYear === itemYear && targetMonth === itemMonth && targetDay === itemDay;
+    // Compare year, month, and day
+    return targetYear === itemYear && targetMonth === itemMonth && targetDay === itemDay;
   });
+
+  // Return null if no matching item is found
+  return filteredData.length > 0 ? filteredData : null;
 }
 
 function getFirstDayOfMonth(): Date {
@@ -107,61 +112,49 @@ function getDateOutdent(): number {
 </script>
 <style>
 .calendar {
-    font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 .header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 10px;
-    gap: 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 15px;
 }
 
 .month-year {
-    font-size: 20px;
-    font-weight: bold;
-    width: 14ch;
+  font-size: 20px;
+  font-weight: bold;
+  width: 14ch;
 }
 
 .days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-}
-
-.day {
-    border: 1px solid #ccc;
-    padding: 5px;
-    height: 125px;
-    cursor: pointer;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
 }
 
 .past {
+  border: 1px solid #ccc;
+  padding: 5px;
+  height: 125px;
   color: #979797;
 }
 
-.selected {
-    border-color: rgb(255, 0, 0);
-}
-
-.current-day {
-    background-color: #ccc;
-}
-
 .day-names {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    border: 1px solid rgb(110, 110, 110);
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border: 1px solid rgb(110, 110, 110);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .day-names div {
-    border-right: 0.5px solid rgb(110, 110, 110);
-    border-left: 0.5px solid rgb(110, 110, 110);
-    font-weight: bold;
-    padding: 10px;
-    font-size: small;
+  border-right: 0.5px solid rgb(110, 110, 110);
+  border-left: 0.5px solid rgb(110, 110, 110);
+  font-weight: bold;
+  padding: 10px;
+  font-size: small;
 }
 </style>
   
@@ -184,12 +177,13 @@ function getDateOutdent(): number {
           {getNextDay(getFirstDayOfMonth(), i - dateIndent).getDate()}
         </div>
       {/each}
+
+
       {#each daysInMonth as day}
-        <div class="day">
-          {day} <br /> <br />
-          {filterDataByDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), day))}
-        </div>
+        <Day dayNum={day} dateData={filterDataByDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), day))} /> 
       {/each}
+
+
       {#each {length: dateOutdent} as _, i}
         <div class="day past">
           {getNextDay(getLastDayOfMonth(), i + 1).getDate()}
