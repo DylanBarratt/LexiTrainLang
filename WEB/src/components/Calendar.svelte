@@ -1,8 +1,11 @@
 <script lang="ts">
-  import Day  from "./Day.svelte";
+import Day  from "./Day.svelte";
 
 
 export let calendarData : any;
+
+let periodLength: number = 7;
+let daysOfTheWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 let currentDate : Date = new Date();
 let dateIndent = getDateIndent();
@@ -35,21 +38,27 @@ function nextMonth() {
   resetDate();
 }
 
+function currentMonth() {
+  let d = new Date();
+  currentDate.setMonth(d.getMonth());
+  resetDate();
+}
+
 function getDaysInMonth(year: number, month: number) {
   return new Date(year, month + 1, 0).getDate();
 }
 
 function filterDataByDate(targetDate: Date) {
-  const filteredData = calendarData.filter(item => {
-    const itemDate = new Date(item.Date);
+  let filteredData = calendarData.filter(item => {
+    let itemDate = new Date(item.Date);
     // Extract year, month, and day from the target date and the item's date
-    const targetYear = targetDate.getFullYear();
-    const targetMonth = targetDate.getMonth();
-    const targetDay = targetDate.getDate();
+    let targetYear = targetDate.getFullYear();
+    let targetMonth = targetDate.getMonth();
+    let targetDay = targetDate.getDate();
 
-    const itemYear = itemDate.getFullYear();
-    const itemMonth = itemDate.getMonth();
-    const itemDay = itemDate.getDate();
+    let itemYear = itemDate.getFullYear();
+    let itemMonth = itemDate.getMonth();
+    let itemDay = itemDate.getDate();
 
     // Compare year, month, and day
     return targetYear === itemYear && targetMonth === itemMonth && targetDay === itemDay;
@@ -60,23 +69,23 @@ function filterDataByDate(targetDate: Date) {
 }
 
 function getFirstDayOfMonth(): Date {
-  const y = currentDate.getFullYear(); // Get the current year
-  const m = currentDate.getMonth(); // Get the current month (0-indexed)
+  let y = currentDate.getFullYear(); // Get the current year
+  let m = currentDate.getMonth(); // Get the current month (0-indexed)
 
   // Create a new Date object representing the first day of the month
-  const firstDayOfMonth = new Date(y, m, 1);
+  let firstDayOfMonth = new Date(y, m, 1);
   return firstDayOfMonth;
 }
 
 function getLastDayOfMonth(): Date {
-  const y = currentDate.getFullYear(); // Get the current year
-  const m = currentDate.getMonth(); // Get the current month (0-indexed)
+  let y = currentDate.getFullYear(); // Get the current year
+  let m = currentDate.getMonth(); // Get the current month (0-indexed)
 
   // Create a new Date object for the next month's first day
-  const nextMonthFirstDay = new Date(y, m + 1, 1);
+  let nextMonthFirstDay = new Date(y, m + 1, 1);
   
   // Subtract one day from the next month's first day
-  const lastDayOfMonth = new Date(nextMonthFirstDay.getTime() - 1);
+  let lastDayOfMonth = new Date(nextMonthFirstDay.getTime() - 1);
 
   return lastDayOfMonth;
 }
@@ -88,10 +97,10 @@ function getNextDay(currDate: Date, previousAmnt: number): Date {
 }
 
 function getDateIndent(): number {
-  const firstDayOfMonth = getFirstDayOfMonth();
+  let firstDayOfMonth = getFirstDayOfMonth();
 
   if (firstDayOfMonth.getDay() == 0) {
-    return 6;
+    return periodLength - 1;
   }
 
   return firstDayOfMonth.getDay() - 1;
@@ -104,12 +113,13 @@ function getDateOutdent(): number {
     return 0;
   }
 
-  return 7 - lastDayOfMonth.getDay();
+  return periodLength - lastDayOfMonth.getDay();
 }
 
 //todo delete
 // console.log(calendarData);
 </script>
+
 <style>
 .calendar {
   font-family: Arial, sans-serif;
@@ -120,7 +130,10 @@ function getDateOutdent(): number {
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 10px;
-  gap: 15px;
+}
+
+.header button {
+  margin-left: 5px;
 }
 
 .month-year {
@@ -131,7 +144,7 @@ function getDateOutdent(): number {
 
 .days {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(var(--week-length), 1fr);
 }
 
 .past {
@@ -143,7 +156,7 @@ function getDateOutdent(): number {
 
 .day-names {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(var(--week-length), 1fr);
   border: 1px solid rgb(110, 110, 110);
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -158,15 +171,16 @@ function getDateOutdent(): number {
 }
 </style>
   
-<div class="calendar">
+<div class="calendar" style="--week-length: {periodLength};">
     <div class="header">
       <div class="month-year">{currentDate.toLocaleString('default', { month: 'long' })} {currentDate.getFullYear()}</div>
       <button on:click={prevMonth}>&lt;</button>
       <button on:click={nextMonth}>&gt;</button>
+      <button on:click={currentMonth}>Current Month</button>
     </div>
   
     <div class="day-names">
-      {#each ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] as day}
+      {#each daysOfTheWeek.slice(0, periodLength) as day}
         <div>{day}</div>
       {/each}
     </div>

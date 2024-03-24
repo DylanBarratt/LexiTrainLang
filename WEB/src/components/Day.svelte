@@ -79,6 +79,10 @@
 .press {
     cursor: pointer;
 }
+
+.press:hover {
+    color: #414141;
+}
 </style>
 
 <div class="day" 

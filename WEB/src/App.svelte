@@ -1,11 +1,12 @@
 <!-- App.svelte -->
 <script lang="ts">
-  import { Parse } from './lib/Antlr.js';
-  import Calendar from './components/Calendar.svelte';
+import { Parse } from './lib/Antlr.js';
+import Calendar from './components/Calendar.svelte';
 
-  let textareaData = `Name: "123".
+let textareaData = `Name: "123".
 author: "Dylan".
 date: "19/01/2003".
+start_date: 01/04/2024.
 
 "week 1" {
   Mon: {
@@ -40,85 +41,129 @@ date: "19/01/2003".
   }
 }`;
 
-  let antlrError = null;
+let antlrError = null;
+
+let calendarData = null;
+
+let metaData = null;
 
 
-  let calendarData = null;
+function parseTA() {
+  let rawData = null;
 
-  let metaData = null;
+  try {
+    rawData = Parse(textareaData);
+    antlrError = null; //no error yay!
+  } catch (error) {
+    antlrError = error.message;
+    return;
+  }
 
+  loadMetaData(rawData);
+  loadCalendarData(rawData);
+}
 
-  function parseTA() {
-    let rawData = null;
+function loadMetaData(rawData) {
+  metaData = rawData.Metadata;
+}
 
-    try {
-      rawData = Parse(textareaData);
-      antlrError = null; //no error yay!
+function isValidDate(day: string) {
+  const daysOfWeek = ["mon", "tue", "wed", "thu", "fri", "sat", "sun", 
+  "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
+  const lowercaseDay = day.toLowerCase();
+  return daysOfWeek.includes(lowercaseDay);
+}
+
+function isValidDateFormat(dateString) {
+  const dateFormat = /^\d{2}\/\d{2}\/\d{4}$/;
+  return dateFormat.test(dateString);
+}
+
+function stringToDate(dateString) {
+  try {
+      if (!isValidDateFormat(dateString)) {
+        throw new Error('Invalid date format (' + dateString + '). Please use the format dd/mm/yyyy.');
+      }
+
+      const parts = dateString.split('/');
+      const day = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10) - 1;
+      const year = parseInt(parts[2], 10);
+
+      const date = new Date(year, month, day);
+
+      if (date.getDate() !== day || date.getMonth() !== month || date.getFullYear() !== year) {
+        throw new Error('Invalid date.');
+      }
+
+      return date;
     } catch (error) {
       antlrError = error.message;
-      console.log(antlrError);
-      return;
     }
+}
 
-    loadMetaData(rawData);
-    loadCalendarData(rawData);
-  }
+function loadCalendarData(rawData) {
+  let periods = rawData.Periods;
 
-  function loadMetaData(rawData) {
-    metaData = rawData.Metadata;
-  }
+  let days = [];
+  // combine weeks into single array with missed days as null
+  periods.forEach(week => { 
+    let weekData = Object.values(week);
+    weekData.pop();
 
-  function isValidDate(day: string) {
-    const daysOfWeek = ["mon", "tue", "wed", "thu", "fri", "sat", "sun", 
-    "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
-    const lowercaseDay = day.toLowerCase();
-    return daysOfWeek.includes(lowercaseDay);
-  }
-
-  function loadCalendarData(rawData) {
-    let periods = rawData.Periods;
-
-    let days = [];
-    // combine weeks into single array with missed days as null
-    periods.forEach(week => { 
-      let weekData = Object.values(week);
-      weekData.pop();
-
-      for (let i = 0; i < 7; i++) {
-        if ((typeof weekData[i] === 'undefined')) { 
-          days.push(null);
-        } else {
-          days.push(weekData[i]);
-        }
-      }
-    }); 
-
-    let dates = [];
-    let undatedDays = [];
-    let date: Date = new Date();
-
-    // give each day a date starting with the first available date that 
-    // matches the specified day. If day not recognised, error?
-    days.forEach(day => {
-      if (day == null) { //ignore empty days
-        return;
-      } else if (day.Day == null && !(typeof day.Repeats === 'undefined')) {
-        for (let i = 0; i < day.Repeats; i++) {
-          undatedDays.push({Date: new Date(date), Data: day.Data})
-        }
+    for (let i = 0; i < 7; i++) {
+      if ((typeof weekData[i] === 'undefined')) { 
+        days.push(null);
       } else {
-        if (isValidDate(day.Day)) {
-          dates.push({Date: new Date(date), Data: day.Data});
-        } else {
-          console.error("Invalid day: " + day);
-        }
+        days.push(weekData[i]);
       }
-      
-      date.setDate(date.getDate() + 1);
-    });
+    }
+  }); 
 
-    calendarData = [...dates, ...undatedDays];
+  let dates = [];
+  let undatedDays = [];
+  let date: Date = new Date();
+  let reverse: boolean = false;
+
+
+  if (typeof rawData.Metadata.Start_date === 'string') {
+    date = stringToDate(rawData.Metadata.Start_date);
   }
+
+  if (typeof rawData.Metadata.End_date === 'string') {
+    date = stringToDate(rawData.Metadata.End_date);
+    reverse = true
+  }
+  
+  if (reverse) {
+    days.reverse();
+  }
+  // give each day a date starting with the first available date that 
+  // matches the specified day. If day not recognised, error?
+  days.forEach(day => {
+    if (day == null) { //ignore empty days
+      return;
+    } else if (day.Day == null && !(typeof day.Repeats === 'undefined')) {
+      for (let i = 0; i < day.Repeats; i++) {
+        undatedDays.push({Date: new Date(date), Data: day.Data})
+      }
+    } else {
+      if (isValidDate(day.Day)) {
+        dates.push({Date: new Date(date), Data: day.Data});
+      } else {
+        antlrError = "Invalid day: " + day;
+      }
+    }
+    
+    if (reverse) {
+      date.setDate(date.getDate() - 1);
+    } else {
+      date.setDate(date.getDate() + 1);
+    }
+  });
+
+  calendarData = [...dates, ...undatedDays];
+}
 </script>
 
 <style>
@@ -162,27 +207,33 @@ date: "19/01/2003".
     <button type="submit">Submit</button>
   </form>
 
+
   {#if antlrError}
     <br/>
     <p style="color: red;">ANTLR Error: {antlrError}</p>
-  {/if}
 
-  {#if metaData}
-    <div>
-    {#if metaData.Name}
-        <h2>Title: {metaData.Name}</h2>
-    {/if}
-    {#if metaData.Author}
-        <h3>By {metaData.Author}</h3>
-    {/if}
-    {#if metaData.Date}
-        <h4>Written on: {metaData.Date}</h4>
-    {/if}
-    </div>
-  {/if}
+  {:else}
+    {#if metaData}
+      <div>
+        {#if metaData.Name}
+            <h2>Title: {metaData.Name}</h2>
+        {/if}
+        
+        {#if metaData.Author}
+            <h3>By {metaData.Author}</h3>
+        {/if}
 
-  {#if calendarData}
-    <br/>
-    <Calendar {calendarData} />
+        {#if metaData.Date}
+            <h4>Written on: {metaData.Date}</h4>
+        {/if}
+      </div>
+    {/if}
+
+    {#if calendarData}
+      {#key calendarData}
+        <br/>
+        <Calendar {calendarData} />
+      {/key}
+    {/if}
   {/if}
 </main>
