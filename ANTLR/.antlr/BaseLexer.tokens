@@ -9,4 +9,4 @@ LINE_COMMENT=8
 WS=9
 '<'=1
 '>'=2
-'IMPORT'=3
+'import'=3

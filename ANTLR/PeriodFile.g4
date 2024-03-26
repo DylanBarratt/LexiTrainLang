@@ -17,6 +17,7 @@ period
 
 periodPair
     : WORD ':' data //specified day
+    | WORD ':' WORD ('&&' data)? //import
     | NUM '*' '{' data '}' //looped days (unspecified day)
     | data //non-specified day
     ;

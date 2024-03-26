@@ -1,7 +1,7 @@
 #!/bin/bash
 ./out.sh
 
-TEST_FILE="../examples/period.lt"
+TEST_FILE="../examples/period_imports.lt"
 TYPE="PeriodFile"
 
 echo "Testing $TEST_FILE"
