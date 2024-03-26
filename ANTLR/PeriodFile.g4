@@ -22,10 +22,12 @@ periodPair
     ;
 
 data
-    : IMPORTED //imported
+    : imported //imported
     | workouts //single line session
     | session //inline session
     ;
+
+imported: IMPORTED;
 
 workouts //single line session
     : workout ('&&' workout)*

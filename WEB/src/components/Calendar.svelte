@@ -194,7 +194,7 @@ function getDateOutdent(): number {
 
 
       {#each daysInMonth as day}
-        <Day dayNum={day} dateData={filterDataByDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), day))} /> 
+        <Day dayNum={day} dayData={filterDataByDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), day))} /> 
       {/each}
 
 

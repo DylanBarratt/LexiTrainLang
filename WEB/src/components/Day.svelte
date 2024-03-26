@@ -1,6 +1,6 @@
 <script lang="ts">
     export let dayNum: any;
-    export let dateData: any;
+    export let dayData: any;
 
     let modalVis = false;
 
@@ -15,6 +15,8 @@
     function hideModal() {
         modalVis = false;
     }
+
+    console.log(dayData); //todo delete
 </script>
 
 <style>
@@ -90,44 +92,50 @@
     on:keydown={showModal}
     tabindex={dayNum} role="button" >
     {dayNum} <br /> <br />
-    {#if dateData}
-      {#each dateData as session}
+    {#if dayData}
+      {#each dayData as session}
         {#each session.Data as data}
-          <div>
-            {data.Sport} 
-            {#if typeof data.Data != 'undefined'}
-              {data.Data}
-            {:else if typeof data.Sections != 'undefined'}
-            <div class="press">
-                <br /> click for more details...
-            </div>
-            <div class:modal-hidden={!modalVis} class:modal-show={modalVis}
-                on:click={showModal} 
-                on:keydown={showModal} role="button" tabindex="-1">
-                <div class="modal-content" 
-                    on:click={e => e.stopPropagation()}
-                    on:keydown={e => e.stopPropagation()} role="button" tabindex="-1">
-                  <div class="hide-button" 
-                    on:click|stopPropagation={hideModal}
-                    on:keydown|stopPropagation={hideModal} role="button" tabindex="-1">
-                    <span>&times;</span>
-                  </div>
-                    <h2>{data.Sport}</h2>
-                    {#each data.Sections as section}
-                        <h3>{section.Title}:</h3>
-                        {#each section.Workloads as workload}
-                        <p>
-                            {#each workload.Data as load}
-                                {load}&nbsp;
-                            {/each}
-                        </p> 
-                        {/each}                
-                    {/each}
+            {#if data.Sport == null} 
+                <!-- a session import. For now just display its name -->
+                {data} <br />
+            {:else}
+            <div>
+                {data.Sport} 
+                {#if typeof data.Data != 'undefined'}
+                  {data.Data}
+                {:else if typeof data.Sections != 'undefined'}
+                <div class="press">
+                    <br /> click for more details...
                 </div>
+                <div class:modal-hidden={!modalVis} class:modal-show={modalVis}
+                    on:click={showModal} 
+                    on:keydown={showModal} role="button" tabindex="-1">
+                    <div class="modal-content" 
+                        on:click={e => e.stopPropagation()}
+                        on:keydown={e => e.stopPropagation()} role="button" tabindex="-1">
+                      <div class="hide-button" 
+                        on:click|stopPropagation={hideModal}
+                        on:keydown|stopPropagation={hideModal} role="button" tabindex="-1">
+                        <span>&times;</span>
+                      </div>
+                        <h2>{data.Sport}</h2>
+                        {#each data.Sections as section}
+                            <h3>{section.Title}:</h3>
+                            {#each section.Workloads as workload}
+                            <p>
+                                {#each workload.Data as load}
+                                    {load}&nbsp;
+                                {/each}
+                            </p> 
+                            {/each}                
+                        {/each}
+                    </div>
+                  </div>
+                {/if}
               </div>
+              <br />
             {/if}
-          </div>
-          <br />
+          
         {/each}
       {/each}  
     {/if}

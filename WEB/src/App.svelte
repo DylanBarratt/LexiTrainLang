@@ -13,20 +13,28 @@ let metaData = null;
 
 
 function parseTA(textareaData) {
+  //todo parse session imports first
+  //if none found, skip straigth to a full parse
+  //if found, stop and ask user for those session files.
+  
+  // console.log(rawData.SessionImports); //todo delete
+
+
   let rawData = null;
 
   try {
     rawData = Parse(textareaData.detail);
     antlrError = null; //no error yay!
   } catch (error) {
+    console.log(error);
     antlrError = error.message;
     return;
   }
 
+  console.log(rawData); //todo delete
+
   loadMetaData(rawData);
   loadCalendarData(rawData);
-
-  console.log(rawData.SessionImports); //todo delete
 }
 
 function loadMetaData(rawData) {
@@ -75,7 +83,7 @@ function loadCalendarData(rawData) {
   // combine weeks into single array with missed days as null
   periods.forEach(week => { 
     let weekData = Object.values(week);
-    weekData.pop();
+    weekData.pop(); //remove week title
 
     for (let i = 0; i < 7; i++) {
       if ((typeof weekData[i] === 'undefined')) { 
@@ -141,13 +149,13 @@ function loadCalendarData(rawData) {
 
   {#if antlrError}
     <br/>
-    <p style="color: red;">ANTLR Error: {antlrError}</p>
+    <p class="error">ANTLR Error: {antlrError}</p>
 
   {:else}
     {#if metaData}
       <div>
-        {#if metaData.Name}
-            <h2>Title: {metaData.Name}</h2>
+        {#if metaData.Title}
+            <h2>Title: {metaData.Title}</h2>
         {/if}
         
         {#if metaData.Author}

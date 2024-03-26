@@ -2,47 +2,75 @@
 import { createEventDispatcher } from 'svelte';
 const dispatch = createEventDispatcher();
 
-let textareaData = `Name: "123".
-author: "Dylan".
-date: "19/01/2003".
-start_date: 01/04/2024.
+let textareaData = `title: "chrim!bo".
+author:"Dylan Barratt".
 
 //this is a comment!
 
-over_unders = 5overUnders.
-base = 2hourBase.
+import over_unders.
+import base.
 
 "week 1" {
-  Mon: {
+	Mon: (bike) 1hr HRZ1 "cool bike yo",
+	Tue: {
         (run)
         "warmup" {60min HRZ1 - HRZ2}
 
         "main set" {
             2hours HRZ2 - HRZ3 &&
-            1hours < HRZ2
+            1hours > HRZ2
         }
 
         "cool down" {
             60min HRZ1 - HRZ2
         }
-  },
-  Tue: (bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
-  Wed: (bike) 2hr HRZ2,
-  Thu: (bike) 1hr HRZ2&&(run) 1hr HRZ2,
-  Fri: (bike) 2hr HRZ2,
-  Sat: (bike) 2hr HRZ2 && (run) 1hr30min HRZ2
+    },
+	Wed: (run) 1hr hrz2,
+	Thu: (bike) 1hr HRZ2&&(run) 1hr HRZ2,
+	Fri: [base],
+	Sat: [base] && (run) 1hr30min HRZ2
+}
+
+"week 2"{
+	Mon: (run)1hr HRZ2 "Chrimbo run!",
+	Tue:(bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
+	Wed: [base],
+	Thu: {
+        (bike)
+        warmup {
+            1hr HRZ1
+        }
+
+        main {
+            5*{
+                5min HRZ5 &&
+                5min HRZ3
+            }
+        }
+
+        cooldown {
+            30min HRZ1 - HRZ2
+        }
+    },
+	Fri: (bike) 2hr30min HRZ2,
+	Sat: (bike) 2hr HRZ2,
+	Sun: (run) 1hr30min HRZ2 && (bike) 1hr HRZ2
+}
+
+"week 3" {
+	Mon: (note) "10mile tt?",
+	Tue: (bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
+	Wed: (bike) 2hr HRZ2,
+	Thu: (swim) 30min load=30 && (run) 1hr HRZ2,
+	Fri: (bike) 2hr30min HRZ2,
+	Sat: (bike) 2hr HRZ2 && (swim) 1hr load=40,
+	Sun: (run) 1hr30min HRZ2 && (bike) 1hr HRZ2
 }
 
 "week 2" {
-  Mon: (bike) 1hr HRZ1 "cool bike yo",
-  Tue: (bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
-  Wed: (bike) 2hr HRZ2,
-  Thu: (bike) 1hr HRZ2&&(run) 1hr HRZ2,
-  Fri: (bike) 2hr HRZ2,
-  Sat: (bike) 2hr HRZ2 && (run) 1hr30min HRZ2,
-  2*{
-    (run) base 
-  }
+	5* {
+        [base]
+	}
 }`;
 
 function btnSubmit() {
