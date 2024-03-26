@@ -16,14 +16,14 @@ period
     ;
 
 periodPair
-    : WORD ':' data //specified day
-    | WORD ':' WORD ('&&' data)? //import
+    : WORD ':' data ('&&' data)* //specified day
     | NUM '*' '{' data '}' //looped days (unspecified day)
-    | data //non-specified day
+    | data ('&&' data)* //non-specified day
     ;
 
 data
-    : workouts //single line session
+    : IMPORTED //imported
+    | workouts //single line session
     | session //inline session
     ;
 

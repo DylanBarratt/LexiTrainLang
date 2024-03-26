@@ -21,16 +21,16 @@ import base.
             60min HRZ1 - HRZ2
         }
     },
-	Wed: base,
+	Wed: (run) 1hr hrz2,
 	Thu: (bike) 1hr HRZ2&&(run) 1hr HRZ2,
-	Fri: base,
-	Sat: base && (run) 1hr30min HRZ2
+	Fri: [base],
+	Sat: [base] && (run) 1hr30min HRZ2
 }
 
 "week 2"{
 	Mon: (run)1hr HRZ2 "Chrimbo run!",
 	Tue:(bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
-	Wed: base,
+	Wed: [base],
 	Thu: {
         (bike)
         warmup {
@@ -65,6 +65,6 @@ import base.
 
 "week 2" {
 	5* {
-		(bike) base
+        [base]
 	}
 }
