@@ -3,8 +3,8 @@ author:"Dylan Barratt".
 
 //this is a comment!
 
-over_unders = 5overUnders.
-base = 2hourBase.
+import over_unders.
+import base.
 
 "week 1" {
 	Mon: (bike) 1hr HRZ1 "cool bike yo",
@@ -21,16 +21,16 @@ base = 2hourBase.
             60min HRZ1 - HRZ2
         }
     },
-	Wed: (bike) 2hr HRZ2,
+	Wed: base,
 	Thu: (bike) 1hr HRZ2&&(run) 1hr HRZ2,
-	Fri: (bike) 2hr HRZ2,
-	Sat: (bike) 2hr HRZ2 && (run) 1hr30min HRZ2
+	Fri: base,
+	Sat: base && (run) 1hr30min HRZ2
 }
 
 "week 2"{
 	Mon: (run)1hr HRZ2 "Chrimbo run!",
 	Tue:(bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
-	Wed:(bike)2hr HRZ2,
+	Wed: base,
 	Thu: {
         (bike)
         warmup {

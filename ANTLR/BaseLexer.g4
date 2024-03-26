@@ -2,6 +2,7 @@ lexer grammar BaseLexer;
 
 LT: '<';
 GT: '>';
+IMPORT: 'IMPORT';
 
 NUM: [0-9]+;
 WORD: [a-zA-Z0-9_/]+ | '"' (ESC|.)*? '"';

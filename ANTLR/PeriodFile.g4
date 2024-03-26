@@ -7,7 +7,7 @@ file:(metaData)* (sessionImport)* periods EOF;
 
 metaData: WORD ':' WORD '.';
 
-sessionImport: WORD '=' WORD '.';
+sessionImport: IMPORT WORD '.';
 
 periods: (period)+;
 
