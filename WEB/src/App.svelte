@@ -31,7 +31,9 @@ function parseTA(textareaData) {
     return;
   }
 
-  console.log(rawData); //todo delete
+  //todo delete
+  console.log("Raw data:")
+  console.log(rawData); 
 
   loadMetaData(rawData);
   loadCalendarData(rawData);
@@ -76,20 +78,59 @@ function stringToDate(dateString) {
     }
 }
 
+
+class DayType{
+  Day: string; 
+  Repeats: number;
+  Data: [];
+}
+
+function dayNameToIndex(dayName: string): number {
+    // Convert the day name to lowercase for case insensitivity
+    var lowerCaseDayName = dayName.toLowerCase();
+    
+    // Define a map of day names to their indices
+    var dayMap = {
+        'sun': 0,
+        'sunday': 0,
+        'mon': 1,
+        'monday': 1,
+        'tue': 2,
+        'tuesday': 2,
+        'wed': 3,
+        'wednesday': 3,
+        'thu': 4,
+        'thursday': 4,
+        'fri': 5,
+        'friday': 5,
+        'sat': 6,
+        'saturday': 6
+    };
+    
+    // Look up the day index in the map
+    return dayMap[lowerCaseDayName];
+}
+
 function loadCalendarData(rawData) {
   let periods = rawData.Periods;
 
   let days = [];
+  let firstNamedDay: string = null;
   // combine weeks into single array with missed days as null
   periods.forEach(week => { 
-    let weekData = Object.values(week);
+    let weekData: Array<DayType> = Object.values(week);
     weekData.pop(); //remove week title
 
+    //assumes 7 days a period
     for (let i = 0; i < 7; i++) {
       if ((typeof weekData[i] === 'undefined')) { 
         days.push(null);
       } else {
         days.push(weekData[i]);
+
+        if (firstNamedDay == null && weekData[i].Day != null) {
+          firstNamedDay = weekData[i].Day;
+        } 
       }
     }
   }); 
@@ -98,34 +139,51 @@ function loadCalendarData(rawData) {
   let undatedDays = [];
   let date: Date = new Date();
   let reverse: boolean = false;
-
-
-  if (typeof rawData.Metadata.Start_date === 'string') {
-    date = stringToDate(rawData.Metadata.Start_date);
+  
+  if (typeof rawData.Metadata.End_date === 'string' && typeof rawData.Metadata.Start_date === 'string') {
+    antlrError = "Both end date and start date not supported, please remove one.";
+    return;
   }
 
-  if (typeof rawData.Metadata.End_date === 'string') {
+  if (typeof rawData.Metadata.End_date === 'string') { //if end date
     date = stringToDate(rawData.Metadata.End_date);
     reverse = true
-  }
-  
-  if (reverse) {
     days.reverse();
+  } else if (typeof rawData.Metadata.Start_date === 'string') { //if start date
+    date = stringToDate(rawData.Metadata.Start_date);
+  } 
+
+  if (firstNamedDay != null) { //if null just start on today.
+    let dateFound: boolean = false;
+    while (!dateFound) {
+      if (date.getDay() == dayNameToIndex(firstNamedDay)) {
+        dateFound = true;
+        break;
+      }
+
+      date.setDate(date.getDate() + 1);
+    }
   }
+
   // give each day a date starting with the first available date that 
-  // matches the specified day. If day not recognised, error?
+  // matches the specified day. If day not recognised, error
   days.forEach(day => {
+    console.log(day); //todo delete
     if (day == null) { //ignore empty days
       return;
     } else if (day.Day == null && !(typeof day.Repeats === 'undefined')) {
       for (let i = 0; i < day.Repeats; i++) {
-        undatedDays.push({Date: new Date(date), Data: day.Data})
+        //store undated sessions in the current week and mark as not dated
+        undatedDays.push({Date: new Date(date), Data: day.Data, Dated: false}) 
       }
-    } else {
+    } else if (day.Day == null) { //undated days
+      undatedDays.push({Date: new Date(date), Data: day.Data, Dated: false})
+    }else {
       if (isValidDate(day.Day)) {
-        dates.push({Date: new Date(date), Data: day.Data});
+        dates.push({Date: new Date(date), Data: day.Data, Dated: true});
       } else {
         antlrError = "Invalid day: " + day;
+        return;
       }
     }
     

@@ -15,15 +15,18 @@
     function hideModal() {
         modalVis = false;
     }
-
-    console.log(dayData); //todo delete
 </script>
 
 <style>
 .day {
     border: 1px solid #ccc;
     padding: 5px;
-    height: 125px;
+    height: 125px;  
+}
+
+.dayNum {
+    font-weight: bold;
+    margin: 2.5px;
 }
 
 .modal-hidden {
@@ -91,7 +94,7 @@
     on:click={showModal}
     on:keydown={showModal}
     tabindex={dayNum} role="button" >
-    {dayNum} <br /> <br />
+    <p class="dayNum">{dayNum}</p>
     {#if dayData}
       {#each dayData as session}
         {#each session.Data as data}

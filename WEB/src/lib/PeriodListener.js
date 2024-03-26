@@ -64,10 +64,8 @@ export default class PeriodListener extends LTListener {
         this.daySessions = [];
     }
 
-    exitPeriodPair(ctx) {
-        console.log(this.daySessions);
-        this.periods[this.currentPeriod][this.currentDay].Data = this.daySessions;
-        this.currentDay++;
+    exitImported(ctx) {
+        this.daySessions.push(ctx.IMPORTED().getText().replace(/\[|\]/g, ''));
     }
 
     exitWorkouts(ctx) {
@@ -78,10 +76,6 @@ export default class PeriodListener extends LTListener {
             this.daySessions.push({Sport: workout[0].replace(/[()]/g, ''), Data: workout[1]})
         });
 
-    }
-
-    exitImported(ctx) {
-        this.daySessions.push(ctx.IMPORTED().getText().replace(/\[|\]/g, ''));
     }
 
     exitSession(ctx) {
@@ -124,7 +118,12 @@ export default class PeriodListener extends LTListener {
             finalSections.push({Title: section[0], Workloads: workloads})
         });
 
-        this.periods[this.currentPeriod][this.currentDay].Data = [{Sport: sport, Sections: finalSections}];
+        this.daySessions.push({Sport: sport, Sections: finalSections});
+    }
+
+    exitPeriodPair(ctx) {
+        this.periods[this.currentPeriod][this.currentDay].Data = this.daySessions;
+        this.currentDay++;
     }
 
     result() {

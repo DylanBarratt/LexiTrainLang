@@ -117,7 +117,8 @@ function getDateOutdent(): number {
 }
 
 //todo delete
-// console.log(calendarData);
+console.log("calender data: ");
+console.log(calendarData);
 </script>
 
 <style>
