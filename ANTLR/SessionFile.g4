@@ -9,13 +9,19 @@ metaData: WORD ':' WORD '.';
 
 section: WORD '{' (workloads | NUM '*' '{' workloads '}') '}'; //single workloads or repeated workloads
 
-workloads: workload ('&&' workload)*;
+workloads: workloadL ('&&' workloadL)*;
+
+workloadL: workload (LOAD NUM)? (NOTES WORD)?; // workload load notes
 
 workload
-    : WORD (LT | GT) WORD //less than intensities
-    | WORD WORD '-' WORD //between intensities
+    : WORD // no specified intensity (just time)
+    | WORD lt 
+    | WORD gt
+    | WORD between
     | WORD WORD //at intensity
     ; 
 
 
-//Lexer rules
+lt : LT WORD; // < HRZ2
+gt : GT WORD; // > HRZ2
+between : WORD BW WORD;  //HRZ1 - HRZ3

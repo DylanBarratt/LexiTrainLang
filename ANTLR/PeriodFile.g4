@@ -33,23 +33,27 @@ workouts //single line session
     : workout ('&&' workout)*
     ;
 
-workout: SPORT (WORD)* (LOAD)? ;
+workout: SPORT workloadL;
 
 session //inline session
     : '{' SPORT (sessionSection)+ '}' //name of sport and the sections of the session
     ;
 
-sessionSection 
-    : WORD '{' (workloads | NUM '*' '{' workloads '}') '}' //single workloads or repeated workloads
-    ;
+sessionSection: WORD '{' (workloads | NUM '*' '{' workloads '}') '}'; //single workloads or repeated workloads
 
-workloads: workload ('&&' workload)*;
+workloads: workloadL ('&&' workloadL)*;
+
+workloadL: workload (LOAD NUM)? (NOTES WORD)?; // workload load notes
 
 workload
-    : WORD (LT | GT) WORD //lt or gt intensities
-    | WORD WORD '-' WORD //between intensities
+    : WORD // no specified intensity (just time)
+    | WORD lt 
+    | WORD gt
+    | WORD between
     | WORD WORD //at intensity
     ; 
 
 
-//lexer rules
+lt : LT WORD; // < HRZ2
+gt : GT WORD; // > HRZ2
+between : WORD BW WORD;  //HRZ1 - HRZ3
