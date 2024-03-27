@@ -12,7 +12,7 @@ section: WORD '{' (workloads | NUM '*' '{' workloads '}') '}'; //single workload
 workloads: workload ('&&' workload)*;
 
 workload
-    : WORD '<' WORD //less than intensities
+    : WORD (LT | GT) WORD //less than intensities
     | WORD WORD '-' WORD //between intensities
     | WORD WORD //at intensity
     ; 
