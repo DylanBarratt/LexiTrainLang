@@ -2,6 +2,8 @@
 // jshint ignore: start
 import antlr4 from 'antlr4';
 import PeriodFileListener from './PeriodFileListener.js';
+import PeriodFileVisitor from './PeriodFileVisitor.js';
+
 const serializedATN = [4,1,18,162,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
 4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,
 2,13,7,13,1,0,5,0,30,8,0,10,0,12,0,33,9,0,1,0,5,0,36,8,0,10,0,12,0,39,9,
@@ -763,6 +765,14 @@ class FileContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof PeriodFileVisitor ) {
+	        return visitor.visitFile(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -806,6 +816,14 @@ class MetaDataContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof PeriodFileVisitor ) {
+	        return visitor.visitMetaData(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -843,6 +861,14 @@ class SessionImportContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof PeriodFileListener ) {
 	        listener.exitSessionImport(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof PeriodFileVisitor ) {
+	        return visitor.visitSessionImport(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -885,6 +911,14 @@ class PeriodsContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof PeriodFileListener ) {
 	        listener.exitPeriods(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof PeriodFileVisitor ) {
+	        return visitor.visitPeriods(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -931,6 +965,14 @@ class PeriodContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof PeriodFileListener ) {
 	        listener.exitPeriod(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof PeriodFileVisitor ) {
+	        return visitor.visitPeriod(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -983,6 +1025,14 @@ class PeriodPairContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof PeriodFileVisitor ) {
+	        return visitor.visitPeriodPair(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1026,6 +1076,14 @@ class DataContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof PeriodFileVisitor ) {
+	        return visitor.visitData(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1059,6 +1117,14 @@ class ImportedContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof PeriodFileListener ) {
 	        listener.exitImported(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof PeriodFileVisitor ) {
+	        return visitor.visitImported(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -1101,6 +1167,14 @@ class WorkoutsContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof PeriodFileListener ) {
 	        listener.exitWorkouts(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof PeriodFileVisitor ) {
+	        return visitor.visitWorkouts(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -1154,6 +1228,14 @@ class WorkoutContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof PeriodFileVisitor ) {
+	        return visitor.visitWorkout(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1200,6 +1282,14 @@ class SessionContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof PeriodFileVisitor ) {
+	        return visitor.visitSession(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1243,6 +1333,14 @@ class SessionSectionContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof PeriodFileVisitor ) {
+	        return visitor.visitSessionSection(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -1283,6 +1381,14 @@ class WorkloadsContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof PeriodFileListener ) {
 	        listener.exitWorkloads(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof PeriodFileVisitor ) {
+	        return visitor.visitWorkloads(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -1334,6 +1440,14 @@ class WorkloadContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof PeriodFileListener ) {
 	        listener.exitWorkload(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof PeriodFileVisitor ) {
+	        return visitor.visitWorkload(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 

@@ -1,6 +1,6 @@
 <!-- App.svelte -->
 <script lang="ts">
-import { Parse } from './lib/Antlr.js';
+import { ParseFull, ParseImports } from './lib/Antlr.js';
 import Calendar from './components/Calendar.svelte';
 import FileUpload from './components/FileUpload.svelte';
 import Ide from './components/IDE.svelte';
@@ -11,19 +11,54 @@ let calendarData = null;
 
 let metaData = null;
 
+let importNames: Array<string> = [];
+let importFiles = {};
 
-function parseTA(textareaData) {
+function checkImports(textareaData) {
   //todo parse session imports first
   //if none found, skip straigth to a full parse
   //if found, stop and ask user for those session files.
   
-  // console.log(rawData.SessionImports); //todo delete
+  importNames = ParseImports(textareaData.detail);
+
+  if (importNames == null) { //no imports so just parse full 
+    parseTA(textareaData);
+    return;
+  }
+
+  importNames.forEach(name => {
+    importFiles[name] = null;
+  });
+}
+
+function fileUploaded(event) {
+  let fileRaw = event.detail;
+
+  const reader = new FileReader();
+
+  reader.onload = function(event) {
+    const fileContent = event.target.result;
+    console.log('Uploaded file content:', fileContent);
+    importFiles[fileRaw.Name] = fileContent;
+  };
+
+  reader.onerror = function(event) {
+    console.error('Error occurred while reading the file:', event.target.error);
+  };
+
+  reader.readAsText(fileRaw.File); 
+}
+
+function checkImportedFiles() {
+  console.log("Imported files", importFiles);
+}
 
 
+function parseTA(textareaData) {
   let rawData = null;
 
   try {
-    rawData = Parse(textareaData.detail);
+    rawData = ParseFull(textareaData.detail);
     antlrError = null; //no error yay!
   } catch (error) {
     console.log(error);
@@ -201,9 +236,16 @@ function loadCalendarData(rawData) {
 <main>
   <h1> Please enter ur training yo</h1>
 
-  <Ide on:textSubmitted={parseTA}/>
+  <Ide on:textSubmitted={checkImports}/>
 
-  <FileUpload />
+
+  {#if importNames.length > 0}
+    {#each importNames as name}
+      <FileUpload {name} on:fileUploaded={fileUploaded}/>
+    {/each}
+    <button on:click={checkImportedFiles}>Submit Files</button>
+  {/if}
+  
 
   {#if antlrError}
     <br/>

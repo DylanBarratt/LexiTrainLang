@@ -2,6 +2,8 @@
 // jshint ignore: start
 import antlr4 from 'antlr4';
 import SessionFileListener from './SessionFileListener.js';
+import SessionFileVisitor from './SessionFileVisitor.js';
+
 const serializedATN = [4,1,17,58,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,
 1,0,4,0,12,8,0,11,0,12,0,13,1,0,4,0,17,8,0,11,0,12,0,18,1,1,1,1,1,1,1,1,
 1,1,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,3,2,35,8,2,1,2,1,2,1,3,1,3,1,3,5,
@@ -337,6 +339,14 @@ class FileContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof SessionFileVisitor ) {
+	        return visitor.visitFile(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -378,6 +388,14 @@ class MetaDataContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof SessionFileListener ) {
 	        listener.exitMetaData(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof SessionFileVisitor ) {
+	        return visitor.visitMetaData(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -423,6 +441,14 @@ class SectionContext extends antlr4.ParserRuleContext {
 		}
 	}
 
+	accept(visitor) {
+	    if ( visitor instanceof SessionFileVisitor ) {
+	        return visitor.visitSection(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
 
 }
 
@@ -463,6 +489,14 @@ class WorkloadsContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof SessionFileListener ) {
 	        listener.exitWorkloads(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof SessionFileVisitor ) {
+	        return visitor.visitWorkloads(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
@@ -510,6 +544,14 @@ class WorkloadContext extends antlr4.ParserRuleContext {
 	    if(listener instanceof SessionFileListener ) {
 	        listener.exitWorkload(this);
 		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof SessionFileVisitor ) {
+	        return visitor.visitWorkload(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
 	}
 
 
