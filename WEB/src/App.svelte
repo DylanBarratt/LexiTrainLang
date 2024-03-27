@@ -8,21 +8,32 @@ import Ide from './components/IDE.svelte';
 let antlrError = null;
 
 let calendarData = null;
-
 let metaData = null;
+
+let ideText = null;
 
 let importNames: Array<string> = [];
 let importFiles = {};
 
-function checkImports(textareaData) {
-  //todo parse session imports first
-  //if none found, skip straigth to a full parse
-  //if found, stop and ask user for those session files.
-  
-  importNames = ParseImports(textareaData.detail);
+function updateIdeText(textareaData) {
+  ideText = textareaData.detail;
 
-  if (importNames == null) { //no imports so just parse full 
-    parseTA(textareaData);
+  antlrError = null;
+
+  calendarData = null;
+  metaData = null;
+
+  importNames = [];
+  importFiles = {};
+
+  checkImports();
+}
+
+function checkImports() {
+  importNames = ParseImports(ideText);
+
+  if (importNames.length == 0) { //no imports so just parse full 
+    parseTA();
     return;
   }
 
@@ -38,7 +49,6 @@ function fileUploaded(event) {
 
   reader.onload = function(event) {
     const fileContent = event.target.result;
-    console.log('Uploaded file content:', fileContent);
     importFiles[fileRaw.Name] = fileContent;
   };
 
@@ -50,15 +60,28 @@ function fileUploaded(event) {
 }
 
 function checkImportedFiles() {
-  console.log("Imported files", importFiles);
+  let err: boolean;
+  importNames.forEach(name => {
+    if (importFiles[name] == null) {
+      console.error("missing " + name);
+      err = true;
+    }
+  });
+
+  if (err) {
+    return;
+  }
+
+  console.log("Imported files", importFiles); //todo delete
+  parseTA();
 }
 
 
-function parseTA(textareaData) {
+function parseTA() {
   let rawData = null;
 
   try {
-    rawData = ParseFull(textareaData.detail);
+    rawData = ParseFull(ideText);
     antlrError = null; //no error yay!
   } catch (error) {
     console.log(error);
@@ -121,35 +144,36 @@ class DayType{
 }
 
 function dayNameToIndex(dayName: string): number {
-    // Convert the day name to lowercase for case insensitivity
-    var lowerCaseDayName = dayName.toLowerCase();
-    
-    // Define a map of day names to their indices
-    var dayMap = {
-        'sun': 0,
-        'sunday': 0,
-        'mon': 1,
-        'monday': 1,
-        'tue': 2,
-        'tuesday': 2,
-        'wed': 3,
-        'wednesday': 3,
-        'thu': 4,
-        'thursday': 4,
-        'fri': 5,
-        'friday': 5,
-        'sat': 6,
-        'saturday': 6
-    };
-    
-    // Look up the day index in the map
-    return dayMap[lowerCaseDayName];
+  // Convert the day name to lowercase for case insensitivity
+  var lowerCaseDayName = dayName.toLowerCase();
+  
+  // Define a map of day names to their indices
+  var dayMap = {
+    'sun': 0,
+    'sunday': 0,
+    'mon': 1,
+    'monday': 1,
+    'tue': 2,
+    'tuesday': 2,
+    'wed': 3,
+    'wednesday': 3,
+    'thu': 4,
+    'thursday': 4,
+    'fri': 5,
+    'friday': 5,
+    'sat': 6,
+    'saturday': 6
+  };
+  
+  // Look up the day index in the map
+  return dayMap[lowerCaseDayName];
 }
 
 function loadCalendarData(rawData) {
   let periods = rawData.Periods;
 
   let days = [];
+  let daysUntilFirst: number = 0;
   let firstNamedDay: string = null;
   // combine weeks into single array with missed days as null
   periods.forEach(week => { 
@@ -165,10 +189,15 @@ function loadCalendarData(rawData) {
 
         if (firstNamedDay == null && weekData[i].Day != null) {
           firstNamedDay = weekData[i].Day;
-        } 
+        } else if (firstNamedDay == null) {
+          daysUntilFirst++;
+        }
       }
     }
   }); 
+
+  console.log(dayNameToIndex(firstNamedDay));
+  console.log(daysUntilFirst);
 
   let dates = [];
   let undatedDays = [];
@@ -198,7 +227,11 @@ function loadCalendarData(rawData) {
 
       date.setDate(date.getDate() + 1);
     }
+
+    date.setDate(date.getDate() - daysUntilFirst) //offset first found by days previous
   }
+
+  
 
   // give each day a date starting with the first available date that 
   // matches the specified day. If day not recognised, error
@@ -236,7 +269,7 @@ function loadCalendarData(rawData) {
 <main>
   <h1> Please enter ur training yo</h1>
 
-  <Ide on:textSubmitted={checkImports}/>
+  <Ide on:textSubmitted={updateIdeText}/>
 
 
   {#if importNames.length > 0}
