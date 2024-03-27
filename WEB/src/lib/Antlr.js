@@ -6,8 +6,12 @@ const { CommonTokenStream, InputStream } = antlr4;
 import LTLexer from './lt/PeriodFileLexer.js';
 import LTParser from './lt/PeriodFileParser.js';
 
+import SLexer from './lt/SessionFileLexer.js';
+import SParser from './lt/SessionFileParser.js';
+
 import PeriodListener from './PeriodListener.js';
 import Imports from './ImportListener.js';
+import SessionListener from './SessionListener.js';
 
 class CustomErrorListener extends antlr4.error.ErrorListener {
     constructor() {
@@ -64,6 +68,26 @@ export function ParseImports(input) {
 	var tree = parser.file();
 
 	var listener = new Imports();
+	antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
+
+	return listener.result();
+}
+
+export function ParseSession(input) {
+	var chars = new InputStream(input, true);
+	var lexer = new SLexer(chars);
+	var tokens = new CommonTokenStream(lexer);
+	var parser = new SParser(tokens);
+
+	parser.buildParseTrees = true;
+
+	parser.removeErrorListeners;
+	var customErrorListener = new CustomErrorListener();
+	parser.addErrorListener(customErrorListener);
+
+	var tree = parser.file();
+
+	var listener = new SessionListener();
 	antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
 
 	return listener.result();

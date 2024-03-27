@@ -1,6 +1,6 @@
 <!-- App.svelte -->
 <script lang="ts">
-import { ParseFull, ParseImports } from './lib/Antlr.js';
+import { ParseFull, ParseImports, ParseSession } from './lib/Antlr.js';
 import Calendar from './components/Calendar.svelte';
 import FileUpload from './components/FileUpload.svelte';
 import Ide from './components/IDE.svelte';
@@ -264,6 +264,32 @@ function loadCalendarData(rawData) {
 
   calendarData = [...dates, ...undatedDays];
 }
+
+var dat = `title: "over unders".
+sport: "cycling".
+author: "Dylan Barratt".
+
+warmup {
+	1hr HRZ1
+}
+
+main {
+	5*{
+		5min HRZ5 &&
+		5min HRZ3 - HRZ4
+	}
+}
+
+"cool down" {
+	30min HRZ1
+}
+
+"test" {
+  30min
+}`;
+
+console.log(dat);
+console.log(ParseSession(dat));
 </script>
 
 <main>
