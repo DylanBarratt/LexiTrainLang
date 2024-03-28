@@ -1,25 +1,56 @@
 import SessionFileListener from "./lt/SessionFileListener";
 
-function capitalizeFirstLetter(str) {
+function capitalizeFirstLetter(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }   
 
-function removeSpeechMarks(str) {
+function removeSpeechMarks(str: string): string {
     return str.replace(/"/g, '');
 }
 
-function isNumber(value) {
+function isNumber(value): boolean {
     return !isNaN(value);
 }
 
+enum WLType {
+    LessThan = 'lt',
+    GreaterThan = 'gt',
+    Between = 'bt',
+    At = 'at',
+    None = 'none'
+}
+
+class Workload {
+    Time: string; 
+    Type: WLType;
+    Zone: string;
+};
+
+class WorkloadExtended {
+    Repeats: number;
+    Workload: Workload;
+}
+
+class Section {
+    Title: string;
+    Workloads: Array<WorkloadExtended>;
+}
+
+class Session {
+    Metadata: object; 
+    Sections: Array<Section>;
+}
+
+
 export default class SessionListener extends SessionFileListener {
-    metadata = {};
-    sections = [];
+    metadata: any = {};
 
-    workloads = [];
-    repeats = 0;
+    sections: Array<Section> = [];
 
-    currSection = 0;
+    workloads: Array<WorkloadExtended> = [];
+    repeats: number = 0;
+
+    currSection:number = 0;
 
     visit(ctx) {
         if (ctx.children) {
@@ -38,7 +69,7 @@ export default class SessionListener extends SessionFileListener {
         this.sections[this.currSection] = {Title: removeSpeechMarks(ctx.WORD().getText()), Workloads: null};
     }
 
-    enterSectionContents(ctx) {
+    enterSectionContents() {
         this.workloads = [];
     }
 
@@ -46,44 +77,44 @@ export default class SessionListener extends SessionFileListener {
         this.repeats = ctx.NUM().getText();
     }
 
-    exitStructure(ctx) {
+    exitStructure() {
         this.repeats = 0;
     }
 
-    wlType = null;
+    wlType: WLType = null;
     wlZone = null;
 
-    enterWorkload(ctx) {
+    enterWorkload() {
         this.wlType = null;
         this.wlZone = null;
     }
 
     enterLt(ctx) {
-        this.wlType = 'lt';
+        this.wlType = WLType.LessThan;
         this.wlZone = ctx.WORD().getText();
     }
 
     enterGt(ctx) {
-        this.wlType = 'gt';
+        this.wlType = WLType.GreaterThan;
         this.wlZone = ctx.WORD().getText();
     }
 
     enterBetween(ctx) {
-        this.wlType = 'bt';
+        this.wlType = WLType.Between;
         this.wlZone = [ctx.children[0].getText(), ctx.children[2].getText()];
     }
 
     exitWorkload(ctx) {
-        let workload = {Time: null, Type: null, Zone: null};
+        let workload: Workload = {Time: null, Type: null, Zone: null};
 
         workload.Time = ctx.children[0].getText();
 
         if (this.wlType == null) { //still unitialised
             if (ctx.children.length == 2) {
-                this.wlType = 'at';
+                this.wlType = WLType.At;
                 this.wlZone = ctx.children[1].getText();
             } else if (ctx.children.length == 1) { 
-                this.wlType = 'none';
+                this.wlType = WLType.None;
             }
         }
 
@@ -93,13 +124,13 @@ export default class SessionListener extends SessionFileListener {
         this.workloads.push({Repeats: this.repeats, Workload: workload})
     }
 
-    exitSectionContents(ctx) {
+    exitSectionContents() {
         this.sections[this.currSection].Workloads = this.workloads;
         this.currSection++;
-        //save note here as well
+        //todo save note here as well
     }
 
-    result() {
+    result():Session {
         return {Metadata: this.metadata, Sections: this.sections};
     }
 }

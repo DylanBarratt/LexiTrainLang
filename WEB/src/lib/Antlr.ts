@@ -9,9 +9,9 @@ import LTParser from './lt/PeriodFileParser.js';
 import SLexer from './lt/SessionFileLexer.js';
 import SParser from './lt/SessionFileParser.js';
 
-import PeriodListener from './PeriodListener.js';
-import Imports from './ImportListener.js';
-import SessionListener from './SessionListener.js';
+import PeriodListener from './PeriodListener';
+import Imports from './ImportListener';
+import SessionListener from './SessionListener';
 
 class CustomErrorListener extends antlr4.error.ErrorListener {
     constructor() {

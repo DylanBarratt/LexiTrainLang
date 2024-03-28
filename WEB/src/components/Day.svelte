@@ -16,7 +16,7 @@
         modalVis = false;
     }
 
-    console.log(dayData); //TODO WHY IS THIS NULLLLLLL!!!!
+    // console.log(dayData); //TODO WHY IS THIS NULLLLLLL!!!!
 </script>
 
 <style>
@@ -92,8 +92,6 @@
 }
 </style>
 
-
-<!-- 
 <div class="day" 
     on:click={showModal}
     on:keydown={showModal}
@@ -147,4 +145,4 @@
     {/if}
 
     
-</div> -->
+</div>

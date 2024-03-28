@@ -1,22 +1,44 @@
 import LTListener  from './lt/PeriodFileListener.js';
 
-function capitalizeFirstLetter(str) {
+function capitalizeFirstLetter(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }   
 
-function removeSpeechMarks(str) {
+function removeSpeechMarks(str: string): string {
     return str.replace(/"/g, '');
 }
 
+class Period {
+    Metadata: object;
+    SessionImports: Array<string>;
+    Periods;
+}
+
+//todo old, periods needs to be renamed
+// class Period {
+//     Title: string;
+//     Day: Date;
+//     Repeats: number;
+//     Data;
+// }
+
+class Session {
+    Import: boolean = false;
+    Sport: string;
+    Sections;
+    Data;
+}
+
 export default class PeriodListener extends LTListener { 
-    metadatas = {};
-    sessionImports = [];
+    metadatas: object = {};
+    sessionImports: Array<string> = [];
 
-    periods = [];
-    currentPeriod = 0;
-    currentDay = 0; 
+    //todo fix type yos
+    periods: Array<Period> = [];
+    currentPeriod: number = 0;
+    currentDay: number = 0; 
 
-    daySessions = [];
+    daySessions: Array<Session> = [];
 
     visit(ctx) {
         if (ctx.children) {
@@ -29,16 +51,19 @@ export default class PeriodListener extends LTListener {
 
     //TODO: speech marks need to be removed
     exitMetaData(ctx) {
-        this.metadatas[capitalizeFirstLetter(ctx.children[0].getText())] = ctx.children[2].getText().replace(/"/g, '');
+        this.metadatas[capitalizeFirstLetter(ctx.children[0].getText())] = removeSpeechMarks(ctx.children[2].getText());
     }
 
     exitSessionImport(ctx) {
-        this.sessionImports.push(ctx.children[1].getText().replace(/"/g, ''));
+        this.sessionImports.push(removeSpeechMarks(ctx.children[1].getText()));
     }
 
     enterPeriod(ctx) {
         var newPeriod = {
-            'title': removeSpeechMarks(ctx.WORD().getText()),
+            Title: removeSpeechMarks(ctx.WORD().getText()),
+            Day: null,
+            Repeats: null,
+            Data: null
         }
         
         this.periods.push(newPeriod);
@@ -58,14 +83,20 @@ export default class PeriodListener extends LTListener {
             day = null;
         }
 
-        this.periods[this.currentPeriod][this.currentDay] 
-            = {Day: day, Repeats: repeats, Data: null};
+        this.periods[this.currentPeriod][this.currentDay] = {Day: day, Repeats: repeats, Data: null};
 
         this.daySessions = [];
     }
 
     exitImported(ctx) {
-        this.daySessions.push({Import: true, Data: ctx.IMPORTED().getText().replace(/\[|\]/g, '')});
+        let importedSession: Session = {
+            Import: true, 
+            Sport: null,
+            Sections: null,
+            Data: ctx.IMPORTED().getText().replace(/\[|\]/g, ''),
+        };
+
+        this.daySessions.push(importedSession);
     }
 
     exitWorkouts(ctx) {
@@ -73,7 +104,13 @@ export default class PeriodListener extends LTListener {
             .map(workoutCtx => this.visit(workoutCtx));
 
         workouts.forEach(workout => {
-            this.daySessions.push({Sport: workout[0].replace(/[()]/g, ''), Data: workout[1]})
+            let workoutSession: Session = {
+                Import: false, 
+                Sport: workout[0].replace(/[()]/g, ''),
+                Sections: null,
+                Data: workout[1],
+            }
+            this.daySessions.push(workoutSession);
         });
 
     }
@@ -118,7 +155,13 @@ export default class PeriodListener extends LTListener {
             finalSections.push({Title: section[0], Workloads: workloads})
         });
 
-        this.daySessions.push({Sport: sport, Sections: finalSections});
+        let inlineSession: Session = {
+            Import: false, 
+            Sport: sport,
+            Sections: finalSections,
+            Data: null,
+        }
+        this.daySessions.push(inlineSession);
     }
 
     exitPeriodPair(ctx) {
@@ -126,7 +169,7 @@ export default class PeriodListener extends LTListener {
         this.currentDay++;
     }
 
-    result() {
+    result():Period {
         return {Metadata: this.metadatas, SessionImports: this.sessionImports, Periods: this.periods};
     }
 }
