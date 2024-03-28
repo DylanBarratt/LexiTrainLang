@@ -7,7 +7,7 @@ file: (metaData)+ (section)+;
 
 metaData: WORD ':' (WORD|NUM) '.';
 
-section: WORD '{'sectionContents'}'; 
+section: WORD '{'sectionContents'}' note?; 
 
 sectionContents
     : workloads
@@ -16,9 +16,7 @@ sectionContents
     
 structure: NUM '*' '{' workloads '}';
 
-workloads: workloadL ('&&' workloadL)*;
-
-workloadL: workload note?; // workload load notes
+workloads: workload ('&&' workload)*;
 
 note: NOTES WORD;
 

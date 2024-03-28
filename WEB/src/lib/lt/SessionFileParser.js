@@ -5,33 +5,32 @@ import SessionFileListener from './SessionFileListener.js';
 import SessionFileVisitor from './SessionFileVisitor.js';
 
 const serializedATN = [4,1,18,100,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
-4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,1,0,4,0,24,8,0,11,0,
-12,0,25,1,0,4,0,29,8,0,11,0,12,0,30,1,1,1,1,1,1,1,1,1,1,1,2,1,2,1,2,1,2,
-1,2,1,3,1,3,1,3,1,3,3,3,47,8,3,1,3,1,3,1,3,3,3,52,8,3,3,3,54,8,3,1,4,1,4,
-1,4,1,4,1,4,1,4,1,5,1,5,1,5,5,5,65,8,5,10,5,12,5,68,9,5,1,6,1,6,1,6,3,6,
-73,8,6,1,6,1,6,3,6,77,8,6,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,1,7,3,7,88,8,7,
-1,8,1,8,1,8,1,9,1,9,1,9,1,10,1,10,1,10,1,10,1,10,0,0,11,0,2,4,6,8,10,12,
-14,16,18,20,0,1,1,0,13,14,100,0,23,1,0,0,0,2,32,1,0,0,0,4,37,1,0,0,0,6,53,
-1,0,0,0,8,55,1,0,0,0,10,61,1,0,0,0,12,69,1,0,0,0,14,87,1,0,0,0,16,89,1,0,
-0,0,18,92,1,0,0,0,20,95,1,0,0,0,22,24,3,2,1,0,23,22,1,0,0,0,24,25,1,0,0,
-0,25,23,1,0,0,0,25,26,1,0,0,0,26,28,1,0,0,0,27,29,3,4,2,0,28,27,1,0,0,0,
-29,30,1,0,0,0,30,28,1,0,0,0,30,31,1,0,0,0,31,1,1,0,0,0,32,33,5,14,0,0,33,
-34,5,1,0,0,34,35,7,0,0,0,35,36,5,2,0,0,36,3,1,0,0,0,37,38,5,14,0,0,38,39,
-5,3,0,0,39,40,3,6,3,0,40,41,5,4,0,0,41,5,1,0,0,0,42,54,3,10,5,0,43,44,3,
-10,5,0,44,45,5,5,0,0,45,47,1,0,0,0,46,43,1,0,0,0,46,47,1,0,0,0,47,48,1,0,
-0,0,48,51,3,8,4,0,49,50,5,5,0,0,50,52,3,10,5,0,51,49,1,0,0,0,51,52,1,0,0,
-0,52,54,1,0,0,0,53,42,1,0,0,0,53,46,1,0,0,0,54,7,1,0,0,0,55,56,5,13,0,0,
-56,57,5,6,0,0,57,58,5,3,0,0,58,59,3,10,5,0,59,60,5,4,0,0,60,9,1,0,0,0,61,
-66,3,12,6,0,62,63,5,5,0,0,63,65,3,12,6,0,64,62,1,0,0,0,65,68,1,0,0,0,66,
-64,1,0,0,0,66,67,1,0,0,0,67,11,1,0,0,0,68,66,1,0,0,0,69,72,3,14,7,0,70,71,
-5,11,0,0,71,73,5,13,0,0,72,70,1,0,0,0,72,73,1,0,0,0,73,76,1,0,0,0,74,75,
-5,12,0,0,75,77,5,14,0,0,76,74,1,0,0,0,76,77,1,0,0,0,77,13,1,0,0,0,78,88,
-5,14,0,0,79,80,5,14,0,0,80,88,3,16,8,0,81,82,5,14,0,0,82,88,3,18,9,0,83,
-84,5,14,0,0,84,88,3,20,10,0,85,86,5,14,0,0,86,88,5,14,0,0,87,78,1,0,0,0,
-87,79,1,0,0,0,87,81,1,0,0,0,87,83,1,0,0,0,87,85,1,0,0,0,88,15,1,0,0,0,89,
-90,5,7,0,0,90,91,5,14,0,0,91,17,1,0,0,0,92,93,5,8,0,0,93,94,5,14,0,0,94,
-19,1,0,0,0,95,96,5,14,0,0,96,97,5,9,0,0,97,98,5,14,0,0,98,21,1,0,0,0,9,25,
-30,46,51,53,66,72,76,87];
+4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,1,0,4,0,26,
+8,0,11,0,12,0,27,1,0,4,0,31,8,0,11,0,12,0,32,1,1,1,1,1,1,1,1,1,1,1,2,1,2,
+1,2,1,2,1,2,1,3,1,3,1,3,1,3,3,3,49,8,3,1,3,1,3,1,3,3,3,54,8,3,3,3,56,8,3,
+1,4,1,4,1,4,1,4,1,4,1,4,1,5,1,5,1,5,5,5,67,8,5,10,5,12,5,70,9,5,1,6,1,6,
+3,6,74,8,6,1,7,1,7,1,7,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,3,8,88,8,8,1,
+9,1,9,1,9,1,10,1,10,1,10,1,11,1,11,1,11,1,11,1,11,0,0,12,0,2,4,6,8,10,12,
+14,16,18,20,22,0,1,1,0,13,14,98,0,25,1,0,0,0,2,34,1,0,0,0,4,39,1,0,0,0,6,
+55,1,0,0,0,8,57,1,0,0,0,10,63,1,0,0,0,12,71,1,0,0,0,14,75,1,0,0,0,16,87,
+1,0,0,0,18,89,1,0,0,0,20,92,1,0,0,0,22,95,1,0,0,0,24,26,3,2,1,0,25,24,1,
+0,0,0,26,27,1,0,0,0,27,25,1,0,0,0,27,28,1,0,0,0,28,30,1,0,0,0,29,31,3,4,
+2,0,30,29,1,0,0,0,31,32,1,0,0,0,32,30,1,0,0,0,32,33,1,0,0,0,33,1,1,0,0,0,
+34,35,5,14,0,0,35,36,5,1,0,0,36,37,7,0,0,0,37,38,5,2,0,0,38,3,1,0,0,0,39,
+40,5,14,0,0,40,41,5,3,0,0,41,42,3,6,3,0,42,43,5,4,0,0,43,5,1,0,0,0,44,56,
+3,10,5,0,45,46,3,10,5,0,46,47,5,5,0,0,47,49,1,0,0,0,48,45,1,0,0,0,48,49,
+1,0,0,0,49,50,1,0,0,0,50,53,3,8,4,0,51,52,5,5,0,0,52,54,3,10,5,0,53,51,1,
+0,0,0,53,54,1,0,0,0,54,56,1,0,0,0,55,44,1,0,0,0,55,48,1,0,0,0,56,7,1,0,0,
+0,57,58,5,13,0,0,58,59,5,6,0,0,59,60,5,3,0,0,60,61,3,10,5,0,61,62,5,4,0,
+0,62,9,1,0,0,0,63,68,3,12,6,0,64,65,5,5,0,0,65,67,3,12,6,0,66,64,1,0,0,0,
+67,70,1,0,0,0,68,66,1,0,0,0,68,69,1,0,0,0,69,11,1,0,0,0,70,68,1,0,0,0,71,
+73,3,16,8,0,72,74,3,14,7,0,73,72,1,0,0,0,73,74,1,0,0,0,74,13,1,0,0,0,75,
+76,5,12,0,0,76,77,5,14,0,0,77,15,1,0,0,0,78,88,5,14,0,0,79,80,5,14,0,0,80,
+88,3,18,9,0,81,82,5,14,0,0,82,88,3,20,10,0,83,84,5,14,0,0,84,88,3,22,11,
+0,85,86,5,14,0,0,86,88,5,14,0,0,87,78,1,0,0,0,87,79,1,0,0,0,87,81,1,0,0,
+0,87,83,1,0,0,0,87,85,1,0,0,0,88,17,1,0,0,0,89,90,5,7,0,0,90,91,5,14,0,0,
+91,19,1,0,0,0,92,93,5,8,0,0,93,94,5,14,0,0,94,21,1,0,0,0,95,96,5,14,0,0,
+96,97,5,9,0,0,97,98,5,14,0,0,98,23,1,0,0,0,8,27,32,48,53,55,68,73,87];
 
 
 const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -51,8 +50,8 @@ export default class SessionFileParser extends antlr4.Parser {
                              "WORD", "SPORT", "IMPORTED", "LINE_COMMENT", 
                              "WS" ];
     static ruleNames = [ "file", "metaData", "section", "sectionContents", 
-                         "structure", "workloads", "workloadL", "workload", 
-                         "lt", "gt", "between" ];
+                         "structure", "workloads", "workloadL", "note", 
+                         "workload", "lt", "gt", "between" ];
 
     constructor(input) {
         super(input);
@@ -70,29 +69,29 @@ export default class SessionFileParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 23; 
+	        this.state = 25; 
 	        this._errHandler.sync(this);
 	        var _alt = 1;
 	        do {
 	        	switch (_alt) {
 	        	case 1:
-	        		this.state = 22;
+	        		this.state = 24;
 	        		this.metaData();
 	        		break;
 	        	default:
 	        		throw new antlr4.error.NoViableAltException(this);
 	        	}
-	        	this.state = 25; 
+	        	this.state = 27; 
 	        	this._errHandler.sync(this);
 	        	_alt = this._interp.adaptivePredict(this._input,0, this._ctx);
 	        } while ( _alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER );
-	        this.state = 28; 
+	        this.state = 30; 
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        do {
-	            this.state = 27;
+	            this.state = 29;
 	            this.section();
-	            this.state = 30; 
+	            this.state = 32; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        } while(_la===14);
@@ -118,11 +117,11 @@ export default class SessionFileParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 32;
-	        this.match(SessionFileParser.WORD);
-	        this.state = 33;
-	        this.match(SessionFileParser.T__0);
 	        this.state = 34;
+	        this.match(SessionFileParser.WORD);
+	        this.state = 35;
+	        this.match(SessionFileParser.T__0);
+	        this.state = 36;
 	        _la = this._input.LA(1);
 	        if(!(_la===13 || _la===14)) {
 	        this._errHandler.recoverInline(this);
@@ -131,7 +130,7 @@ export default class SessionFileParser extends antlr4.Parser {
 	        	this._errHandler.reportMatch(this);
 	            this.consume();
 	        }
-	        this.state = 35;
+	        this.state = 37;
 	        this.match(SessionFileParser.T__1);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -154,13 +153,13 @@ export default class SessionFileParser extends antlr4.Parser {
 	    this.enterRule(localctx, 4, SessionFileParser.RULE_section);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 37;
-	        this.match(SessionFileParser.WORD);
-	        this.state = 38;
-	        this.match(SessionFileParser.T__2);
 	        this.state = 39;
-	        this.sectionContents();
+	        this.match(SessionFileParser.WORD);
 	        this.state = 40;
+	        this.match(SessionFileParser.T__2);
+	        this.state = 41;
+	        this.sectionContents();
+	        this.state = 42;
 	        this.match(SessionFileParser.T__3);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -183,37 +182,37 @@ export default class SessionFileParser extends antlr4.Parser {
 	    this.enterRule(localctx, 6, SessionFileParser.RULE_sectionContents);
 	    var _la = 0;
 	    try {
-	        this.state = 53;
+	        this.state = 55;
 	        this._errHandler.sync(this);
 	        var la_ = this._interp.adaptivePredict(this._input,4,this._ctx);
 	        switch(la_) {
 	        case 1:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 42;
+	            this.state = 44;
 	            this.workloads();
 	            break;
 
 	        case 2:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 46;
+	            this.state = 48;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	            if(_la===14) {
-	                this.state = 43;
+	                this.state = 45;
 	                this.workloads();
-	                this.state = 44;
+	                this.state = 46;
 	                this.match(SessionFileParser.T__4);
 	            }
 
-	            this.state = 48;
+	            this.state = 50;
 	            this.structure();
-	            this.state = 51;
+	            this.state = 53;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	            if(_la===5) {
-	                this.state = 49;
+	                this.state = 51;
 	                this.match(SessionFileParser.T__4);
-	                this.state = 50;
+	                this.state = 52;
 	                this.workloads();
 	            }
 
@@ -241,15 +240,15 @@ export default class SessionFileParser extends antlr4.Parser {
 	    this.enterRule(localctx, 8, SessionFileParser.RULE_structure);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 55;
-	        this.match(SessionFileParser.NUM);
-	        this.state = 56;
-	        this.match(SessionFileParser.T__5);
 	        this.state = 57;
-	        this.match(SessionFileParser.T__2);
+	        this.match(SessionFileParser.NUM);
 	        this.state = 58;
-	        this.workloads();
+	        this.match(SessionFileParser.T__5);
 	        this.state = 59;
+	        this.match(SessionFileParser.T__2);
+	        this.state = 60;
+	        this.workloads();
+	        this.state = 61;
 	        this.match(SessionFileParser.T__3);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -272,19 +271,19 @@ export default class SessionFileParser extends antlr4.Parser {
 	    this.enterRule(localctx, 10, SessionFileParser.RULE_workloads);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 61;
+	        this.state = 63;
 	        this.workloadL();
-	        this.state = 66;
+	        this.state = 68;
 	        this._errHandler.sync(this);
 	        var _alt = this._interp.adaptivePredict(this._input,5,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
-	                this.state = 62;
+	                this.state = 64;
 	                this.match(SessionFileParser.T__4);
-	                this.state = 63;
+	                this.state = 65;
 	                this.workloadL(); 
 	            }
-	            this.state = 68;
+	            this.state = 70;
 	            this._errHandler.sync(this);
 	            _alt = this._interp.adaptivePredict(this._input,5,this._ctx);
 	        }
@@ -311,26 +310,14 @@ export default class SessionFileParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 69;
+	        this.state = 71;
 	        this.workload();
-	        this.state = 72;
-	        this._errHandler.sync(this);
-	        _la = this._input.LA(1);
-	        if(_la===11) {
-	            this.state = 70;
-	            this.match(SessionFileParser.LOAD);
-	            this.state = 71;
-	            this.match(SessionFileParser.NUM);
-	        }
-
-	        this.state = 76;
+	        this.state = 73;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        if(_la===12) {
-	            this.state = 74;
-	            this.match(SessionFileParser.NOTES);
-	            this.state = 75;
-	            this.match(SessionFileParser.WORD);
+	            this.state = 72;
+	            this.note();
 	        }
 
 	    } catch (re) {
@@ -349,13 +336,38 @@ export default class SessionFileParser extends antlr4.Parser {
 
 
 
+	note() {
+	    let localctx = new NoteContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 14, SessionFileParser.RULE_note);
+	    try {
+	        this.enterOuterAlt(localctx, 1);
+	        this.state = 75;
+	        this.match(SessionFileParser.NOTES);
+	        this.state = 76;
+	        this.match(SessionFileParser.WORD);
+	    } catch (re) {
+	    	if(re instanceof antlr4.error.RecognitionException) {
+		        localctx.exception = re;
+		        this._errHandler.reportError(this, re);
+		        this._errHandler.recover(this, re);
+		    } else {
+		    	throw re;
+		    }
+	    } finally {
+	        this.exitRule();
+	    }
+	    return localctx;
+	}
+
+
+
 	workload() {
 	    let localctx = new WorkloadContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 14, SessionFileParser.RULE_workload);
+	    this.enterRule(localctx, 16, SessionFileParser.RULE_workload);
 	    try {
 	        this.state = 87;
 	        this._errHandler.sync(this);
-	        var la_ = this._interp.adaptivePredict(this._input,8,this._ctx);
+	        var la_ = this._interp.adaptivePredict(this._input,7,this._ctx);
 	        switch(la_) {
 	        case 1:
 	            this.enterOuterAlt(localctx, 1);
@@ -414,7 +426,7 @@ export default class SessionFileParser extends antlr4.Parser {
 
 	lt() {
 	    let localctx = new LtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 16, SessionFileParser.RULE_lt);
+	    this.enterRule(localctx, 18, SessionFileParser.RULE_lt);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 89;
@@ -439,7 +451,7 @@ export default class SessionFileParser extends antlr4.Parser {
 
 	gt() {
 	    let localctx = new GtContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 18, SessionFileParser.RULE_gt);
+	    this.enterRule(localctx, 20, SessionFileParser.RULE_gt);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 92;
@@ -464,7 +476,7 @@ export default class SessionFileParser extends antlr4.Parser {
 
 	between() {
 	    let localctx = new BetweenContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 20, SessionFileParser.RULE_between);
+	    this.enterRule(localctx, 22, SessionFileParser.RULE_between);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 95;
@@ -517,10 +529,11 @@ SessionFileParser.RULE_sectionContents = 3;
 SessionFileParser.RULE_structure = 4;
 SessionFileParser.RULE_workloads = 5;
 SessionFileParser.RULE_workloadL = 6;
-SessionFileParser.RULE_workload = 7;
-SessionFileParser.RULE_lt = 8;
-SessionFileParser.RULE_gt = 9;
-SessionFileParser.RULE_between = 10;
+SessionFileParser.RULE_note = 7;
+SessionFileParser.RULE_workload = 8;
+SessionFileParser.RULE_lt = 9;
+SessionFileParser.RULE_gt = 10;
+SessionFileParser.RULE_between = 11;
 
 class FileContext extends antlr4.ParserRuleContext {
 
@@ -854,20 +867,8 @@ class WorkloadLContext extends antlr4.ParserRuleContext {
 	    return this.getTypedRuleContext(WorkloadContext,0);
 	};
 
-	LOAD() {
-	    return this.getToken(SessionFileParser.LOAD, 0);
-	};
-
-	NUM() {
-	    return this.getToken(SessionFileParser.NUM, 0);
-	};
-
-	NOTES() {
-	    return this.getToken(SessionFileParser.NOTES, 0);
-	};
-
-	WORD() {
-	    return this.getToken(SessionFileParser.WORD, 0);
+	note() {
+	    return this.getTypedRuleContext(NoteContext,0);
 	};
 
 	enterRule(listener) {
@@ -885,6 +886,53 @@ class WorkloadLContext extends antlr4.ParserRuleContext {
 	accept(visitor) {
 	    if ( visitor instanceof SessionFileVisitor ) {
 	        return visitor.visitWorkloadL(this);
+	    } else {
+	        return visitor.visitChildren(this);
+	    }
+	}
+
+
+}
+
+
+
+class NoteContext extends antlr4.ParserRuleContext {
+
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = SessionFileParser.RULE_note;
+    }
+
+	NOTES() {
+	    return this.getToken(SessionFileParser.NOTES, 0);
+	};
+
+	WORD() {
+	    return this.getToken(SessionFileParser.WORD, 0);
+	};
+
+	enterRule(listener) {
+	    if(listener instanceof SessionFileListener ) {
+	        listener.enterNote(this);
+		}
+	}
+
+	exitRule(listener) {
+	    if(listener instanceof SessionFileListener ) {
+	        listener.exitNote(this);
+		}
+	}
+
+	accept(visitor) {
+	    if ( visitor instanceof SessionFileVisitor ) {
+	        return visitor.visitNote(this);
 	    } else {
 	        return visitor.visitChildren(this);
 	    }
@@ -1115,6 +1163,7 @@ SessionFileParser.SectionContentsContext = SectionContentsContext;
 SessionFileParser.StructureContext = StructureContext; 
 SessionFileParser.WorkloadsContext = WorkloadsContext; 
 SessionFileParser.WorkloadLContext = WorkloadLContext; 
+SessionFileParser.NoteContext = NoteContext; 
 SessionFileParser.WorkloadContext = WorkloadContext; 
 SessionFileParser.LtContext = LtContext; 
 SessionFileParser.GtContext = GtContext; 

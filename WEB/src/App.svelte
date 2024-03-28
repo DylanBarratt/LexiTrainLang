@@ -279,9 +279,9 @@ main {
 	5*{
 		5min HRZ5 &&
 		5min HRZ3 - HRZ4
-	}
-  10min HRZ1
-}
+	} &&
+  10min HRZ1 
+} note="cooloff after hard set!!"
 
 "cool down" {
 	30min HRZ1

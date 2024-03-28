@@ -20,6 +20,7 @@ export default class SessionListener extends SessionFileListener {
     repeats = null;
 
     currSection = 0;
+    currWorkload = 0;
 
     visit(ctx) {
         if (ctx.children) {
@@ -31,39 +32,46 @@ export default class SessionListener extends SessionFileListener {
     }
 
     exitMetaData(ctx) {
-        this.metadata[capitalizeFirstLetter(ctx.children[0].getText())] = removeSpeechMarks(ctx.children[2].getText());
+    this.metadata[capitalizeFirstLetter(ctx.children[0].getText())] = removeSpeechMarks(ctx.children[2].getText());
     }
 
-    enterSection(ctx) {
-        this.sections[this.currSection] = {Title: removeSpeechMarks(ctx.WORD().getText()), Workloads: null};
+   enterSection(ctx) {
+    this.sections[this.currSection] = {Title: removeSpeechMarks(ctx.WORD().getText()), Workloads: null};
+   }
 
-        this.repeats = 0;
-        if (isNumber(ctx.children[2].getText())) {
-            this.repeats = ctx.children[2].getText();
-        }
-    }
+   enterSectionContents(ctx) {
+    this.workloads = [];
+    this.currWorkload = 0;
+   }
 
-    enterWorkloads(ctx) {
-        //reset workloads
-        this.workloads = [];
-    }
+   enterStructure(ctx) {
+    this.repeats = ctx.NUM().getText();
+   }
 
-    exitWorkload(ctx) {
-        let workload = {Time: ctx.children[0].getText(), Repeats: this.repeats, Intensity: null};
+   enterWorkloadL(ctx) {
+    this.workloads[this.currWorkload] = {
+        Data: null, Notes: null
+    };
+   }
 
-        if (ctx.children.length == 1) {
-            console.log("// no specified intensity");
-        }
+   enterNote(ctx) {
+    this.workloads[this.currWorkload].Notes = removeSpeechMarks(ctx.WORD().getText());
+   }
 
-        this.workloads.push(workload);
-    }
+   exitWorkloadL(ctx) {
+    this.currWorkload++;
+   }
 
-    exitSection(ctx) {
-        this.sections[this.currSection].Workloads = this.workloads;
-        this.currSection++;
-    }
+   exitStructure(ctx) {
+    this.repeats = 0;
+   }
+
+   exitSection (ctx) {
+    this.sections[this.currSection].Workloads = this.workloads;
+    this.currSection++;
+   }
 
     result() {
-        return {Metadata: this.metadata, Sections: this.sections};
+     return {Metadata: this.metadata, Sections: this.sections};
     }
 }
