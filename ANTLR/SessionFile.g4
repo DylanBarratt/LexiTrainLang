@@ -5,7 +5,7 @@ import BaseLexer;
 //Parser rules
 file: (metaData)+ (section)+;
 
-metaData: WORD ':' WORD '.';
+metaData: WORD ':' (WORD|NUM) '.';
 
 section: WORD '{' (workloads | NUM '*' '{' workloads '}') '}'; //single workloads or repeated workloads
 

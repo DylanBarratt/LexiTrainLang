@@ -5,7 +5,7 @@ import BaseLexer;
 //parser rules
 file:(metaData)* (sessionImport)* periods EOF;
 
-metaData: WORD ':' WORD '.';
+metaData: WORD ':' (WORD|NUM) '.';
 
 sessionImport: IMPORT WORD '.';
 
