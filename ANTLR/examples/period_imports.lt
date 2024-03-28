@@ -54,7 +54,7 @@ import base.
 }
 
 "week 3" {
-	Mon: (note) "10mile tt?",
+	Mon: note="10mile tt?",
 	Tue: (bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
 	Wed: (bike) 2hr HRZ2,
 	Thu: (swim) 30min load=30 && (run) 1hr HRZ2,

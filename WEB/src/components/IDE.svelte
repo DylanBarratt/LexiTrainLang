@@ -11,7 +11,7 @@ import over_unders.
 import base.
 
 "week 1" {
-	Mon: (bike) 1hr HRZ1 "cool bike yo",
+	Mon: (bike) 1hr HRZ1 note="cool bike yo",
 	Tue: {
         (run)
         "warmup" {60min HRZ1 - HRZ2}
@@ -32,7 +32,7 @@ import base.
 }
 
 "week 2"{
-	Mon: (run)1hr HRZ2 "Chrimbo run!",
+	Mon: (run)1hr HRZ2 note="Chrimbo run!",
 	Tue:(bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
 	Wed: [base],
 	Thu: {
@@ -58,7 +58,7 @@ import base.
 }
 
 "week 3" {
-	Mon: (note) "10mile tt?",
+	Mon: (note) note="10mile tt?",
 	Tue: (bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
 	Wed: (bike) 2hr HRZ2,
 	Thu: (swim) 30min load=30 && (run) 1hr HRZ2,

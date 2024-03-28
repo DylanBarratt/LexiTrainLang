@@ -84,8 +84,32 @@ export default class PeriodFileVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by PeriodFileParser#workloadL.
+	visitWorkloadL(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by PeriodFileParser#workload.
 	visitWorkload(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by PeriodFileParser#lt.
+	visitLt(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by PeriodFileParser#gt.
+	visitGt(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
+	// Visit a parse tree produced by PeriodFileParser#between.
+	visitBetween(ctx) {
 	  return this.visitChildren(ctx);
 	}
 

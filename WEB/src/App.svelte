@@ -268,6 +268,7 @@ function loadCalendarData(rawData) {
 var dat = `title: "over unders".
 sport: "cycling".
 author: "Dylan Barratt".
+load: 30.
 
 warmup {
 	1hr HRZ1

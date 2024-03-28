@@ -122,12 +122,48 @@ export default class PeriodFileListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by PeriodFileParser#workloadL.
+	enterWorkloadL(ctx) {
+	}
+
+	// Exit a parse tree produced by PeriodFileParser#workloadL.
+	exitWorkloadL(ctx) {
+	}
+
+
 	// Enter a parse tree produced by PeriodFileParser#workload.
 	enterWorkload(ctx) {
 	}
 
 	// Exit a parse tree produced by PeriodFileParser#workload.
 	exitWorkload(ctx) {
+	}
+
+
+	// Enter a parse tree produced by PeriodFileParser#lt.
+	enterLt(ctx) {
+	}
+
+	// Exit a parse tree produced by PeriodFileParser#lt.
+	exitLt(ctx) {
+	}
+
+
+	// Enter a parse tree produced by PeriodFileParser#gt.
+	enterGt(ctx) {
+	}
+
+	// Exit a parse tree produced by PeriodFileParser#gt.
+	exitGt(ctx) {
+	}
+
+
+	// Enter a parse tree produced by PeriodFileParser#between.
+	enterBetween(ctx) {
+	}
+
+	// Exit a parse tree produced by PeriodFileParser#between.
+	exitBetween(ctx) {
 	}
 
 

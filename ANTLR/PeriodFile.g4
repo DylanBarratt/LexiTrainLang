@@ -25,6 +25,7 @@ data
     : imported //imported
     | workouts //single line session
     | session //inline session
+    | NOTES WORD
     ;
 
 imported: IMPORTED;
