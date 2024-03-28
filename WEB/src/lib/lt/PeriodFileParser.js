@@ -4,60 +4,60 @@ import antlr4 from 'antlr4';
 import PeriodFileListener from './PeriodFileListener.js';
 import PeriodFileVisitor from './PeriodFileVisitor.js';
 
-const serializedATN = [4,1,19,182,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
+const serializedATN = [4,1,19,184,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,
 4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,
 2,13,7,13,2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,1,0,5,0,38,8,0,10,0,12,
 0,41,9,0,1,0,5,0,44,8,0,10,0,12,0,47,9,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,
 1,2,1,2,1,2,1,2,1,3,4,3,62,8,3,11,3,12,3,63,1,4,1,4,1,4,1,4,1,4,5,4,71,8,
 4,10,4,12,4,74,9,4,1,4,1,4,1,5,1,5,1,5,1,5,1,5,5,5,83,8,5,10,5,12,5,86,9,
 5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,5,5,97,8,5,10,5,12,5,100,9,5,3,5,102,
-8,5,1,6,1,6,1,6,3,6,107,8,6,1,7,1,7,1,8,1,8,1,8,5,8,114,8,8,10,8,12,8,117,
-9,8,1,9,1,9,1,9,1,10,1,10,1,10,4,10,125,8,10,11,10,12,10,126,1,10,1,10,1,
-11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,3,11,140,8,11,1,11,1,11,1,12,
-1,12,1,12,5,12,147,8,12,10,12,12,12,150,9,12,1,13,1,13,1,13,3,13,155,8,13,
-1,13,1,13,3,13,159,8,13,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,3,14,
-170,8,14,1,15,1,15,1,15,1,16,1,16,1,16,1,17,1,17,1,17,1,17,1,17,0,0,18,0,
-2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,0,1,1,0,14,15,183,0,39,1,
-0,0,0,2,51,1,0,0,0,4,56,1,0,0,0,6,61,1,0,0,0,8,65,1,0,0,0,10,101,1,0,0,0,
-12,106,1,0,0,0,14,108,1,0,0,0,16,110,1,0,0,0,18,118,1,0,0,0,20,121,1,0,0,
-0,22,130,1,0,0,0,24,143,1,0,0,0,26,151,1,0,0,0,28,169,1,0,0,0,30,171,1,0,
-0,0,32,174,1,0,0,0,34,177,1,0,0,0,36,38,3,2,1,0,37,36,1,0,0,0,38,41,1,0,
-0,0,39,37,1,0,0,0,39,40,1,0,0,0,40,45,1,0,0,0,41,39,1,0,0,0,42,44,3,4,2,
-0,43,42,1,0,0,0,44,47,1,0,0,0,45,43,1,0,0,0,45,46,1,0,0,0,46,48,1,0,0,0,
-47,45,1,0,0,0,48,49,3,6,3,0,49,50,5,0,0,1,50,1,1,0,0,0,51,52,5,15,0,0,52,
-53,5,1,0,0,53,54,7,0,0,0,54,55,5,2,0,0,55,3,1,0,0,0,56,57,5,11,0,0,57,58,
-5,15,0,0,58,59,5,2,0,0,59,5,1,0,0,0,60,62,3,8,4,0,61,60,1,0,0,0,62,63,1,
-0,0,0,63,61,1,0,0,0,63,64,1,0,0,0,64,7,1,0,0,0,65,66,5,15,0,0,66,67,5,3,
-0,0,67,72,3,10,5,0,68,69,5,4,0,0,69,71,3,10,5,0,70,68,1,0,0,0,71,74,1,0,
-0,0,72,70,1,0,0,0,72,73,1,0,0,0,73,75,1,0,0,0,74,72,1,0,0,0,75,76,5,5,0,
-0,76,9,1,0,0,0,77,78,5,15,0,0,78,79,5,1,0,0,79,84,3,12,6,0,80,81,5,6,0,0,
-81,83,3,12,6,0,82,80,1,0,0,0,83,86,1,0,0,0,84,82,1,0,0,0,84,85,1,0,0,0,85,
-102,1,0,0,0,86,84,1,0,0,0,87,88,5,14,0,0,88,89,5,7,0,0,89,90,5,3,0,0,90,
-91,3,12,6,0,91,92,5,5,0,0,92,102,1,0,0,0,93,98,3,12,6,0,94,95,5,6,0,0,95,
-97,3,12,6,0,96,94,1,0,0,0,97,100,1,0,0,0,98,96,1,0,0,0,98,99,1,0,0,0,99,
-102,1,0,0,0,100,98,1,0,0,0,101,77,1,0,0,0,101,87,1,0,0,0,101,93,1,0,0,0,
-102,11,1,0,0,0,103,107,3,14,7,0,104,107,3,16,8,0,105,107,3,20,10,0,106,103,
-1,0,0,0,106,104,1,0,0,0,106,105,1,0,0,0,107,13,1,0,0,0,108,109,5,17,0,0,
-109,15,1,0,0,0,110,115,3,18,9,0,111,112,5,6,0,0,112,114,3,18,9,0,113,111,
-1,0,0,0,114,117,1,0,0,0,115,113,1,0,0,0,115,116,1,0,0,0,116,17,1,0,0,0,117,
-115,1,0,0,0,118,119,5,16,0,0,119,120,3,26,13,0,120,19,1,0,0,0,121,122,5,
-3,0,0,122,124,5,16,0,0,123,125,3,22,11,0,124,123,1,0,0,0,125,126,1,0,0,0,
-126,124,1,0,0,0,126,127,1,0,0,0,127,128,1,0,0,0,128,129,5,5,0,0,129,21,1,
-0,0,0,130,131,5,15,0,0,131,139,5,3,0,0,132,140,3,24,12,0,133,134,5,14,0,
-0,134,135,5,7,0,0,135,136,5,3,0,0,136,137,3,24,12,0,137,138,5,5,0,0,138,
-140,1,0,0,0,139,132,1,0,0,0,139,133,1,0,0,0,140,141,1,0,0,0,141,142,5,5,
-0,0,142,23,1,0,0,0,143,148,3,26,13,0,144,145,5,6,0,0,145,147,3,26,13,0,146,
-144,1,0,0,0,147,150,1,0,0,0,148,146,1,0,0,0,148,149,1,0,0,0,149,25,1,0,0,
-0,150,148,1,0,0,0,151,154,3,28,14,0,152,153,5,12,0,0,153,155,5,14,0,0,154,
-152,1,0,0,0,154,155,1,0,0,0,155,158,1,0,0,0,156,157,5,13,0,0,157,159,5,15,
-0,0,158,156,1,0,0,0,158,159,1,0,0,0,159,27,1,0,0,0,160,170,5,15,0,0,161,
-162,5,15,0,0,162,170,3,30,15,0,163,164,5,15,0,0,164,170,3,32,16,0,165,166,
-5,15,0,0,166,170,3,34,17,0,167,168,5,15,0,0,168,170,5,15,0,0,169,160,1,0,
-0,0,169,161,1,0,0,0,169,163,1,0,0,0,169,165,1,0,0,0,169,167,1,0,0,0,170,
-29,1,0,0,0,171,172,5,8,0,0,172,173,5,15,0,0,173,31,1,0,0,0,174,175,5,9,0,
-0,175,176,5,15,0,0,176,33,1,0,0,0,177,178,5,15,0,0,178,179,5,10,0,0,179,
-180,5,15,0,0,180,35,1,0,0,0,15,39,45,63,72,84,98,101,106,115,126,139,148,
-154,158,169];
+8,5,1,6,1,6,1,6,1,6,1,6,3,6,109,8,6,1,7,1,7,1,8,1,8,1,8,5,8,116,8,8,10,8,
+12,8,119,9,8,1,9,1,9,1,9,1,10,1,10,1,10,4,10,127,8,10,11,10,12,10,128,1,
+10,1,10,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,3,11,142,8,11,1,11,
+1,11,1,12,1,12,1,12,5,12,149,8,12,10,12,12,12,152,9,12,1,13,1,13,1,13,3,
+13,157,8,13,1,13,1,13,3,13,161,8,13,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,
+14,1,14,3,14,172,8,14,1,15,1,15,1,15,1,16,1,16,1,16,1,17,1,17,1,17,1,17,
+1,17,0,0,18,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,0,1,1,0,14,
+15,186,0,39,1,0,0,0,2,51,1,0,0,0,4,56,1,0,0,0,6,61,1,0,0,0,8,65,1,0,0,0,
+10,101,1,0,0,0,12,108,1,0,0,0,14,110,1,0,0,0,16,112,1,0,0,0,18,120,1,0,0,
+0,20,123,1,0,0,0,22,132,1,0,0,0,24,145,1,0,0,0,26,153,1,0,0,0,28,171,1,0,
+0,0,30,173,1,0,0,0,32,176,1,0,0,0,34,179,1,0,0,0,36,38,3,2,1,0,37,36,1,0,
+0,0,38,41,1,0,0,0,39,37,1,0,0,0,39,40,1,0,0,0,40,45,1,0,0,0,41,39,1,0,0,
+0,42,44,3,4,2,0,43,42,1,0,0,0,44,47,1,0,0,0,45,43,1,0,0,0,45,46,1,0,0,0,
+46,48,1,0,0,0,47,45,1,0,0,0,48,49,3,6,3,0,49,50,5,0,0,1,50,1,1,0,0,0,51,
+52,5,15,0,0,52,53,5,1,0,0,53,54,7,0,0,0,54,55,5,2,0,0,55,3,1,0,0,0,56,57,
+5,11,0,0,57,58,5,15,0,0,58,59,5,2,0,0,59,5,1,0,0,0,60,62,3,8,4,0,61,60,1,
+0,0,0,62,63,1,0,0,0,63,61,1,0,0,0,63,64,1,0,0,0,64,7,1,0,0,0,65,66,5,15,
+0,0,66,67,5,3,0,0,67,72,3,10,5,0,68,69,5,4,0,0,69,71,3,10,5,0,70,68,1,0,
+0,0,71,74,1,0,0,0,72,70,1,0,0,0,72,73,1,0,0,0,73,75,1,0,0,0,74,72,1,0,0,
+0,75,76,5,5,0,0,76,9,1,0,0,0,77,78,5,15,0,0,78,79,5,1,0,0,79,84,3,12,6,0,
+80,81,5,6,0,0,81,83,3,12,6,0,82,80,1,0,0,0,83,86,1,0,0,0,84,82,1,0,0,0,84,
+85,1,0,0,0,85,102,1,0,0,0,86,84,1,0,0,0,87,88,5,14,0,0,88,89,5,7,0,0,89,
+90,5,3,0,0,90,91,3,12,6,0,91,92,5,5,0,0,92,102,1,0,0,0,93,98,3,12,6,0,94,
+95,5,6,0,0,95,97,3,12,6,0,96,94,1,0,0,0,97,100,1,0,0,0,98,96,1,0,0,0,98,
+99,1,0,0,0,99,102,1,0,0,0,100,98,1,0,0,0,101,77,1,0,0,0,101,87,1,0,0,0,101,
+93,1,0,0,0,102,11,1,0,0,0,103,109,3,14,7,0,104,109,3,16,8,0,105,109,3,20,
+10,0,106,107,5,13,0,0,107,109,5,15,0,0,108,103,1,0,0,0,108,104,1,0,0,0,108,
+105,1,0,0,0,108,106,1,0,0,0,109,13,1,0,0,0,110,111,5,17,0,0,111,15,1,0,0,
+0,112,117,3,18,9,0,113,114,5,6,0,0,114,116,3,18,9,0,115,113,1,0,0,0,116,
+119,1,0,0,0,117,115,1,0,0,0,117,118,1,0,0,0,118,17,1,0,0,0,119,117,1,0,0,
+0,120,121,5,16,0,0,121,122,3,26,13,0,122,19,1,0,0,0,123,124,5,3,0,0,124,
+126,5,16,0,0,125,127,3,22,11,0,126,125,1,0,0,0,127,128,1,0,0,0,128,126,1,
+0,0,0,128,129,1,0,0,0,129,130,1,0,0,0,130,131,5,5,0,0,131,21,1,0,0,0,132,
+133,5,15,0,0,133,141,5,3,0,0,134,142,3,24,12,0,135,136,5,14,0,0,136,137,
+5,7,0,0,137,138,5,3,0,0,138,139,3,24,12,0,139,140,5,5,0,0,140,142,1,0,0,
+0,141,134,1,0,0,0,141,135,1,0,0,0,142,143,1,0,0,0,143,144,5,5,0,0,144,23,
+1,0,0,0,145,150,3,26,13,0,146,147,5,6,0,0,147,149,3,26,13,0,148,146,1,0,
+0,0,149,152,1,0,0,0,150,148,1,0,0,0,150,151,1,0,0,0,151,25,1,0,0,0,152,150,
+1,0,0,0,153,156,3,28,14,0,154,155,5,12,0,0,155,157,5,14,0,0,156,154,1,0,
+0,0,156,157,1,0,0,0,157,160,1,0,0,0,158,159,5,13,0,0,159,161,5,15,0,0,160,
+158,1,0,0,0,160,161,1,0,0,0,161,27,1,0,0,0,162,172,5,15,0,0,163,164,5,15,
+0,0,164,172,3,30,15,0,165,166,5,15,0,0,166,172,3,32,16,0,167,168,5,15,0,
+0,168,172,3,34,17,0,169,170,5,15,0,0,170,172,5,15,0,0,171,162,1,0,0,0,171,
+163,1,0,0,0,171,165,1,0,0,0,171,167,1,0,0,0,171,169,1,0,0,0,172,29,1,0,0,
+0,173,174,5,8,0,0,174,175,5,15,0,0,175,31,1,0,0,0,176,177,5,9,0,0,177,178,
+5,15,0,0,178,33,1,0,0,0,179,180,5,15,0,0,180,181,5,10,0,0,181,182,5,15,0,
+0,182,35,1,0,0,0,15,39,45,63,72,84,98,101,108,117,128,141,150,156,160,171];
 
 
 const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -321,6 +321,7 @@ export default class PeriodFileParser extends antlr4.Parser {
 	            this.match(PeriodFileParser.T__4);
 	            break;
 	        case 3:
+	        case 13:
 	        case 16:
 	        case 17:
 	            this.enterOuterAlt(localctx, 3);
@@ -362,7 +363,7 @@ export default class PeriodFileParser extends antlr4.Parser {
 	    let localctx = new DataContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 12, PeriodFileParser.RULE_data);
 	    try {
-	        this.state = 106;
+	        this.state = 108;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
 	        case 17:
@@ -379,6 +380,13 @@ export default class PeriodFileParser extends antlr4.Parser {
 	            this.enterOuterAlt(localctx, 3);
 	            this.state = 105;
 	            this.session();
+	            break;
+	        case 13:
+	            this.enterOuterAlt(localctx, 4);
+	            this.state = 106;
+	            this.match(PeriodFileParser.NOTES);
+	            this.state = 107;
+	            this.match(PeriodFileParser.WORD);
 	            break;
 	        default:
 	            throw new antlr4.error.NoViableAltException(this);
@@ -404,7 +412,7 @@ export default class PeriodFileParser extends antlr4.Parser {
 	    this.enterRule(localctx, 14, PeriodFileParser.RULE_imported);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 108;
+	        this.state = 110;
 	        this.match(PeriodFileParser.IMPORTED);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -427,19 +435,19 @@ export default class PeriodFileParser extends antlr4.Parser {
 	    this.enterRule(localctx, 16, PeriodFileParser.RULE_workouts);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 110;
+	        this.state = 112;
 	        this.workout();
-	        this.state = 115;
+	        this.state = 117;
 	        this._errHandler.sync(this);
 	        var _alt = this._interp.adaptivePredict(this._input,8,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
-	                this.state = 111;
+	                this.state = 113;
 	                this.match(PeriodFileParser.T__5);
-	                this.state = 112;
+	                this.state = 114;
 	                this.workout(); 
 	            }
-	            this.state = 117;
+	            this.state = 119;
 	            this._errHandler.sync(this);
 	            _alt = this._interp.adaptivePredict(this._input,8,this._ctx);
 	        }
@@ -465,9 +473,9 @@ export default class PeriodFileParser extends antlr4.Parser {
 	    this.enterRule(localctx, 18, PeriodFileParser.RULE_workout);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 118;
+	        this.state = 120;
 	        this.match(PeriodFileParser.SPORT);
-	        this.state = 119;
+	        this.state = 121;
 	        this.workloadL();
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -491,21 +499,21 @@ export default class PeriodFileParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 121;
+	        this.state = 123;
 	        this.match(PeriodFileParser.T__2);
-	        this.state = 122;
+	        this.state = 124;
 	        this.match(PeriodFileParser.SPORT);
-	        this.state = 124; 
+	        this.state = 126; 
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        do {
-	            this.state = 123;
+	            this.state = 125;
 	            this.sessionSection();
-	            this.state = 126; 
+	            this.state = 128; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        } while(_la===15);
-	        this.state = 128;
+	        this.state = 130;
 	        this.match(PeriodFileParser.T__4);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -528,33 +536,33 @@ export default class PeriodFileParser extends antlr4.Parser {
 	    this.enterRule(localctx, 22, PeriodFileParser.RULE_sessionSection);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 130;
+	        this.state = 132;
 	        this.match(PeriodFileParser.WORD);
-	        this.state = 131;
+	        this.state = 133;
 	        this.match(PeriodFileParser.T__2);
-	        this.state = 139;
+	        this.state = 141;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
 	        case 15:
-	            this.state = 132;
+	            this.state = 134;
 	            this.workloads();
 	            break;
 	        case 14:
-	            this.state = 133;
-	            this.match(PeriodFileParser.NUM);
-	            this.state = 134;
-	            this.match(PeriodFileParser.T__6);
 	            this.state = 135;
-	            this.match(PeriodFileParser.T__2);
+	            this.match(PeriodFileParser.NUM);
 	            this.state = 136;
-	            this.workloads();
+	            this.match(PeriodFileParser.T__6);
 	            this.state = 137;
+	            this.match(PeriodFileParser.T__2);
+	            this.state = 138;
+	            this.workloads();
+	            this.state = 139;
 	            this.match(PeriodFileParser.T__4);
 	            break;
 	        default:
 	            throw new antlr4.error.NoViableAltException(this);
 	        }
-	        this.state = 141;
+	        this.state = 143;
 	        this.match(PeriodFileParser.T__4);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -578,17 +586,17 @@ export default class PeriodFileParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 143;
+	        this.state = 145;
 	        this.workloadL();
-	        this.state = 148;
+	        this.state = 150;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        while(_la===6) {
-	            this.state = 144;
+	            this.state = 146;
 	            this.match(PeriodFileParser.T__5);
-	            this.state = 145;
+	            this.state = 147;
 	            this.workloadL();
-	            this.state = 150;
+	            this.state = 152;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        }
@@ -614,25 +622,25 @@ export default class PeriodFileParser extends antlr4.Parser {
 	    var _la = 0;
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 151;
+	        this.state = 153;
 	        this.workload();
-	        this.state = 154;
+	        this.state = 156;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        if(_la===12) {
-	            this.state = 152;
+	            this.state = 154;
 	            this.match(PeriodFileParser.LOAD);
-	            this.state = 153;
+	            this.state = 155;
 	            this.match(PeriodFileParser.NUM);
 	        }
 
-	        this.state = 158;
+	        this.state = 160;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        if(_la===13) {
-	            this.state = 156;
+	            this.state = 158;
 	            this.match(PeriodFileParser.NOTES);
-	            this.state = 157;
+	            this.state = 159;
 	            this.match(PeriodFileParser.WORD);
 	        }
 
@@ -656,45 +664,45 @@ export default class PeriodFileParser extends antlr4.Parser {
 	    let localctx = new WorkloadContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 28, PeriodFileParser.RULE_workload);
 	    try {
-	        this.state = 169;
+	        this.state = 171;
 	        this._errHandler.sync(this);
 	        var la_ = this._interp.adaptivePredict(this._input,14,this._ctx);
 	        switch(la_) {
 	        case 1:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 160;
+	            this.state = 162;
 	            this.match(PeriodFileParser.WORD);
 	            break;
 
 	        case 2:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 161;
+	            this.state = 163;
 	            this.match(PeriodFileParser.WORD);
-	            this.state = 162;
+	            this.state = 164;
 	            this.lt();
 	            break;
 
 	        case 3:
 	            this.enterOuterAlt(localctx, 3);
-	            this.state = 163;
+	            this.state = 165;
 	            this.match(PeriodFileParser.WORD);
-	            this.state = 164;
+	            this.state = 166;
 	            this.gt();
 	            break;
 
 	        case 4:
 	            this.enterOuterAlt(localctx, 4);
-	            this.state = 165;
+	            this.state = 167;
 	            this.match(PeriodFileParser.WORD);
-	            this.state = 166;
+	            this.state = 168;
 	            this.between();
 	            break;
 
 	        case 5:
 	            this.enterOuterAlt(localctx, 5);
-	            this.state = 167;
+	            this.state = 169;
 	            this.match(PeriodFileParser.WORD);
-	            this.state = 168;
+	            this.state = 170;
 	            this.match(PeriodFileParser.WORD);
 	            break;
 
@@ -720,9 +728,9 @@ export default class PeriodFileParser extends antlr4.Parser {
 	    this.enterRule(localctx, 30, PeriodFileParser.RULE_lt);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 171;
+	        this.state = 173;
 	        this.match(PeriodFileParser.LT);
-	        this.state = 172;
+	        this.state = 174;
 	        this.match(PeriodFileParser.WORD);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -745,9 +753,9 @@ export default class PeriodFileParser extends antlr4.Parser {
 	    this.enterRule(localctx, 32, PeriodFileParser.RULE_gt);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 174;
+	        this.state = 176;
 	        this.match(PeriodFileParser.GT);
-	        this.state = 175;
+	        this.state = 177;
 	        this.match(PeriodFileParser.WORD);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -770,11 +778,11 @@ export default class PeriodFileParser extends antlr4.Parser {
 	    this.enterRule(localctx, 34, PeriodFileParser.RULE_between);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 177;
-	        this.match(PeriodFileParser.WORD);
-	        this.state = 178;
-	        this.match(PeriodFileParser.BW);
 	        this.state = 179;
+	        this.match(PeriodFileParser.WORD);
+	        this.state = 180;
+	        this.match(PeriodFileParser.BW);
+	        this.state = 181;
 	        this.match(PeriodFileParser.WORD);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -1190,6 +1198,14 @@ class DataContext extends antlr4.ParserRuleContext {
 
 	session() {
 	    return this.getTypedRuleContext(SessionContext,0);
+	};
+
+	NOTES() {
+	    return this.getToken(PeriodFileParser.NOTES, 0);
+	};
+
+	WORD() {
+	    return this.getToken(PeriodFileParser.WORD, 0);
 	};
 
 	enterRule(listener) {
