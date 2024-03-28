@@ -1,5 +1,5 @@
 #!/bin/bash
-TYPE="PeriodFile"
+TYPE="SessionFile"
 
 rm -rf ./Java
 mkdir ./Java

@@ -8,11 +8,16 @@ function removeSpeechMarks(str) {
     return str.replace(/"/g, '');
 }
 
+function isNumber(value) {
+    return !isNaN(value);
+}
+
 export default class SessionListener extends SessionFileListener {
     metadata = {};
     sections = [];
 
     workloads = [];
+    repeats = null;
 
     currSection = 0;
 
@@ -31,6 +36,11 @@ export default class SessionListener extends SessionFileListener {
 
     enterSection(ctx) {
         this.sections[this.currSection] = {Title: removeSpeechMarks(ctx.WORD().getText()), Workloads: null};
+
+        this.repeats = 0;
+        if (isNumber(ctx.children[2].getText())) {
+            this.repeats = ctx.children[2].getText();
+        }
     }
 
     enterWorkloads(ctx) {
@@ -39,7 +49,7 @@ export default class SessionListener extends SessionFileListener {
     }
 
     exitWorkload(ctx) {
-        let workload = {Time: ctx.children[0].getText(), Repeats: null, Intensity: null};
+        let workload = {Time: ctx.children[0].getText(), Repeats: this.repeats, Intensity: null};
 
         if (ctx.children.length == 1) {
             console.log("// no specified intensity");

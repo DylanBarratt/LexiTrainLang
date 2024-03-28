@@ -32,6 +32,24 @@ export default class SessionFileListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by SessionFileParser#sectionContents.
+	enterSectionContents(ctx) {
+	}
+
+	// Exit a parse tree produced by SessionFileParser#sectionContents.
+	exitSectionContents(ctx) {
+	}
+
+
+	// Enter a parse tree produced by SessionFileParser#structure.
+	enterStructure(ctx) {
+	}
+
+	// Exit a parse tree produced by SessionFileParser#structure.
+	exitStructure(ctx) {
+	}
+
+
 	// Enter a parse tree produced by SessionFileParser#workloads.
 	enterWorkloads(ctx) {
 	}

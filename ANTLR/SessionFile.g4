@@ -7,7 +7,14 @@ file: (metaData)+ (section)+;
 
 metaData: WORD ':' (WORD|NUM) '.';
 
-section: WORD '{' (workloads | NUM '*' '{' workloads '}') '}'; //single workloads or repeated workloads
+section: WORD '{'sectionContents'}'; 
+
+sectionContents
+    : workloads
+    | (workloads '&&')? structure ('&&' workloads)?
+    ;
+    
+structure: NUM '*' '{' workloads '}';
 
 workloads: workloadL ('&&' workloadL)*;
 

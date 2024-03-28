@@ -72,8 +72,8 @@ function checkImportedFiles() {
     return;
   }
 
-  console.log("Imported files", importFiles); //todo delete
-  parseTA();
+  // console.log("Imported files", importFiles); //todo delete
+  // parseTA();
 }
 
 
@@ -265,6 +265,7 @@ function loadCalendarData(rawData) {
   calendarData = [...dates, ...undatedDays];
 }
 
+// todo delete
 var dat = `title: "over unders".
 sport: "cycling".
 author: "Dylan Barratt".
@@ -279,6 +280,7 @@ main {
 		5min HRZ5 &&
 		5min HRZ3 - HRZ4
 	}
+  10min HRZ1
 }
 
 "cool down" {
