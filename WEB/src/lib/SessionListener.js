@@ -17,10 +17,9 @@ export default class SessionListener extends SessionFileListener {
     sections = [];
 
     workloads = [];
-    repeats = null;
+    repeats = 0;
 
     currSection = 0;
-    currWorkload = 0;
 
     visit(ctx) {
         if (ctx.children) {
@@ -32,46 +31,75 @@ export default class SessionListener extends SessionFileListener {
     }
 
     exitMetaData(ctx) {
-    this.metadata[capitalizeFirstLetter(ctx.children[0].getText())] = removeSpeechMarks(ctx.children[2].getText());
+        this.metadata[capitalizeFirstLetter(ctx.children[0].getText())] = removeSpeechMarks(ctx.children[2].getText());
     }
 
-   enterSection(ctx) {
-    this.sections[this.currSection] = {Title: removeSpeechMarks(ctx.WORD().getText()), Workloads: null};
-   }
+    enterSection(ctx) {
+        this.sections[this.currSection] = {Title: removeSpeechMarks(ctx.WORD().getText()), Workloads: null};
+    }
 
-   enterSectionContents(ctx) {
-    this.workloads = [];
-    this.currWorkload = 0;
-   }
+    enterSectionContents(ctx) {
+        this.workloads = [];
+    }
 
-   enterStructure(ctx) {
-    this.repeats = ctx.NUM().getText();
-   }
+    enterStructure(ctx) {
+        this.repeats = ctx.NUM().getText();
+    }
 
-   enterWorkloadL(ctx) {
-    this.workloads[this.currWorkload] = {
-        Data: null, Notes: null
-    };
-   }
+    exitStructure(ctx) {
+        this.repeats = 0;
+    }
 
-   enterNote(ctx) {
-    this.workloads[this.currWorkload].Notes = removeSpeechMarks(ctx.WORD().getText());
-   }
+    wlType = null;
+    wlZone = null;
 
-   exitWorkloadL(ctx) {
-    this.currWorkload++;
-   }
+    enterWorkload(ctx) {
+        this.wlType = null;
+        this.wlZone = null;
+    }
 
-   exitStructure(ctx) {
-    this.repeats = 0;
-   }
+    enterLt(ctx) {
+        this.wlType = 'lt';
+        this.wlZone = ctx.WORD().getText();
+    }
 
-   exitSection (ctx) {
-    this.sections[this.currSection].Workloads = this.workloads;
-    this.currSection++;
-   }
+    enterGt(ctx) {
+        this.wlType = 'gt';
+        this.wlZone = ctx.WORD().getText();
+    }
+
+    enterBetween(ctx) {
+        this.wlType = 'bt';
+        this.wlZone = [ctx.children[0].getText(), ctx.children[2].getText()];
+    }
+
+    exitWorkload(ctx) {
+        let workload = {Time: null, Type: null, Zone: null};
+
+        workload.Time = ctx.children[0].getText();
+
+        if (this.wlType == null) { //still unitialised
+            if (ctx.children.length == 2) {
+                this.wlType = 'at';
+                this.wlZone = ctx.children[1].getText();
+            } else if (ctx.children.length == 1) { 
+                this.wlType = 'none';
+            }
+        }
+
+        workload.Type = this.wlType;
+        workload.Zone = this.wlZone;
+
+        this.workloads.push({Repeats: this.repeats, Workload: workload})
+    }
+
+    exitSectionContents(ctx) {
+        this.sections[this.currSection].Workloads = this.workloads;
+        this.currSection++;
+        //save note here as well
+    }
 
     result() {
-     return {Metadata: this.metadata, Sections: this.sections};
+        return {Metadata: this.metadata, Sections: this.sections};
     }
 }

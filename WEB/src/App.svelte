@@ -1,9 +1,10 @@
 <!-- App.svelte -->
 <script lang="ts">
 import { ParseFull, ParseImports, ParseSession } from './lib/Antlr.js';
+
 import Calendar from './components/Calendar.svelte';
-import FileUpload from './components/FileUpload.svelte';
 import Ide from './components/IDE.svelte';
+import SessionUpload from './components/SessionUpload.svelte';
 
 let antlrError = null;
 
@@ -14,6 +15,7 @@ let ideText = null;
 
 let importNames: Array<string> = [];
 let importFiles = {};
+let importedFilesParsed = {};
 
 function updateIdeText(textareaData) {
   ideText = textareaData.detail;
@@ -42,26 +44,13 @@ function checkImports() {
   });
 }
 
-function fileUploaded(event) {
-  let fileRaw = event.detail;
-
-  const reader = new FileReader();
-
-  reader.onload = function(event) {
-    const fileContent = event.target.result;
-    importFiles[fileRaw.Name] = fileContent;
-  };
-
-  reader.onerror = function(event) {
-    console.error('Error occurred while reading the file:', event.target.error);
-  };
-
-  reader.readAsText(fileRaw.File); 
+function fileProccessed(event) {
+  importFiles[event.detail.Name] = event.detail.FileContent;
 }
 
 function checkImportedFiles() {
   let err: boolean;
-  importNames.forEach(name => {
+  importNames.forEach(name => { //loop through all to get all missing file names
     if (importFiles[name] == null) {
       console.error("missing " + name);
       err = true;
@@ -72,8 +61,25 @@ function checkImportedFiles() {
     return;
   }
 
-  // console.log("Imported files", importFiles); //todo delete
-  // parseTA();
+ 
+  try {
+    importNames.forEach(name => {
+      importedFilesParsed[name] = ParseSession(importFiles[name]);
+
+      if (importedFilesParsed[name].Metadata.Sport == undefined) {
+        throw new Error("Sport required in " + name);
+      }
+    });
+
+    
+
+    antlrError = null; //no error yay!
+  } catch (e) {
+    antlrError = e.message;
+    return;
+  }
+
+  parseTA();
 }
 
 
@@ -176,8 +182,8 @@ function loadCalendarData(rawData) {
   let daysUntilFirst: number = 0;
   let firstNamedDay: string = null;
   // combine weeks into single array with missed days as null
-  periods.forEach(week => { 
-    let weekData: Array<DayType> = Object.values(week);
+  periods.forEach(period => { 
+    let weekData: Array<DayType> = Object.values(period);
     weekData.pop(); //remove week title
 
     //assumes 7 days a period
@@ -195,9 +201,6 @@ function loadCalendarData(rawData) {
       }
     }
   }); 
-
-  console.log(dayNameToIndex(firstNamedDay));
-  console.log(daysUntilFirst);
 
   let dates = [];
   let undatedDays = [];
@@ -231,24 +234,33 @@ function loadCalendarData(rawData) {
     date.setDate(date.getDate() - daysUntilFirst) //offset first found by days previous
   }
 
-  
-
   // give each day a date starting with the first available date that 
   // matches the specified day. If day not recognised, error
   days.forEach(day => {
-    console.log(day); //todo delete
     if (day == null) { //ignore empty days
       return;
-    } else if (day.Day == null && !(typeof day.Repeats === 'undefined')) {
+    } 
+
+    let dd = {Sections: day.Data};
+
+    //replace imports
+    //todo combine session data with import data
+    day.Data.forEach(data => {
+      if (data.Import) {
+        dd = importedFilesParsed[data.Data];
+      }
+    })
+  
+    if (day.Day == null && !(typeof day.Repeats === 'undefined')) {
       for (let i = 0; i < day.Repeats; i++) {
         //store undated sessions in the current week and mark as not dated
-        undatedDays.push({Date: new Date(date), Data: day.Data, Dated: false}) 
+        undatedDays.push({Date: new Date(date), Data: dd, Dated: false}) 
       }
     } else if (day.Day == null) { //undated days
-      undatedDays.push({Date: new Date(date), Data: day.Data, Dated: false})
+      undatedDays.push({Date: new Date(date), Data: dd, Dated: false})
     }else {
       if (isValidDate(day.Day)) {
-        dates.push({Date: new Date(date), Data: day.Data, Dated: true});
+        dates.push({Date: new Date(date), Data: dd, Dated: true});
       } else {
         antlrError = "Invalid day: " + day;
         return;
@@ -262,37 +274,8 @@ function loadCalendarData(rawData) {
     }
   });
 
-  calendarData = [...dates, ...undatedDays];
+  calendarData = {Imports: importedFilesParsed, Days: [...dates, ...undatedDays]};
 }
-
-// todo delete
-var dat = `title: "over unders".
-sport: "cycling".
-author: "Dylan Barratt".
-load: 30.
-
-warmup {
-	1hr HRZ1
-}
-
-main {
-	5*{
-		5min HRZ5 &&
-		5min HRZ3 - HRZ4
-	} &&
-  10min HRZ1 
-} note="cooloff after hard set!!"
-
-"cool down" {
-	30min HRZ1
-}
-
-"test" {
-  30min
-}`;
-
-console.log(dat);
-console.log(ParseSession(dat));
 </script>
 
 <main>
@@ -303,7 +286,7 @@ console.log(ParseSession(dat));
 
   {#if importNames.length > 0}
     {#each importNames as name}
-      <FileUpload {name} on:fileUploaded={fileUploaded}/>
+      <SessionUpload {name} on:fileProccessed={fileProccessed}/>
     {/each}
     <button on:click={checkImportedFiles}>Submit Files</button>
   {/if}

@@ -1,7 +1,6 @@
 <script lang="ts">
 import Day  from "./Day.svelte";
 
-
 export let calendarData : any;
 
 let periodLength: number = 7;
@@ -48,8 +47,9 @@ function getDaysInMonth(year: number, month: number) {
   return new Date(year, month + 1, 0).getDate();
 }
 
+//todo could this by sped up?
 function filterDataByDate(targetDate: Date) {
-  let filteredData = calendarData.filter(item => {
+  let filteredData = calendarData.Days.filter(item => {
     let itemDate = new Date(item.Date);
     // Extract year, month, and day from the target date and the item's date
     let targetYear = targetDate.getFullYear();

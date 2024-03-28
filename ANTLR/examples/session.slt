@@ -4,7 +4,7 @@ author: "Dylan Barratt".
 load: 30.
 
 warmup {
-	1hr HRZ1
+	1hr > HRZ1
 }
 
 main {
@@ -16,7 +16,7 @@ main {
 } note="cooloff after hard set!!"
 
 "cool down" {
-	30min HRZ1
+	30min < HRZ2
 }
 
 "test" {

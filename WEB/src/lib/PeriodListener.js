@@ -65,7 +65,7 @@ export default class PeriodListener extends LTListener {
     }
 
     exitImported(ctx) {
-        this.daySessions.push(ctx.IMPORTED().getText().replace(/\[|\]/g, ''));
+        this.daySessions.push({Import: true, Data: ctx.IMPORTED().getText().replace(/\[|\]/g, '')});
     }
 
     exitWorkouts(ctx) {

@@ -42,12 +42,6 @@ export default class SessionFileVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
-	// Visit a parse tree produced by SessionFileParser#workloadL.
-	visitWorkloadL(ctx) {
-	  return this.visitChildren(ctx);
-	}
-
-
 	// Visit a parse tree produced by SessionFileParser#note.
 	visitNote(ctx) {
 	  return this.visitChildren(ctx);
