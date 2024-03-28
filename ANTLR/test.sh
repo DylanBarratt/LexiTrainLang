@@ -1,8 +1,8 @@
 #!/bin/bash
 ./out.sh
 
-TEST_FILE="../examples/session.slt"
-TYPE="SessionFile"
+TEST_FILE="../examples/period_imports.lt"
+TYPE="Imports"
 
 echo "Testing $TEST_FILE"
 cd Java

@@ -1,5 +1,5 @@
 #!/bin/bash
-TYPE="SessionFile"
+TYPE="Imports"
 
 rm -rf ./Java
 mkdir ./Java
