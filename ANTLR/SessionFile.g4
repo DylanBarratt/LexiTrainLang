@@ -18,7 +18,9 @@ structure: NUM '*' '{' workloads '}';
 
 workloads: workloadL ('&&' workloadL)*;
 
-workloadL: workload (LOAD NUM)? (NOTES WORD)?; // workload load notes
+workloadL: workload note?; // workload load notes
+
+note: NOTES WORD;
 
 workload
     : WORD // no specified intensity (just time)

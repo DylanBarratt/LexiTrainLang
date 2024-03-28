@@ -1,20 +1,24 @@
 title: "over unders".
 sport: "cycling".
 author: "Dylan Barratt".
+load: 30.
 
 warmup {
-	60min < HRZ2
+	1hr HRZ1
 }
 
-"main set" {
-	2hours < HRZ3 &&
-	5 * {
-		10min HRZ2 &&
-		5min HRZ3
+main {
+	5*{
+		5min HRZ5 &&
+		5min HRZ3 - HRZ4
 	} &&
-	20min < HRZ2
+  10min HRZ1 note="cooloff after hard set!!"
 }
 
-cooldown {
-	60min < HRZ2
+"cool down" {
+	30min HRZ1
+}
+
+"test" {
+  30min
 }
