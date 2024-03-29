@@ -36,7 +36,7 @@ class Section {
     Workloads: Array<WorkloadExtended>;
 }
 
-class Session {
+class Session { // the final object
     Metadata: object; 
     Sections: Array<Section>;
 }

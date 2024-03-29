@@ -48,8 +48,8 @@ metaData
 sessionImport
 periods
 period
-periodPair
-data
+day
+dayData
 imported
 workouts
 workout

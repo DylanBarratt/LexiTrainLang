@@ -3,8 +3,8 @@
 import antlr4 from 'antlr4';
 const { CommonTokenStream, InputStream } = antlr4;
 
-import LTLexer from './lt/PeriodFileLexer.js';
-import LTParser from './lt/PeriodFileParser.js';
+import PeriodFileLexer from './lt/PeriodFileLexer.js';
+import PeriodFileParser from './lt/PeriodFileParser.js';
 
 import SLexer from './lt/SessionFileLexer.js';
 import SParser from './lt/SessionFileParser.js';
@@ -34,9 +34,9 @@ class CustomError extends Error {
 
 export function ParseFull(input) {
 	var chars = new InputStream(input, true);
-	var lexer = new LTLexer(chars);
+	var lexer = new PeriodFileLexer(chars);
 	var tokens = new CommonTokenStream(lexer);
-	var parser = new LTParser(tokens);
+	var parser = new PeriodFileParser(tokens);
 
 	parser.buildParseTrees = true;
 
@@ -54,41 +54,41 @@ export function ParseFull(input) {
 
 
 export function ParseImports(input) {
-	var chars = new InputStream(input, true);
-	var lexer = new LTLexer(chars);
-	var tokens = new CommonTokenStream(lexer);
-	var parser = new LTParser(tokens);
+	// var chars = new InputStream(input, true);
+	// var lexer = new LTLexer(chars);
+	// var tokens = new CommonTokenStream(lexer);
+	// var parser = new LTParser(tokens);
 
-	parser.buildParseTrees = true;
+	// parser.buildParseTrees = true;
 
-	parser.removeErrorListeners;
-	var customErrorListener = new CustomErrorListener();
-	parser.addErrorListener(customErrorListener);
+	// parser.removeErrorListeners;
+	// var customErrorListener = new CustomErrorListener();
+	// parser.addErrorListener(customErrorListener);
 
-	var tree = parser.file();
+	// var tree = parser.file();
 
-	var listener = new Imports();
-	antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
+	// var listener = new Imports();
+	// antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
 
-	return listener.result();
+	// return listener.result();
 }
 
 export function ParseSession(input) {
-	var chars = new InputStream(input, true);
-	var lexer = new SLexer(chars);
-	var tokens = new CommonTokenStream(lexer);
-	var parser = new SParser(tokens);
+	// var chars = new InputStream(input, true);
+	// var lexer = new SLexer(chars);
+	// var tokens = new CommonTokenStream(lexer);
+	// var parser = new SParser(tokens);
 
-	parser.buildParseTrees = true;
+	// parser.buildParseTrees = true;
 
-	parser.removeErrorListeners;
-	var customErrorListener = new CustomErrorListener();
-	parser.addErrorListener(customErrorListener);
+	// parser.removeErrorListeners;
+	// var customErrorListener = new CustomErrorListener();
+	// parser.addErrorListener(customErrorListener);
 
-	var tree = parser.file();
+	// var tree = parser.file();
 
-	var listener = new SessionListener();
-	antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
+	// var listener = new SessionListener();
+	// antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
 
-	return listener.result();
+	// return listener.result();
 }

@@ -77,7 +77,7 @@ export default class PeriodFileParser extends antlr4.Parser {
                              "NUM", "WORD", "SPORT", "IMPORTED", "LINE_COMMENT", 
                              "WS" ];
     static ruleNames = [ "file", "metaData", "sessionImport", "periods", 
-                         "period", "periodPair", "data", "imported", "workouts", 
+                         "period", "day", "dayData", "imported", "workouts", 
                          "workout", "session", "sessionSection", "workloads", 
                          "workloadL", "workload", "lt", "gt", "between" ];
 
@@ -247,7 +247,7 @@ export default class PeriodFileParser extends antlr4.Parser {
 	        this.state = 66;
 	        this.match(PeriodFileParser.T__2);
 	        this.state = 67;
-	        this.periodPair();
+	        this.day();
 	        this.state = 72;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
@@ -255,7 +255,7 @@ export default class PeriodFileParser extends antlr4.Parser {
 	            this.state = 68;
 	            this.match(PeriodFileParser.T__3);
 	            this.state = 69;
-	            this.periodPair();
+	            this.day();
 	            this.state = 74;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
@@ -278,9 +278,9 @@ export default class PeriodFileParser extends antlr4.Parser {
 
 
 
-	periodPair() {
-	    let localctx = new PeriodPairContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 10, PeriodFileParser.RULE_periodPair);
+	day() {
+	    let localctx = new DayContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 10, PeriodFileParser.RULE_day);
 	    var _la = 0;
 	    try {
 	        this.state = 101;
@@ -293,7 +293,7 @@ export default class PeriodFileParser extends antlr4.Parser {
 	            this.state = 78;
 	            this.match(PeriodFileParser.T__0);
 	            this.state = 79;
-	            this.data();
+	            this.dayData();
 	            this.state = 84;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
@@ -301,7 +301,7 @@ export default class PeriodFileParser extends antlr4.Parser {
 	                this.state = 80;
 	                this.match(PeriodFileParser.T__5);
 	                this.state = 81;
-	                this.data();
+	                this.dayData();
 	                this.state = 86;
 	                this._errHandler.sync(this);
 	                _la = this._input.LA(1);
@@ -316,7 +316,7 @@ export default class PeriodFileParser extends antlr4.Parser {
 	            this.state = 89;
 	            this.match(PeriodFileParser.T__2);
 	            this.state = 90;
-	            this.data();
+	            this.dayData();
 	            this.state = 91;
 	            this.match(PeriodFileParser.T__4);
 	            break;
@@ -326,7 +326,7 @@ export default class PeriodFileParser extends antlr4.Parser {
 	        case 17:
 	            this.enterOuterAlt(localctx, 3);
 	            this.state = 93;
-	            this.data();
+	            this.dayData();
 	            this.state = 98;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
@@ -334,7 +334,7 @@ export default class PeriodFileParser extends antlr4.Parser {
 	                this.state = 94;
 	                this.match(PeriodFileParser.T__5);
 	                this.state = 95;
-	                this.data();
+	                this.dayData();
 	                this.state = 100;
 	                this._errHandler.sync(this);
 	                _la = this._input.LA(1);
@@ -359,9 +359,9 @@ export default class PeriodFileParser extends antlr4.Parser {
 
 
 
-	data() {
-	    let localctx = new DataContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 12, PeriodFileParser.RULE_data);
+	dayData() {
+	    let localctx = new DayDataContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 12, PeriodFileParser.RULE_dayData);
 	    try {
 	        this.state = 108;
 	        this._errHandler.sync(this);
@@ -827,8 +827,8 @@ PeriodFileParser.RULE_metaData = 1;
 PeriodFileParser.RULE_sessionImport = 2;
 PeriodFileParser.RULE_periods = 3;
 PeriodFileParser.RULE_period = 4;
-PeriodFileParser.RULE_periodPair = 5;
-PeriodFileParser.RULE_data = 6;
+PeriodFileParser.RULE_day = 5;
+PeriodFileParser.RULE_dayData = 6;
 PeriodFileParser.RULE_imported = 7;
 PeriodFileParser.RULE_workouts = 8;
 PeriodFileParser.RULE_workout = 9;
@@ -1080,14 +1080,14 @@ class PeriodContext extends antlr4.ParserRuleContext {
 	    return this.getToken(PeriodFileParser.WORD, 0);
 	};
 
-	periodPair = function(i) {
+	day = function(i) {
 	    if(i===undefined) {
 	        i = null;
 	    }
 	    if(i===null) {
-	        return this.getTypedRuleContexts(PeriodPairContext);
+	        return this.getTypedRuleContexts(DayContext);
 	    } else {
-	        return this.getTypedRuleContext(PeriodPairContext,i);
+	        return this.getTypedRuleContext(DayContext,i);
 	    }
 	};
 
@@ -1116,7 +1116,7 @@ class PeriodContext extends antlr4.ParserRuleContext {
 
 
 
-class PeriodPairContext extends antlr4.ParserRuleContext {
+class DayContext extends antlr4.ParserRuleContext {
 
     constructor(parser, parent, invokingState) {
         if(parent===undefined) {
@@ -1127,21 +1127,21 @@ class PeriodPairContext extends antlr4.ParserRuleContext {
         }
         super(parent, invokingState);
         this.parser = parser;
-        this.ruleIndex = PeriodFileParser.RULE_periodPair;
+        this.ruleIndex = PeriodFileParser.RULE_day;
     }
 
 	WORD() {
 	    return this.getToken(PeriodFileParser.WORD, 0);
 	};
 
-	data = function(i) {
+	dayData = function(i) {
 	    if(i===undefined) {
 	        i = null;
 	    }
 	    if(i===null) {
-	        return this.getTypedRuleContexts(DataContext);
+	        return this.getTypedRuleContexts(DayDataContext);
 	    } else {
-	        return this.getTypedRuleContext(DataContext,i);
+	        return this.getTypedRuleContext(DayDataContext,i);
 	    }
 	};
 
@@ -1151,19 +1151,19 @@ class PeriodPairContext extends antlr4.ParserRuleContext {
 
 	enterRule(listener) {
 	    if(listener instanceof PeriodFileListener ) {
-	        listener.enterPeriodPair(this);
+	        listener.enterDay(this);
 		}
 	}
 
 	exitRule(listener) {
 	    if(listener instanceof PeriodFileListener ) {
-	        listener.exitPeriodPair(this);
+	        listener.exitDay(this);
 		}
 	}
 
 	accept(visitor) {
 	    if ( visitor instanceof PeriodFileVisitor ) {
-	        return visitor.visitPeriodPair(this);
+	        return visitor.visitDay(this);
 	    } else {
 	        return visitor.visitChildren(this);
 	    }
@@ -1174,7 +1174,7 @@ class PeriodPairContext extends antlr4.ParserRuleContext {
 
 
 
-class DataContext extends antlr4.ParserRuleContext {
+class DayDataContext extends antlr4.ParserRuleContext {
 
     constructor(parser, parent, invokingState) {
         if(parent===undefined) {
@@ -1185,7 +1185,7 @@ class DataContext extends antlr4.ParserRuleContext {
         }
         super(parent, invokingState);
         this.parser = parser;
-        this.ruleIndex = PeriodFileParser.RULE_data;
+        this.ruleIndex = PeriodFileParser.RULE_dayData;
     }
 
 	imported() {
@@ -1210,19 +1210,19 @@ class DataContext extends antlr4.ParserRuleContext {
 
 	enterRule(listener) {
 	    if(listener instanceof PeriodFileListener ) {
-	        listener.enterData(this);
+	        listener.enterDayData(this);
 		}
 	}
 
 	exitRule(listener) {
 	    if(listener instanceof PeriodFileListener ) {
-	        listener.exitData(this);
+	        listener.exitDayData(this);
 		}
 	}
 
 	accept(visitor) {
 	    if ( visitor instanceof PeriodFileVisitor ) {
-	        return visitor.visitData(this);
+	        return visitor.visitDayData(this);
 	    } else {
 	        return visitor.visitChildren(this);
 	    }
@@ -1805,8 +1805,8 @@ PeriodFileParser.MetaDataContext = MetaDataContext;
 PeriodFileParser.SessionImportContext = SessionImportContext; 
 PeriodFileParser.PeriodsContext = PeriodsContext; 
 PeriodFileParser.PeriodContext = PeriodContext; 
-PeriodFileParser.PeriodPairContext = PeriodPairContext; 
-PeriodFileParser.DataContext = DataContext; 
+PeriodFileParser.DayContext = DayContext; 
+PeriodFileParser.DayDataContext = DayDataContext; 
 PeriodFileParser.ImportedContext = ImportedContext; 
 PeriodFileParser.WorkoutsContext = WorkoutsContext; 
 PeriodFileParser.WorkoutContext = WorkoutContext; 

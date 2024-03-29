@@ -36,14 +36,14 @@ export default class PeriodFileVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
-	// Visit a parse tree produced by PeriodFileParser#periodPair.
-	visitPeriodPair(ctx) {
+	// Visit a parse tree produced by PeriodFileParser#day.
+	visitDay(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
 
-	// Visit a parse tree produced by PeriodFileParser#data.
-	visitData(ctx) {
+	// Visit a parse tree produced by PeriodFileParser#dayData.
+	visitDayData(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
