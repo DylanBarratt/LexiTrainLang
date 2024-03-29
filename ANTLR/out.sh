@@ -1,5 +1,5 @@
 #!/bin/bash
-TYPE="Imports"
+TYPE="PeriodFile"
 
 rm -rf ./Java
 mkdir ./Java

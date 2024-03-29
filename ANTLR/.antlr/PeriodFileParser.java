@@ -21,15 +21,14 @@ public class PeriodFileParser extends Parser {
 		LINE_COMMENT=18, WS=19;
 	public static final int
 		RULE_file = 0, RULE_metaData = 1, RULE_sessionImport = 2, RULE_periods = 3, 
-		RULE_period = 4, RULE_periodPair = 5, RULE_data = 6, RULE_imported = 7, 
-		RULE_workouts = 8, RULE_workout = 9, RULE_session = 10, RULE_sessionSection = 11, 
-		RULE_workloads = 12, RULE_workloadL = 13, RULE_workload = 14, RULE_lt = 15, 
-		RULE_gt = 16, RULE_between = 17;
+		RULE_period = 4, RULE_day = 5, RULE_dayData = 6, RULE_imported = 7, RULE_workouts = 8, 
+		RULE_workout = 9, RULE_session = 10, RULE_sessionSection = 11, RULE_workloads = 12, 
+		RULE_workloadL = 13, RULE_workload = 14, RULE_lt = 15, RULE_gt = 16, RULE_between = 17;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"file", "metaData", "sessionImport", "periods", "period", "periodPair", 
-			"data", "imported", "workouts", "workout", "session", "sessionSection", 
-			"workloads", "workloadL", "workload", "lt", "gt", "between"
+			"file", "metaData", "sessionImport", "periods", "period", "day", "dayData", 
+			"imported", "workouts", "workout", "session", "sessionSection", "workloads", 
+			"workloadL", "workload", "lt", "gt", "between"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -313,11 +312,11 @@ public class PeriodFileParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class PeriodContext extends ParserRuleContext {
 		public TerminalNode WORD() { return getToken(PeriodFileParser.WORD, 0); }
-		public List<PeriodPairContext> periodPair() {
-			return getRuleContexts(PeriodPairContext.class);
+		public List<DayContext> day() {
+			return getRuleContexts(DayContext.class);
 		}
-		public PeriodPairContext periodPair(int i) {
-			return getRuleContext(PeriodPairContext.class,i);
+		public DayContext day(int i) {
+			return getRuleContext(DayContext.class,i);
 		}
 		public PeriodContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -337,7 +336,7 @@ public class PeriodFileParser extends Parser {
 			setState(66);
 			match(T__2);
 			setState(67);
-			periodPair();
+			day();
 			setState(72);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -347,7 +346,7 @@ public class PeriodFileParser extends Parser {
 				setState(68);
 				match(T__3);
 				setState(69);
-				periodPair();
+				day();
 				}
 				}
 				setState(74);
@@ -370,24 +369,24 @@ public class PeriodFileParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class PeriodPairContext extends ParserRuleContext {
+	public static class DayContext extends ParserRuleContext {
 		public TerminalNode WORD() { return getToken(PeriodFileParser.WORD, 0); }
-		public List<DataContext> data() {
-			return getRuleContexts(DataContext.class);
+		public List<DayDataContext> dayData() {
+			return getRuleContexts(DayDataContext.class);
 		}
-		public DataContext data(int i) {
-			return getRuleContext(DataContext.class,i);
+		public DayDataContext dayData(int i) {
+			return getRuleContext(DayDataContext.class,i);
 		}
 		public TerminalNode NUM() { return getToken(PeriodFileParser.NUM, 0); }
-		public PeriodPairContext(ParserRuleContext parent, int invokingState) {
+		public DayContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_periodPair; }
+		@Override public int getRuleIndex() { return RULE_day; }
 	}
 
-	public final PeriodPairContext periodPair() throws RecognitionException {
-		PeriodPairContext _localctx = new PeriodPairContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_periodPair);
+	public final DayContext day() throws RecognitionException {
+		DayContext _localctx = new DayContext(_ctx, getState());
+		enterRule(_localctx, 10, RULE_day);
 		int _la;
 		try {
 			setState(101);
@@ -401,7 +400,7 @@ public class PeriodFileParser extends Parser {
 				setState(78);
 				match(T__0);
 				setState(79);
-				data();
+				dayData();
 				setState(84);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -411,7 +410,7 @@ public class PeriodFileParser extends Parser {
 					setState(80);
 					match(T__5);
 					setState(81);
-					data();
+					dayData();
 					}
 					}
 					setState(86);
@@ -430,7 +429,7 @@ public class PeriodFileParser extends Parser {
 				setState(89);
 				match(T__2);
 				setState(90);
-				data();
+				dayData();
 				setState(91);
 				match(T__4);
 				}
@@ -442,7 +441,7 @@ public class PeriodFileParser extends Parser {
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(93);
-				data();
+				dayData();
 				setState(98);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -452,7 +451,7 @@ public class PeriodFileParser extends Parser {
 					setState(94);
 					match(T__5);
 					setState(95);
-					data();
+					dayData();
 					}
 					}
 					setState(100);
@@ -477,7 +476,7 @@ public class PeriodFileParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class DataContext extends ParserRuleContext {
+	public static class DayDataContext extends ParserRuleContext {
 		public ImportedContext imported() {
 			return getRuleContext(ImportedContext.class,0);
 		}
@@ -489,15 +488,15 @@ public class PeriodFileParser extends Parser {
 		}
 		public TerminalNode NOTES() { return getToken(PeriodFileParser.NOTES, 0); }
 		public TerminalNode WORD() { return getToken(PeriodFileParser.WORD, 0); }
-		public DataContext(ParserRuleContext parent, int invokingState) {
+		public DayDataContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_data; }
+		@Override public int getRuleIndex() { return RULE_dayData; }
 	}
 
-	public final DataContext data() throws RecognitionException {
-		DataContext _localctx = new DataContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_data);
+	public final DayDataContext dayData() throws RecognitionException {
+		DayDataContext _localctx = new DayDataContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_dayData);
 		try {
 			setState(108);
 			_errHandler.sync(this);

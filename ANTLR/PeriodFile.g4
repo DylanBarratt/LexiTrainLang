@@ -9,19 +9,19 @@ metaData: WORD ':' (WORD|NUM) '.';
 
 sessionImport: IMPORT WORD '.';
 
-periods: (period)+;
+periods: (period)+; // e.g. multiple weeks
 
-period
-    : WORD '{' periodPair (',' periodPair)* '}' 
+period // e.g. a week
+    : WORD '{' day (',' day)* '}' 
     ;
 
-periodPair
-    : WORD ':' data ('&&' data)* //specified day
-    | NUM '*' '{' data '}' //looped days (unspecified day)
-    | data ('&&' data)* //non-specified day
+day
+    : WORD ':' dayData ('&&' dayData)* //specified day
+    | NUM '*' '{' dayData '}' //looped days (unspecified day)
+    | dayData ('&&' dayData)* //non-specified day
     ;
 
-data
+dayData
     : imported //imported
     | workouts //single line session
     | session //inline session
