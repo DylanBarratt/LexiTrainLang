@@ -65,3 +65,14 @@ export class DayData {
     Sections: Array<Section>; //this is where the workloads are stored. By default only one section
     Notes: string = null; 
 }
+
+
+export class FileUploadOut {
+    Name: string;
+    File: File;
+}
+
+export class FileString {
+    Name: string;
+    FileContents: string;
+}

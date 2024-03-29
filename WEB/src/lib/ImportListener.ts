@@ -1,10 +1,16 @@
-import LTListener from './lt/PeriodFileListener.js';
+import ImportListener from './lt/ImportsListener.js';
 
-export default class Imports extends LTListener { 
+function removeImport(inp: string): string {
+    let str = inp.replace(/import /g, '');
+    str = str.replace(/\./g, '');
+    return str;
+}
+
+export default class Imports extends ImportListener { 
     sessionImports: Array<string> = [];
 
-    exitSessionImport(ctx): void {
-        this.sessionImports.push(ctx.children[1].getText().replace(/"/g, ''));
+    exitImportStatement(ctx: any): void {
+        this.sessionImports.push(removeImport(ctx.getText()));
     }
 
     result(): Array<string> {

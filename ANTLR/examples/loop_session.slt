@@ -2,17 +2,9 @@ title: "over unders".
 sport: "cycling".
 author: "Dylan Barratt".
 
-warmup {
-	1hr HRZ1
-}
-
 main {
 	5*{
 		5min HRZ5 &&
 		5min HRZ3 - HRZ4
 	}
-}
-
-"cool down" {
-	30min HRZ1
 }

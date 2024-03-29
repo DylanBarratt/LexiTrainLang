@@ -1,38 +1,41 @@
 <script lang='ts'>
+import type { FileString, FileUploadOut } from "../lib/DataTypes";
 import FileUpload from "./FileUpload.svelte";
 import { createEventDispatcher } from 'svelte';
 
-const dispatch = createEventDispatcher();
+const dispatch = createEventDispatcher<{FileProccessed: FileString, RemoveOldName: string}>();
 
-export let name;
 
-let fileContents;
+export let fileNeeded: string;
 
-function fileUploaded(event) {
+let fileContents: string;
+let oldFileName: string;
+
+$: fileContents;
+
+function fileUploaded(event: CustomEvent<FileUploadOut>) {
+    dispatch('RemoveOldName', oldFileName);
+    
     let fileRaw = event.detail;
 
     const reader = new FileReader();
 
     reader.onload = function(event) {
-        var text = event.target.result;
-        fileContents = text;
-        dispatch('fileProccessed', {Name: name, FileContent: fileContents});
+        fileContents = event.target.result as string;
+        oldFileName = fileRaw.Name;
+        dispatch('FileProccessed', {Name: fileRaw.Name, FileContents: fileContents});
     };
 
     reader.onerror = function(event) {
-        console.error('Error occurred while reading the file:', event.target.error);
+        throw new Error('Error occurred while reading the file:', event.target.error);
     };
 
     reader.readAsText(fileRaw.File); 
 }
 </script>
 
-<style>
-
-</style>
-
 <div>
-    <FileUpload {name} on:fileUploaded={fileUploaded}/>
+    <FileUpload {fileNeeded} on:FileUploaded={fileUploaded}/>
 
     {#if fileContents}
         <!-- todo probs very unsafe lol -->

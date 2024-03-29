@@ -1,20 +1,17 @@
-<script>
+<script lang='ts'>
+import type { FileUploadOut } from "../lib/DataTypes";
 import { createEventDispatcher } from 'svelte';
 
-const dispatch = createEventDispatcher();
 
-export let name;
-export let file = null;
+const dispatch = createEventDispatcher<{FileUploaded: FileUploadOut}>();
+
+export let fileNeeded: string;
+export let file: File = null;
 
 let errorMessage = '';
 
-async function handleFileUpload(event) {
+function handleFileUpload(event) {    
     const selectedFile = event.target.files[0];
-
-    if (!selectedFile) {
-        errorMessage = 'No file selected.';
-        return;
-    }
     
     if (!selectedFile) {
         console.error('No file selected.');
@@ -30,8 +27,7 @@ async function handleFileUpload(event) {
         return;
     }
 
-
-    dispatch('fileUploaded', {Name: name, File: selectedFile});
+    dispatch('FileUploaded', {Name: selectedFile.name, File: selectedFile});
 }
 </script>
 
@@ -45,11 +41,10 @@ async function handleFileUpload(event) {
 </style>
 
 <div class="file-upload-container">
-    <label for="fileUpload">Upload {name}</label>
+    <label for="fileUpload">Upload {fileNeeded}</label>
     <br />
     <hr />
     <input type="file" id="fileUpload" accept=".slt" class="file-upload-input" on:change={handleFileUpload}>
-    
     
     {#if errorMessage}
         <div class="error">

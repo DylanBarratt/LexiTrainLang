@@ -6,8 +6,11 @@ const { CommonTokenStream, InputStream } = antlr4;
 import PeriodFileLexer from './lt/PeriodFileLexer.js';
 import PeriodFileParser from './lt/PeriodFileParser.js';
 
-import SLexer from './lt/SessionFileLexer.js';
-import SParser from './lt/SessionFileParser.js';
+import SessionFileLexer from './lt/SessionFileLexer.js';
+import SessionFileParser from './lt/SessionFileParser.js';
+
+import ImportsLexer from './lt/ImportsLexer.js';
+import ImportsParser from './lt/ImportsParser.js';
 
 import type { PeriodFile, Session } from './DataTypes';
 
@@ -35,6 +38,27 @@ class CustomError extends Error {
     }
 }
 
+export function ParseImports(input: string): Array<string>{
+	var chars = new InputStream(input, true);
+	var lexer = new ImportsLexer(chars);
+	var tokens = new CommonTokenStream(lexer);
+	var parser = new ImportsParser(tokens);
+
+	parser.buildParseTrees = true;
+
+	parser.removeErrorListeners;
+	var customErrorListener = new CustomErrorListener();
+	parser.addErrorListener(customErrorListener);
+
+	var tree = parser.file();
+
+	var listener = new Imports();
+	antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
+
+	return listener.result();
+}
+
+
 export function ParseFull(input: string, importedFiles: object): PeriodFile {
 	var chars = new InputStream(input, true);
 	var lexer = new PeriodFileLexer(chars);
@@ -55,32 +79,11 @@ export function ParseFull(input: string, importedFiles: object): PeriodFile {
 	return listener.result();
 }
 
-
-export function ParseImports(input) {
-	// var chars = new InputStream(input, true);
-	// var lexer = new LTLexer(chars);
-	// var tokens = new CommonTokenStream(lexer);
-	// var parser = new LTParser(tokens);
-
-	// parser.buildParseTrees = true;
-
-	// parser.removeErrorListeners;
-	// var customErrorListener = new CustomErrorListener();
-	// parser.addErrorListener(customErrorListener);
-
-	// var tree = parser.file();
-
-	// var listener = new Imports();
-	// antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
-
-	// return listener.result();
-}
-
 export function ParseSession(input: string): Session {
 	var chars = new InputStream(input, true);
-	var lexer = new SLexer(chars);
+	var lexer = new SessionFileLexer(chars);
 	var tokens = new CommonTokenStream(lexer);
-	var parser = new SParser(tokens);
+	var parser = new SessionFileParser(tokens);
 
 	parser.buildParseTrees = true;
 
