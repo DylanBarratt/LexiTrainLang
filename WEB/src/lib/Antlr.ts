@@ -9,9 +9,12 @@ import PeriodFileParser from './lt/PeriodFileParser.js';
 import SLexer from './lt/SessionFileLexer.js';
 import SParser from './lt/SessionFileParser.js';
 
+import type { PeriodFile, Session } from './DataTypes';
+
 import PeriodListener from './PeriodListener';
 import Imports from './ImportListener';
 import SessionListener from './SessionListener';
+
 
 class CustomErrorListener extends antlr4.error.ErrorListener {
     constructor() {
@@ -32,7 +35,7 @@ class CustomError extends Error {
     }
 }
 
-export function ParseFull(input) {
+export function ParseFull(input: string, importedFiles: object): PeriodFile {
 	var chars = new InputStream(input, true);
 	var lexer = new PeriodFileLexer(chars);
 	var tokens = new CommonTokenStream(lexer);
@@ -46,7 +49,7 @@ export function ParseFull(input) {
 
 	var tree = parser.file();
 
-	var listener = new PeriodListener();
+	var listener = new PeriodListener(importedFiles);
 	antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
 
 	return listener.result();
@@ -73,22 +76,22 @@ export function ParseImports(input) {
 	// return listener.result();
 }
 
-export function ParseSession(input) {
-	// var chars = new InputStream(input, true);
-	// var lexer = new SLexer(chars);
-	// var tokens = new CommonTokenStream(lexer);
-	// var parser = new SParser(tokens);
+export function ParseSession(input: string): Session {
+	var chars = new InputStream(input, true);
+	var lexer = new SLexer(chars);
+	var tokens = new CommonTokenStream(lexer);
+	var parser = new SParser(tokens);
 
-	// parser.buildParseTrees = true;
+	parser.buildParseTrees = true;
 
-	// parser.removeErrorListeners;
-	// var customErrorListener = new CustomErrorListener();
-	// parser.addErrorListener(customErrorListener);
+	parser.removeErrorListeners;
+	var customErrorListener = new CustomErrorListener();
+	parser.addErrorListener(customErrorListener);
 
-	// var tree = parser.file();
+	var tree = parser.file();
 
-	// var listener = new SessionListener();
-	// antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
+	var listener = new SessionListener();
+	antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
 
-	// return listener.result();
+	return listener.result();
 }

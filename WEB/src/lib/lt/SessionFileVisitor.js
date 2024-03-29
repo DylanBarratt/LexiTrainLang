@@ -12,6 +12,12 @@ export default class SessionFileVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by SessionFileParser#metaDatas.
+	visitMetaDatas(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by SessionFileParser#metaData.
 	visitMetaData(ctx) {
 	  return this.visitChildren(ctx);

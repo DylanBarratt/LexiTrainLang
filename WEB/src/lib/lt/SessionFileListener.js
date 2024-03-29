@@ -14,6 +14,15 @@ export default class SessionFileListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by SessionFileParser#metaDatas.
+	enterMetaDatas(ctx) {
+	}
+
+	// Exit a parse tree produced by SessionFileParser#metaDatas.
+	exitMetaDatas(ctx) {
+	}
+
+
 	// Enter a parse tree produced by SessionFileParser#metaData.
 	enterMetaData(ctx) {
 	}

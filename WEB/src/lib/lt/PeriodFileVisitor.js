@@ -12,6 +12,12 @@ export default class PeriodFileVisitor extends antlr4.tree.ParseTreeVisitor {
 	}
 
 
+	// Visit a parse tree produced by PeriodFileParser#metaDatas.
+	visitMetaDatas(ctx) {
+	  return this.visitChildren(ctx);
+	}
+
+
 	// Visit a parse tree produced by PeriodFileParser#metaData.
 	visitMetaData(ctx) {
 	  return this.visitChildren(ctx);
@@ -50,12 +56,6 @@ export default class PeriodFileVisitor extends antlr4.tree.ParseTreeVisitor {
 
 	// Visit a parse tree produced by PeriodFileParser#imported.
 	visitImported(ctx) {
-	  return this.visitChildren(ctx);
-	}
-
-
-	// Visit a parse tree produced by PeriodFileParser#workouts.
-	visitWorkouts(ctx) {
 	  return this.visitChildren(ctx);
 	}
 

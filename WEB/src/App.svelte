@@ -1,8 +1,10 @@
 <!-- App.svelte -->
 <script lang="ts">
 import { ParseFull, ParseImports, ParseSession } from './lib/Antlr';
+import type { PeriodFile, Session } from './lib/DataTypes';
 
-let dat = `title: "chrim!bo".
+
+let periodDat = `title: "chrim!bo".
 author:"Dylan Barratt".
 
 //this is a comment!
@@ -72,11 +74,52 @@ Sun: (run) 1hr30min HRZ2 && (bike) 1hr HRZ2
 }
 }`;
 
-let fullParse = ParseFull(dat);
+let sessionDat = `title: "base".
+sport: "cycling".
+author: "Dylan Barratt".
+load: 30.
 
-console.log(fullParse.Metadata);
-console.log(fullParse.SessionImports);
-console.log(fullParse.Periods);
+warmup {
+	1hr > HRZ1
+}
+
+main {
+	5*{
+		5min HRZ5 &&
+		5min HRZ3 - HRZ4
+	} &&
+  10min HRZ1 
+} 
+
+note="cooloff after hard set!!"
+"cool down" {
+	30min < HRZ2
+}
+
+"test" {
+  30min
+}`
+
+console.log("Period:", periodDat);
+console.log("Session:", sessionDat);
+
+let sessionParse: Session;
+try {
+  sessionParse = ParseSession(sessionDat);
+  console.log("Session parse: ", sessionParse);
+
+  let fullParse: PeriodFile;
+  try {
+    fullParse = ParseFull(periodDat, {[sessionParse.Metadata.Title]: sessionParse});
+    console.log("Metadata: ", fullParse.Metadata);
+    console.log("Periods: ", fullParse.Periods);
+  } catch (e) {
+    console.error(e);
+  }
+} catch (e) {
+  console.error(e);
+}
+
 
 </script>
 

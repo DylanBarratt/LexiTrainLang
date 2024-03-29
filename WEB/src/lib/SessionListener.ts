@@ -1,3 +1,4 @@
+import { SessionMetadata, Section, WorkloadExtended, WLType, Workload, Session } from "./DataTypes";
 import SessionFileListener from "./lt/SessionFileListener";
 
 function capitalizeFirstLetter(str: string): string {
@@ -8,42 +9,8 @@ function removeSpeechMarks(str: string): string {
     return str.replace(/"/g, '');
 }
 
-function isNumber(value): boolean {
-    return !isNaN(value);
-}
-
-enum WLType {
-    LessThan = 'lt',
-    GreaterThan = 'gt',
-    Between = 'bt',
-    At = 'at',
-    None = 'none'
-}
-
-class Workload {
-    Time: string; 
-    Type: WLType;
-    Zone: string;
-};
-
-class WorkloadExtended {
-    Repeats: number;
-    Workload: Workload;
-}
-
-class Section {
-    Title: string;
-    Workloads: Array<WorkloadExtended>;
-}
-
-class Session { // the final object
-    Metadata: object; 
-    Sections: Array<Section>;
-}
-
-
 export default class SessionListener extends SessionFileListener {
-    metadata: any = {};
+    metadata: SessionMetadata = new SessionMetadata;
 
     sections: Array<Section> = [];
 
@@ -62,7 +29,33 @@ export default class SessionListener extends SessionFileListener {
     }
 
     exitMetaData(ctx) {
-        this.metadata[capitalizeFirstLetter(ctx.children[0].getText())] = removeSpeechMarks(ctx.children[2].getText());
+        switch (capitalizeFirstLetter(ctx.children[0].getText())) {
+            case "Title":
+                this.metadata.Title = removeSpeechMarks(ctx.children[2].getText());
+                break;
+            case "Author":
+                this.metadata.Author = removeSpeechMarks(ctx.children[2].getText());
+                break;
+            case "Sport":
+                this.metadata.Sport = removeSpeechMarks(ctx.children[2].getText());
+                break;
+            case "Load":
+                this.metadata.Load = removeSpeechMarks(ctx.children[2].getText());
+                break;
+            case "Note":
+                this.metadata.Note = removeSpeechMarks(ctx.children[2].getText());
+                break;
+        }
+    }
+
+    exitMetaDatas(ctx: any): void {
+        if (this.metadata.Title == null) {
+            throw new Error("Title required in session file");
+        }
+
+        if (this.metadata.Sport == null) {
+            throw new Error("Sport required in session file");
+        }
     }
 
     enterSection(ctx) {
@@ -104,6 +97,11 @@ export default class SessionListener extends SessionFileListener {
         this.wlZone = [ctx.children[0].getText(), ctx.children[2].getText()];
     }
 
+    note:string = null
+    enterNote(ctx: any): void {
+        this.note = removeSpeechMarks(ctx.WORD().getText());
+    }
+
     exitWorkload(ctx) {
         let workload: Workload = {Time: null, Type: null, Zone: null};
 
@@ -121,7 +119,16 @@ export default class SessionListener extends SessionFileListener {
         workload.Type = this.wlType;
         workload.Zone = this.wlZone;
 
-        this.workloads.push({Repeats: this.repeats, Workload: workload})
+        let wl: WorkloadExtended = new WorkloadExtended;
+        wl.Repeats = this.repeats;
+
+        wl.Notes = this.note;
+
+        this.note = null;
+
+        wl.Workload = workload;
+        
+        this.workloads.push(wl)
     }
 
     exitSectionContents() {

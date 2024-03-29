@@ -1,3 +1,4 @@
+import { Day, DayData, Period, PeriodFile, PeriodMetadata, Section, Session, WLType, Workload, WorkloadExtended } from './DataTypes.js';
 import LTListener  from './lt/PeriodFileListener.js';
 
 function capitalizeFirstLetter(str: string): string {
@@ -8,73 +9,93 @@ function removeSpeechMarks(str: string): string {
     return str.replace(/"/g, '');
 }
 
-//This is the final object
-class PeriodFile {
-    Metadata: object;
-    SessionImports: Array<string>;
-    Periods: Array<Period>;
+function isValidDate(day: string): boolean {
+    const daysOfWeek = ["mon", "tue", "wed", "thu", "fri", "sat", "sun", 
+    "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
+    const lowercaseDay = day.toLowerCase();
+    return daysOfWeek.includes(lowercaseDay);
 }
 
-class Period {
-    Title: string;
-    Days: Array<Day>;
+function isValidDateFormat(dateString: string): boolean {
+    const dateFormat = /^\d{2}\/\d{2}\/\d{4}$/;
+    return dateFormat.test(dateString);
 }
 
-class Day {
-    DayName: string; // day in period. e.g. Mon
-    Sessions: Array<DayData>;
+function stringToDate(dateString: string):Date {
+    try {
+        if (!isValidDateFormat(dateString)) {
+            throw new Error('Invalid date format (' + dateString + '). Please use the format dd/mm/yyyy.');
+        }
+
+        if (!isValidDate(dateString)) {
+            throw new Error('Invalid date name (' + dateString + ').');
+        }
+
+        const parts = dateString.split('/');
+        const day = parseInt(parts[0], 10);
+        const month = parseInt(parts[1], 10) - 1;
+        const year = parseInt(parts[2], 10);
+
+        const date = new Date(year, month, day);
+
+        if (date.getDate() !== day || date.getMonth() !== month || date.getFullYear() !== year) {
+            throw new Error('Invalid date.');
+        }
+
+        return date;
+    } catch (e) {
+        throw e;
+    }
 }
-
-class DayData {
-    Import: boolean = false;
-    ImportedName: string = null;
-    Sport: string = null;
-    Sections: Array<Section>; //this is where the workloads are stored. By default only one section
-    Notes: string = null; 
-}
-
-class Section {
-    Title: string = null;
-    Workloads: Array<WorkloadExtended>;
-}
-
-class WorkloadExtended {
-    Load: number = null;
-    Notes: string = null;
-    Workload: Workload;
-    Repeats: number = 1;
-}
-
-class Workload {
-    Time: string; 
-    Type: WLType;
-    Zone: string = null;
-};
-
-enum WLType {
-    LessThan = 'lt',
-    GreaterThan = 'gt',
-    Between = 'bt',
-    At = 'at',
-    None = 'none'
-}
-
+  
 
 export default class PeriodListener extends LTListener { 
-    constructor() {
+    private importedFiles: Object;
+
+    constructor(importedFiles: Object) {
         super();
-    }
+        this.importedFiles = importedFiles;
 
-    private metadatas: object = {};
+        console.log(this.importedFiles);
+    }
+    
+    private metadata: PeriodMetadata = new PeriodMetadata;
     exitMetaData(ctx) {
-        this.metadatas[capitalizeFirstLetter(ctx.children[0].getText())] = removeSpeechMarks(ctx.children[2].getText());
+        this.metadata[capitalizeFirstLetter(ctx.children[0].getText())] = removeSpeechMarks(ctx.children[2].getText());
+    
+        switch (capitalizeFirstLetter(ctx.children[0].getText())) {
+            case "Title":
+                this.metadata.Title = removeSpeechMarks(ctx.children[2].getText());
+                break;
+            case "Author":
+                this.metadata.Author = removeSpeechMarks(ctx.children[2].getText());
+                break;
+            case "Date":
+                this.metadata.Date = stringToDate(ctx.children[2].getText());
+                break;
+            case "Start_date":
+                this.metadata.Start_Date = stringToDate(ctx.children[2].getText());
+                break;
+            case "End_date":
+                this.metadata.End_Date = stringToDate(ctx.children[2].getText());
+                break;
+        }
+
+        if (this.metadata.Title == null) {
+            throw new Error("Title required in session file");
+        }
     }
 
-    private sessionImports: Array<string> = [];
-    exitSessionImport(ctx) {
-        this.sessionImports.push(removeSpeechMarks(ctx.children[1].getText()));
-    }
 
+    exitMetaDatas(ctx: any): void {
+        if (this.metadata.Title == null) {
+            throw new Error("Title required in session file");
+        }
+
+        if (this.metadata.Start_Date != null && this.metadata.End_Date != null) {
+            throw new Error("Both start date and end date not supported");
+        }
+    }
 
     private periods: Array<Period> = []
     private currPeriod: number = 0;
@@ -109,9 +130,17 @@ export default class PeriodListener extends LTListener {
     enterImported(ctx: any): void {
         let session: DayData = new DayData;
 
-        session.Import = true;
-        session.Sections = null;
-        session.ImportedName = ctx.IMPORTED().getText().replace(/\[|\]/g, '');
+        let importName: string = ctx.IMPORTED().getText().replace(/\[|\]/g, '');
+
+        if (typeof this.importedFiles[importName] === 'undefined') {
+            throw new Error(importName + " not imported")
+        }
+
+        let importedFile: Session = this.importedFiles[importName];
+
+        session.Sections = importedFile.Sections;
+        session.Sport = importedFile.Metadata.Sport;
+        session.Notes = importedFile.Metadata.Note;
 
         this.sessions.push(session);
     }
@@ -166,7 +195,6 @@ export default class PeriodListener extends LTListener {
         this.curWl.Zone = this.wlZone;
     }
 
-
     exitWorkloadL(ctx: any): void {
         let wlL = new WorkloadExtended;
         
@@ -190,7 +218,6 @@ export default class PeriodListener extends LTListener {
     exitWorkout(ctx: any): void {
         let session: DayData = new DayData;
 
-        session.Import = false;
         session.Sport = removeSpeechMarks(ctx.SPORT().getText());
 
         session.Sections = [];
@@ -263,6 +290,6 @@ export default class PeriodListener extends LTListener {
     }
 
     public result():PeriodFile {
-        return {Metadata: this.metadatas, SessionImports: this.sessionImports, Periods: this.periods};
+        return {Metadata: this.metadata, Periods: this.periods};
     }
 }
