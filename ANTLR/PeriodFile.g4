@@ -23,16 +23,12 @@ day
 
 dayData
     : imported //imported
-    | workouts //single line session
+    | workout //single line session
     | session //inline session
     | NOTES WORD
     ;
 
 imported: IMPORTED;
-
-workouts //single line session
-    : workout ('&&' workout)*
-    ;
 
 workout: SPORT workloadL;
 
