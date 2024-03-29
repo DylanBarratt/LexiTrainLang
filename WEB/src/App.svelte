@@ -12,8 +12,8 @@ author:"Dylan Barratt".
 import base.
 
 "week 1" {
-Mon: (bike) 1hr HRZ1 note="cool bike yo",
-Tue: {
+(bike) 1hr HRZ1 note="cool bike yo",
+{
       (run)
       "warmup" {60min HRZ1 - HRZ2}
 
@@ -26,7 +26,7 @@ Tue: {
           60min HRZ1 - HRZ2
       }
   },
-Wed: (run) 1hr hrz2,
+(run) 1hr hrz2,
 Thu: (bike) 1hr HRZ2&&(run) 1hr HRZ2,
 Fri: [base],
 Sat: [base] && (run) 1hr30min HRZ2

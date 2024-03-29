@@ -56,7 +56,7 @@ export class Period {
 }
 
 export class Day {
-    DayName: string; // day in period. e.g. Mon
+    DayName: string = null; // day in period. e.g. Mon
     Sessions: Array<DayData>;
 }
 

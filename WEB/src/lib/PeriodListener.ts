@@ -257,6 +257,8 @@ export default class PeriodListener extends LTListener {
         session.Sport = ctx.children[1].getText();
         session.Sections = this.sessionSections;
 
+        this.sessions.push(session);
+
         this.sessionSections = [];
     }
 
