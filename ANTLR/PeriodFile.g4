@@ -3,8 +3,9 @@ grammar PeriodFile;
 import BaseLexer;
 
 //parser rules
-file:(metaData)* (sessionImport)* periods EOF;
+file: metaDatas (sessionImport)* periods EOF;
 
+metaDatas: (metaData)*;
 metaData: WORD ':' (WORD|NUM) '.';
 
 sessionImport: IMPORT WORD '.';

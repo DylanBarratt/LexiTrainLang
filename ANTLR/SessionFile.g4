@@ -3,8 +3,9 @@ grammar SessionFile;
 import BaseLexer;
 
 //Parser rules
-file: (metaData)+ (section)+;
+file: metaDatas (section)+;
 
+metaDatas: (metaData)+;
 metaData: WORD ':' (WORD|NUM) '.';
 
 section: WORD '{'sectionContents'}' note?; 

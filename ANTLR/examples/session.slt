@@ -13,8 +13,9 @@ main {
 		5min HRZ3 - HRZ4
 	} &&
   10min HRZ1 
-} note="cooloff after hard set!!"
+} 
 
+note="cooloff after hard set!!"
 "cool down" {
 	30min < HRZ2
 }
