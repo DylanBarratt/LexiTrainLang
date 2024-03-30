@@ -1,3 +1,54 @@
+export class Session { // the final object for session listener
+    Metadata: SessionMetadata; 
+    Sections: Array<Section>;
+}
+
+export class SessionMetadata {
+    Title: string = null;
+    Author: string = null;
+    Sport: string = null;
+    Load: string = null;
+    Note: string = null;
+}
+
+
+
+
+export class PeriodFile { //This is the final object for period listener
+    Metadata: PeriodMetadata;
+    Periods: Array<Period>;
+}
+
+export class PeriodMetadata {
+    Title: string = null;
+    Author: string = null;
+    Date: Date = null;
+    Start_Date: Date = null;
+    End_Date: Date = null;
+}
+
+export class Period {
+    Title: string;
+    Days: Array<Day>;
+}
+
+export class Day {
+    DayName: string = null; // day in period. e.g. Mon
+    Sessions: Array<DayData>;
+}
+
+export class DayData {
+    Sport: string = null;
+    Sections: Array<Section>; //this is where the workloads are stored. By default only one section
+    Notes: string = null; 
+}
+
+export class Section {
+    Title: string = null;
+    Workloads: Array<WorkloadExtended>;
+}
+
+
 export enum WLType {
     LessThan = 'lt',
     GreaterThan = 'gt',
@@ -19,52 +70,7 @@ export class Workload {
     Zone: string = null;
 };
 
-export class Section {
-    Title: string = null;
-    Workloads: Array<WorkloadExtended>;
-}
 
-export class Session { // the final object for session listener
-    Metadata: SessionMetadata; 
-    Sections: Array<Section>;
-}
-
-export class SessionMetadata {
-    Title: string = null;
-    Author: string = null;
-    Sport: string = null;
-    Load: string = null;
-    Note: string = null;
-}
-
-export class PeriodMetadata {
-    Title: string = null;
-    Author: string = null;
-    Date: Date = null;
-    Start_Date: Date = null;
-    End_Date: Date = null;
-}
-
-export class PeriodFile { //This is the final object for period listener
-    Metadata: PeriodMetadata;
-    Periods: Array<Period>;
-}
-
-export class Period {
-    Title: string;
-    Days: Array<Day>;
-}
-
-export class Day {
-    DayName: string = null; // day in period. e.g. Mon
-    Sessions: Array<DayData>;
-}
-
-export class DayData {
-    Sport: string = null;
-    Sections: Array<Section>; //this is where the workloads are stored. By default only one section
-    Notes: string = null; 
-}
 
 
 export class FileUploadOut {
@@ -75,4 +81,14 @@ export class FileUploadOut {
 export class FileString {
     Name: string;
     FileContents: string;
+}
+
+
+
+//todo the title of periods is ignored, if not used can be removed from data
+// maybe store it as a note?
+export class DayFinal {
+    Date: Date;
+    Sessions: Array<DayData>;
+    Dated: boolean = false; // false for undated (not given a specific day in the week)
 }

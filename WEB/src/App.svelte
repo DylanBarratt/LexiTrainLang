@@ -5,11 +5,11 @@ import SessionUpload from './components/SessionUpload.svelte';
 
 import { ParseFull, ParseImports, ParseSession } from './lib/Antlr';
 import type { FileString, PeriodFile, Session } from './lib/DataTypes';
+  import { flattenPeriods } from './lib/DateData';
 
 let ideText: string;
 let requiredImports: Array<string> = [];
 let unparsedSessionFiles: object = {};
-let parsedSessionFiles: object = {};
 
 function getRequiredImports(periodInp: string): Array<string> {
   try {
@@ -20,14 +20,16 @@ function getRequiredImports(periodInp: string): Array<string> {
 }
 
 //abbrv to remove confusion with variable of similar name - Dyaln
-function parseSFS() {
+function parseSFS(): object {
+  let parsedSessionFiles: object = {};
+
   Object.entries(unparsedSessionFiles).forEach(([key, value]) => {
     let s: Session = parseSF(value);
     parsedSessionFiles[s.Metadata.Title] = s;
   });
-
-  console.log(parsedSessionFiles);
+  return parsedSessionFiles;
 }
+
 
 //abbrv to remove confusion with variable of similar name - Dyaln
 function parseSF(sessionInp: string): Session {
@@ -47,7 +49,7 @@ function parseFullPeriod(periodInp: string, sessions: Object): PeriodFile {
   }
 }
 
-function updateIdeText(textareaData) {
+function updateIdeText(textareaData: CustomEvent<string>) {
   ideText = textareaData.detail;
 
   requiredImports = getRequiredImports(ideText);
@@ -65,7 +67,16 @@ function removeOldSessionFile(event: CustomEvent<string>) {
   }
 }
 
+function parseAll() {
+  let parsedSessions = parseSFS();
 
+  let parsedPeriodFile: PeriodFile = parseFullPeriod(ideText, parsedSessions);
+
+  //todo: process metadata
+  //todo: flatten periods
+  console.log(flattenPeriods(parsedPeriodFile));
+  
+}
 </script>
 
 <main>
@@ -80,6 +91,6 @@ function removeOldSessionFile(event: CustomEvent<string>) {
         on:RemoveOldName={removeOldSessionFile}/>
     {/each}
 
-    <button type="submit" on:click={parseSFS}>Parse all!</button>
+    <button type="submit" on:click={parseAll}>Parse all!</button>
   {/if}
 </main>

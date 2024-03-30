@@ -9,6 +9,14 @@ function removeSpeechMarks(str: string): string {
     return str.replace(/"/g, '');
 }
 
+function removeBrackets(str: string): string {
+    return str.replace(/[()]/g, '');
+}
+
+function removeBoth(str: string): string {
+    return removeSpeechMarks(removeBrackets(str));
+}
+
 function isValidDate(day: string): boolean {
     const daysOfWeek = ["mon", "tue", "wed", "thu", "fri", "sat", "sun", 
     "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
@@ -218,7 +226,7 @@ export default class PeriodListener extends LTListener {
     exitWorkout(ctx: any): void {
         let session: DayData = new DayData;
 
-        session.Sport = removeSpeechMarks(ctx.SPORT().getText());
+        session.Sport = removeBoth(ctx.SPORT().getText());
 
         session.Sections = [];
         let section: Section = new Section;
@@ -254,7 +262,7 @@ export default class PeriodListener extends LTListener {
     exitSession(ctx: any): void {
         let session: DayData = new DayData;
 
-        session.Sport = ctx.children[1].getText();
+        session.Sport = removeBoth(ctx.children[1].getText());
         session.Sections = this.sessionSections;
 
         this.sessions.push(session);
