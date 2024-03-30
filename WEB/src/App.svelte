@@ -1,15 +1,17 @@
 <!-- App.svelte -->
 <script lang="ts">
+import Calendar from './components/Calendar.svelte';
 import Ide from './components/IDE.svelte';
 import SessionUpload from './components/SessionUpload.svelte';
 
 import { ParseFull, ParseImports, ParseSession } from './lib/Antlr';
-import type { FileString, PeriodFile, Session } from './lib/DataTypes';
-  import { flattenPeriods } from './lib/DateData';
+import type { DayFinal, FileString, PeriodFile, Session } from './lib/DataTypes';
+import { flattenPeriods } from './lib/DateData';
 
 let ideText: string;
 let requiredImports: Array<string> = [];
 let unparsedSessionFiles: object = {};
+let days: Array<DayFinal> = [];
 
 function getRequiredImports(periodInp: string): Array<string> {
   try {
@@ -73,9 +75,7 @@ function parseAll() {
   let parsedPeriodFile: PeriodFile = parseFullPeriod(ideText, parsedSessions);
 
   //todo: process metadata
-  //todo: flatten periods
-  console.log(flattenPeriods(parsedPeriodFile));
-  
+  days = flattenPeriods(parsedPeriodFile);
 }
 </script>
 
@@ -92,5 +92,9 @@ function parseAll() {
     {/each}
 
     <button type="submit" on:click={parseAll}>Parse all!</button>
+  {/if}
+
+  {#if days.length > 0}
+    <Calendar Days={days} />
   {/if}
 </main>
