@@ -6,7 +6,7 @@ export class Session { // the final object for session listener
 export class SessionMetadata {
     Title: string = null;
     Author: string = null;
-    Sport: string = null;
+    Sport: ValidSport;
     Load: string = null;
     Note: string = null;
 }
@@ -38,7 +38,7 @@ export class Day {
 }
 
 export class DayData {
-    Sport: string = null;
+    Sport: ValidSport = null;
     Sections: Array<Section>; //this is where the workloads are stored. By default only one section
     Notes: string = null; 
 }
@@ -69,6 +69,16 @@ export class Workload {
     Type: WLType;
     Zone: string = null;
 };
+
+export enum ValidSport {
+    Swimming = "fa-solid fa-person-swimming",
+    Cycling = "fa-solid fa-person-biking",
+    Running = "fa-solid fa-person-running",
+    Walking = "fa-solid fa-person-walking",
+    Gym = "fa-solid fa-dumbbell",
+    Other = "fa-solid fa-question",
+    Note = "fa-solid fa-note-sticky"
+}
 
 
 

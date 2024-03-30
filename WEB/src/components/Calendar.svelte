@@ -1,33 +1,32 @@
 <script lang="ts">
+import { afterUpdate } from 'svelte';
 import type { DayFinal } from "../lib/DataTypes";
 import Day from "./Day.svelte";
 
-export let Days: Array<DayFinal>;
+export let days: Array<DayFinal>;
 
-let currentDate : Date = new Date();
+let currentMonth : Date = getFirstDayOfMonth(new Date());
 let monthArr: Array<DayFinal> = [];
 
 function prevMonth() {
-  currentDate.setMonth(currentDate.getMonth() - 1);
+  currentMonth.setMonth(currentMonth.getMonth() - 1);
   resetDate();
 }
 
 function nextMonth() {
-  currentDate.setMonth(currentDate.getMonth() + 1);
+  currentMonth.setMonth(currentMonth.getMonth() + 1);
   resetDate();
 }
 
-function currentMonth() {
-  let d = new Date();
-  currentDate.setMonth(d.getMonth());
+function gotoCurrentMonth() {
+  currentMonth.setMonth(new Date().getMonth());
   resetDate();
 }
 
 function resetDate() {
-  console.log(currentDate);
+  currentMonth = currentMonth;
   
-  currentDate = new Date(currentDate);
-  populateCalendarData();
+  monthArr = [];
 }
 
 function getDaysInMonth(date: Date): number {
@@ -76,10 +75,6 @@ function getDateOutdent(date: Date): number {
   return 7 - lastDayOfMonth.getDay();
 }
 
-function findByKey(array: Array<any>, key: any, value: any): any {
-  return array.find(item => item[key] === value);
-}
-
 //can add or subtract days from date
 function getNextDay(currDate: Date, previousAmnt: number): Date {
   let previousDate = new Date(currDate);
@@ -87,35 +82,66 @@ function getNextDay(currDate: Date, previousAmnt: number): Date {
   return previousDate;
 }
 
-function dateEquals(date1: Date, date2: Date): boolean {
-  return (
-    date1.getDay() == date2.getDay() && 
-    date1.getMonth() == date2.getMonth() && 
-    date1.getFullYear() == date2.getFullYear()
-  );
+function filterDataByDate(targetDate: Date) {
+  let filteredData = days.filter(item => {
+    let itemDate = new Date(item.Date);
+    // Extract year, month, and day from the target date and the item's date
+    let targetYear = targetDate.getFullYear();
+    let targetMonth = targetDate.getMonth();
+    let targetDay = targetDate.getDate();
+
+    let itemYear = itemDate.getFullYear();
+    let itemMonth = itemDate.getMonth();
+    let itemDay = itemDate.getDate();
+
+    // Compare year, month, and day
+    return targetYear === itemYear && targetMonth === itemMonth && targetDay === itemDay;
+  });
+
+  // Return null if no matching item is found
+  return filteredData.length > 0 ? filteredData : null;
 }
 
-function populateCalendarData(){
+function populateCalendarData() {
   monthArr = [];
-  //todo delete
-  console.log("indent", getDateIndent(currentDate));
-  console.log("outdent", getDateOutdent(currentDate));
-  console.log("length", getDateIndent(currentDate) + getDaysInMonth(currentDate) + getDateOutdent(currentDate));
-  console.log("current date", currentDate);
+  // console.log("indent", getDateIndent(currentMonth));
+  // console.log("outdent", getDateOutdent(currentMonth));
+  // console.log("length", getDateIndent(currentMonth) + getDaysInMonth(currentMonth) + getDateOutdent(currentMonth));
+  // console.log("current date", currentMonth);
   
-  let startDate = new Date(getNextDay(getFirstDayOfMonth(currentDate), -getDateIndent(currentDate)));
-
-  console.log("start date: ", startDate);
+  let dateI = new Date();
+  dateI = getNextDay(currentMonth, -getDateIndent(currentMonth));
   
+  // find first date from data in this month (if any)
+  // all other dates are just imcrement from that one.
+  for (let i = 0; i < getDateIndent(currentMonth) + getDaysInMonth(currentMonth) + getDateOutdent(currentMonth); i++) {
+    let found = filterDataByDate(dateI);
 
-  for (let i = 0; i < getDateIndent(currentDate) + getDaysInMonth(currentDate) + getDateOutdent(currentDate); i++) {
-    monthArr.push(Days.find((day: DayFinal) => dateEquals(day.Date, startDate)));
-    startDate = getNextDay(startDate, 1);
+    if (found == null) {
+      monthArr.push(null);
+    } else {
+      found.forEach(day => {
+      monthArr.push(day); 
+    });
+    }
+
+    dateI = getNextDay(dateI, 1);
   }
 
-  console.log(monthArr);
+  monthArr = monthArr; 
 }
 
+function getDayNum(index: number): number {
+  if (index + 1 - getDateIndent(currentMonth) < 1) {
+    return getNextDay(currentMonth, index - getDateIndent(currentMonth)).getDate();
+  } else if (index + 1 - getDateIndent(currentMonth) > getDaysInMonth(currentMonth)) {
+    return index + 1 - getDateIndent(currentMonth) - getDaysInMonth(currentMonth);
+  } else {
+    return index + 1 - getDateIndent(currentMonth);
+  }
+}
+
+afterUpdate(populateCalendarData);
 </script>
 
 <style>
@@ -145,10 +171,10 @@ function populateCalendarData(){
 
 <div class="calendar">
   <div class="header">
-    <div class="month-year">{currentDate.toLocaleString('default', { month: 'long' })} {currentDate.getFullYear()}</div>
+    <div class="month-year">{currentMonth.toLocaleString('default', { month: 'long' })} {currentMonth.getFullYear()}</div>
     <button on:click={prevMonth}>&lt;</button>
     <button on:click={nextMonth}>&gt;</button>
-    <button on:click={currentMonth}>Current Month</button>
+    <button on:click={gotoCurrentMonth}>Current Month</button>
   </div>
 
   {#if monthArr.length > 0}
@@ -159,11 +185,13 @@ function populateCalendarData(){
     </div>
     <div class="dayContainer grid">  
       {#each monthArr as day, i}
-        {#if ((i + 1) - getDateIndent(currentDate)) < 1}
-          <Day dayNum={getNextDay(getFirstDayOfMonth(currentDate), i - getDateIndent(currentDate)).getDate()} />
+        {#if day != null && !day.Dated}
+          <!-- todo undated days go here -->
+          <Day dayNum={getDayNum(i)} dayData={null}/>
         {:else}
-          <Day dayNum={((i + 1) - getDateIndent(currentDate))} />
+          <Day dayNum={getDayNum(i)} dayData={day}/>
         {/if}
+        
       {/each}
     </div>
   {/if}

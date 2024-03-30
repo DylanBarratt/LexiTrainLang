@@ -1,13 +1,6 @@
 import { SessionMetadata, Section, WorkloadExtended, WLType, Workload, Session } from "./DataTypes";
+import { removeSpeechMarks, capitalizeFirstLetter, sportStringToValidSport } from "./HelperFunctions";
 import SessionFileListener from "./lt/SessionFileListener";
-
-function capitalizeFirstLetter(str: string): string {
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-}   
-
-function removeSpeechMarks(str: string): string {
-    return str.replace(/"/g, '');
-}
 
 export default class SessionListener extends SessionFileListener {
     metadata: SessionMetadata = new SessionMetadata;
@@ -37,7 +30,7 @@ export default class SessionListener extends SessionFileListener {
                 this.metadata.Author = removeSpeechMarks(ctx.children[2].getText());
                 break;
             case "Sport":
-                this.metadata.Sport = removeSpeechMarks(ctx.children[2].getText());
+                this.metadata.Sport = sportStringToValidSport(ctx.children[2].getText());
                 break;
             case "Load":
                 this.metadata.Load = removeSpeechMarks(ctx.children[2].getText());

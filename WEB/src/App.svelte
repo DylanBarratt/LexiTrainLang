@@ -6,7 +6,7 @@ import SessionUpload from './components/SessionUpload.svelte';
 
 import { ParseFull, ParseImports, ParseSession } from './lib/Antlr';
 import type { DayFinal, FileString, PeriodFile, Session } from './lib/DataTypes';
-import { flattenPeriods } from './lib/DateData';
+import { flattenPeriods } from './lib/HelperFunctions';
 
 let ideText: string;
 let requiredImports: Array<string> = [];
@@ -18,6 +18,7 @@ function getRequiredImports(periodInp: string): Array<string> {
     return ParseImports(periodInp);
   } catch (e) {
     console.error(e);
+    return;
   }
 }
 
@@ -39,6 +40,7 @@ function parseSF(sessionInp: string): Session {
     return ParseSession(sessionInp);
   } catch (e) {
     console.error(e);
+    return;
   }
 }
 
@@ -48,6 +50,7 @@ function parseFullPeriod(periodInp: string, sessions: Object): PeriodFile {
     return ParseFull(periodInp, sessions);
   } catch (e) {
     console.error(e);
+    return;
   }
 }
 
@@ -70,12 +73,23 @@ function removeOldSessionFile(event: CustomEvent<string>) {
 }
 
 function parseAll() {
-  let parsedSessions = parseSFS();
+  let parsedSessions: object = null;
+  let parsedPeriodFile: PeriodFile = null;
 
-  let parsedPeriodFile: PeriodFile = parseFullPeriod(ideText, parsedSessions);
+  try {
+    parsedSessions = parseSFS();
+    parsedPeriodFile = parseFullPeriod(ideText, parsedSessions);
+    days = flattenPeriods(parsedPeriodFile);
+  } catch (e) {
+    return;
+  }
+
+  // console.log("Parsed Sessions", parsedSessions);
+  // console.log("Parsed Period file uo", parsedPeriodFile);
+  // console.log("Days", days);
+  
 
   //todo: process metadata
-  days = flattenPeriods(parsedPeriodFile);
 }
 </script>
 
@@ -95,6 +109,6 @@ function parseAll() {
   {/if}
 
   {#if days.length > 0}
-    <Calendar Days={days} />
+    <Calendar {days} />
   {/if}
 </main>

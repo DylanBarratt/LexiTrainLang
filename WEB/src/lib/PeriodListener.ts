@@ -1,74 +1,16 @@
-import { Day, DayData, Period, PeriodFile, PeriodMetadata, Section, Session, WLType, Workload, WorkloadExtended } from './DataTypes.js';
+import { Day, DayData, Period, PeriodFile, PeriodMetadata, Section, Session, WLType, Workload, WorkloadExtended } from './DataTypes';
+import { capitalizeFirstLetter, removeSpeechMarks, stringToDate, sportStringToValidSport } from './HelperFunctions';
 import LTListener  from './lt/PeriodFileListener.js';
-
-function capitalizeFirstLetter(str: string): string {
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-}   
-
-function removeSpeechMarks(str: string): string {
-    return str.replace(/"/g, '');
-}
-
-function removeBrackets(str: string): string {
-    return str.replace(/[()]/g, '');
-}
-
-function removeBoth(str: string): string {
-    return removeSpeechMarks(removeBrackets(str));
-}
-
-function isValidDate(day: string): boolean {
-    const daysOfWeek = ["mon", "tue", "wed", "thu", "fri", "sat", "sun", 
-    "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
-    const lowercaseDay = day.toLowerCase();
-    return daysOfWeek.includes(lowercaseDay);
-}
-
-function isValidDateFormat(dateString: string): boolean {
-    const dateFormat = /^\d{2}\/\d{2}\/\d{4}$/;
-    return dateFormat.test(dateString);
-}
-
-function stringToDate(dateString: string):Date {
-    try {
-        if (!isValidDateFormat(dateString)) {
-            throw new Error('Invalid date format (' + dateString + '). Please use the format dd/mm/yyyy.');
-        }
-
-        if (!isValidDate(dateString)) {
-            throw new Error('Invalid date name (' + dateString + ').');
-        }
-
-        const parts = dateString.split('/');
-        const day = parseInt(parts[0], 10);
-        const month = parseInt(parts[1], 10) - 1;
-        const year = parseInt(parts[2], 10);
-
-        const date = new Date(year, month, day);
-
-        if (date.getDate() !== day || date.getMonth() !== month || date.getFullYear() !== year) {
-            throw new Error('Invalid date.');
-        }
-
-        return date;
-    } catch (e) {
-        throw e;
-    }
-}
-  
-
 export default class PeriodListener extends LTListener { 
     private importedFiles: Object;
 
     constructor(importedFiles: Object) {
         super();
         this.importedFiles = importedFiles;
-
-        console.log(this.importedFiles);
     }
     
     private metadata: PeriodMetadata = new PeriodMetadata;
-    exitMetaData(ctx) {
+    exitMetaData(ctx: any) {
         this.metadata[capitalizeFirstLetter(ctx.children[0].getText())] = removeSpeechMarks(ctx.children[2].getText());
     
         switch (capitalizeFirstLetter(ctx.children[0].getText())) {
@@ -116,6 +58,7 @@ export default class PeriodListener extends LTListener {
 
     private currDay: Day;
     private repeats: number = 0;
+    private sessions: Array<DayData>
     enterDay(ctx: any): void {
         this.currDay = new Day;
 
@@ -127,10 +70,7 @@ export default class PeriodListener extends LTListener {
         } else {
             this.repeats = 0;
         }
-    }
 
-    private sessions: Array<DayData>
-    enterDayData(ctx: any): void {
         this.sessions = [];
     }
 
@@ -215,7 +155,7 @@ export default class PeriodListener extends LTListener {
         if (ctx.WORD()) {
             wlL.Notes = ctx.WORD().getText();
         }
-
+        
         if (this.sessionSectionRepeats) {
             wlL.Repeats = this.sessionSectionRepeats;
         }
@@ -226,7 +166,7 @@ export default class PeriodListener extends LTListener {
     exitWorkout(ctx: any): void {
         let session: DayData = new DayData;
 
-        session.Sport = removeBoth(ctx.SPORT().getText());
+        session.Sport = sportStringToValidSport(ctx.SPORT().getText());
 
         session.Sections = [];
         let section: Section = new Section;
@@ -262,7 +202,7 @@ export default class PeriodListener extends LTListener {
     exitSession(ctx: any): void {
         let session: DayData = new DayData;
 
-        session.Sport = removeBoth(ctx.children[1].getText());
+        session.Sport = sportStringToValidSport(ctx.children[1].getText());
         session.Sections = this.sessionSections;
 
         this.sessions.push(session);

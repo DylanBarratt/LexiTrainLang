@@ -24,7 +24,7 @@ import base.
             60min HRZ1 - HRZ2
         }
     },
-	Wed: (run) 1hr hrz2,
+	Wed: (swim) 1hr hrz2,
 	Thu: (bike) 1hr HRZ2&&(run) 1hr HRZ2,
 	Fri: [base],
 	Sat: [base] && (run) 1hr30min HRZ2
