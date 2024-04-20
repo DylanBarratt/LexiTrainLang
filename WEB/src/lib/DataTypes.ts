@@ -135,3 +135,8 @@ export class DayFinal {
     Sessions: Array<DayData>;
     Dated: boolean = false; // false for undated (not given a specific day in the week)
 }
+
+export class ExtraDay {
+    Sessions: Array<DayData>;
+    Period: number;
+}

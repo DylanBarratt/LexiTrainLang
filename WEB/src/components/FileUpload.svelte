@@ -22,8 +22,6 @@ function handleFileUpload(event) {
     // Check file extension
     const allowedExtensions = fileExtensions;
     const fileExtension = '.' + selectedFile.name.split('.').pop().toLowerCase();
-
-    console.log(fileExtension, allowedExtensions[0]);
     
     if (!allowedExtensions.includes(fileExtension)) {
         errorMessage = 'Invalid file type. Please select a ' + fileExtensions + ' file.';

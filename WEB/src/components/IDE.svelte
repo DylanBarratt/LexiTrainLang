@@ -50,7 +50,7 @@ function btnSubmit() {
   if (changePeriodUpload) {
     dispatch('textSubmitted', textareaData);
   } else {
-    dispatch('textSubmitted', textareaData);
+    dispatch('textSubmitted', uploadedFile);
   }
 }
 

@@ -38,10 +38,6 @@ export default class PeriodListener extends LTListener {
 
 
     exitMetaDatas(ctx: any): void {
-        if (this.metadata.Title == null) {
-            throw new Error("Title required in session file");
-        }
-
         if (this.metadata.Start_Date != null && this.metadata.End_Date != null) {
             throw new Error("Both start date and end date not supported");
         }
@@ -225,20 +221,26 @@ export default class PeriodListener extends LTListener {
         this.sessions.push(session);
     }
 
-    exitDayData(ctx: any): void {
-        if (this.repeats > 0) {
-            let repeat: DayData = this.sessions[this.sessions.length - 1];
+    // exitDayData(ctx: any): void {
+    //     if (this.repeats > 0) {
+    //         let repeat: DayData = this.sessions[this.sessions.length - 1];
 
-            for (let i = 0; i < this.repeats - 1; i++) {
-                this.sessions.push(repeat);
-            }
-        }
-    }
+    //         for (let i = 0; i < this.repeats - 1; i++) {
+    //             this.sessions.push(repeat);
+    //         }
+    //     }
+    // }
     
     exitDay(ctx: any): void {
         this.currDay.Sessions = this.sessions;
 
         this.periods[this.currPeriod].Days.push(this.currDay);
+        
+        if (this.repeats > 0) {
+            for (let i = 0; i < this.repeats - 1; i++) {
+                this.periods[this.currPeriod].Days.push(this.currDay)
+            }
+        }
 
         this.currDay = null;
     }

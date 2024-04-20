@@ -1,18 +1,19 @@
 <!-- App.svelte -->
 <script lang="ts">
 import Calendar from './components/Calendar.svelte';
-import FileUpload from './components/FileUpload.svelte';
+import Error from './components/Error.svelte';
 import Ide from './components/IDE.svelte';
 import SessionUpload from './components/SessionUpload.svelte';
 
 import { ParseFull, ParseImports, ParseSession } from './lib/Antlr';
-import type { DayFinal, FileString, PeriodFile, Session } from './lib/DataTypes';
+import type { Day, DayFinal, ExtraDay, FileString, PeriodFile, Session } from './lib/DataTypes';
 import { flattenPeriods } from './lib/HelperFunctions';
 
-let ideText: string;
+let periodInp: string;
 let requiredImports: Array<string> = [];
 let unparsedSessionFiles: object = {};
 let days: Array<DayFinal> = [];
+let extraDays: Array<ExtraDay> = [];
 
 function getRequiredImports(periodInp: string): Array<string> {
   try {
@@ -56,10 +57,13 @@ function parseFullPeriod(periodInp: string, sessions: Object): PeriodFile {
   }
 }
 
-function updateIdeText(textareaData: CustomEvent<string>) {
-  ideText = textareaData.detail;
+function updateIdeText(dat: CustomEvent<string>) {
+  periodInp = dat.detail;
+  requiredImports = getRequiredImports(periodInp);
 
-  requiredImports = getRequiredImports(ideText);
+  if (requiredImports.length == 0) {
+    parseAll();
+  }
 }
 
 function sessionFileProcessed(event: CustomEvent<FileString>) {  
@@ -80,8 +84,9 @@ function parseAll() {
 
   try {
     parsedSessions = parseSFS();
-    parsedPeriodFile = parseFullPeriod(ideText, parsedSessions);
-    days = flattenPeriods(parsedPeriodFile);
+    parsedPeriodFile = parseFullPeriod(periodInp, parsedSessions);
+    days = flattenPeriods(parsedPeriodFile)[0];
+    extraDays = flattenPeriods(parsedPeriodFile)[1];
   } catch (e) {
     return;
   }
@@ -90,28 +95,31 @@ function parseAll() {
   console.log("Parsed Sessions", parsedSessions);
   console.log("Parsed Period file uo", parsedPeriodFile);
   console.log("Days", days);
+  console.log("Extra Days", extraDays);
 
   //todo: process metadata
 }
 </script>
 
 <main>
-  <h1>Enter ur training</h1>
+<Error>
+<h1>Enter ur training</h1>
 
-  <Ide on:textSubmitted={updateIdeText} />
-  
-  {#if requiredImports.length > 0}
-    {#each requiredImports as importName}
-      <SessionUpload 
-        fileNeeded={importName} 
-        on:FileProccessed={sessionFileProcessed}
-        on:RemoveOldName={removeOldSessionFile}/>
-    {/each}
+<Ide on:textSubmitted={updateIdeText} />
 
-    <button type="submit" on:click={parseAll}>Parse all!</button>
-  {/if}
+{#if requiredImports.length > 0}
+  {#each requiredImports as importName}
+    <SessionUpload 
+      fileNeeded={importName} 
+      on:FileProccessed={sessionFileProcessed}
+      on:RemoveOldName={removeOldSessionFile}/>
+  {/each}
 
-  {#if days.length > 0}
-    <Calendar {days} />
-  {/if}
+  <button type="submit" on:click={parseAll}>Parse all!</button>
+{/if}
+
+{#if days.length > 0 || extraDays.length > 0}
+  <Calendar {days} />
+{/if}
+</Error>
 </main>

@@ -1,11 +1,11 @@
 "week 1" {
     5*{
-        (run) base 
+        (run) 1hr HRZ2 
     }
 }
 
 "week 2" {
     5*{
-        (run) base && (bike) base
+        (run) 1hr HRZ2  && (bike) 1hr HRZ2 
     }
 }

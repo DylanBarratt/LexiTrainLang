@@ -1,4 +1,4 @@
-import { DayFinal, type Day, type Period, type PeriodFile, ValidSport, IntensityZone } from "./DataTypes";
+import { DayFinal, type Day, type Period, type PeriodFile, ValidSport, IntensityZone, ExtraDay } from "./DataTypes";
 
 function dayNameToIndex(dayName: string): number {
     // Convert the day name to lowercase for case insensitivity
@@ -21,6 +21,7 @@ function dayNameToIndex(dayName: string): number {
 
 function daysToWeek(days: Array<Day>): Array<Day> {
     var fullWeek: Array<Day> = Array(7).fill(null);
+    var extraI = 7;
     days.forEach((day: Day) => {
         switch (day.DayName) {
             case "Mon":
@@ -45,6 +46,8 @@ function daysToWeek(days: Array<Day>): Array<Day> {
                 fullWeek[6] = day
                 break;
             default:
+                fullWeek[extraI] = day
+                extraI++;
                 break;
         }
     });
@@ -52,13 +55,16 @@ function daysToWeek(days: Array<Day>): Array<Day> {
     return fullWeek;
 }
 
-//I don't like this function... feels messy - Dylan
+// I don't like this function... feels messy - Dylan
 // flatten periods in a period file
-export function flattenPeriods(periodFile: PeriodFile): Array<DayFinal> {
+export function flattenPeriods(periodFile: PeriodFile): [Array<DayFinal>, Array<ExtraDay>] {
     let combinedDaysRaw: Array<Day | null> = [];
-    let daysUntilFirst: number = 0;
+    let extraDays: Array<ExtraDay> = [];
+
+    let daysUntilFirst: number = 0; 
     let firstNamedDayI: number = null;
 
+    let periodCount = 0;
     // combine weeks into single array with missed days as null
     periodFile.Periods.forEach((period: Period) => { 
         let weekData: Array<Day | null> = daysToWeek(period.Days);
@@ -78,10 +84,17 @@ export function flattenPeriods(periodFile: PeriodFile): Array<DayFinal> {
                 }
             }
         }    
+
+        //extra days
+        for (let i = 7; i < weekData.length; i++) {
+            let ed: ExtraDay = new ExtraDay;
+            ed.Sessions = weekData[i].Sessions;
+            ed.Period = periodCount;
+            extraDays.push(ed)
+        }
+        periodCount++;
     }); 
 
-    console.log(combinedDaysRaw);
-    
     //start date
     let date: Date = new Date();
     let reverse: boolean = false;
@@ -132,10 +145,8 @@ export function flattenPeriods(periodFile: PeriodFile): Array<DayFinal> {
             date.setDate(date.getDate() + 1);
         }
     });
-
-    console.log(finalDays);
     
-    return finalDays;
+    return [finalDays, extraDays];
 }
 
 export function sportStringToValidSport(str: string): ValidSport {
