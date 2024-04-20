@@ -67,7 +67,7 @@ export class WorkloadExtended {
 export class Workload {
     Time: string; 
     Type: WLType;
-    Zone: string = null;
+    Zone: Array<IntensityZone> = null;
 };
 
 export enum ValidSport {
@@ -80,6 +80,11 @@ export enum ValidSport {
     Note = "fa-solid fa-note-sticky"
 }
 
+export enum IntensityZone {
+    HRZ1, HRZ2, HRZ3, HRZ4, HRZ5, //matching the Norwegian Olympic model
+    LTZ1, LTZ2, LTZ3, //matching Dr Seileir's model
+    PWZ1, PWZ2, PWZ3, PWZ4, PWZ5, PWZ6,PWZ7 //matching Dr Coggan's model
+}
 
 
 

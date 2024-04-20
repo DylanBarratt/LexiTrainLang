@@ -1,5 +1,5 @@
 <script lang="ts">
-import { afterUpdate } from 'svelte';
+import { afterUpdate, beforeUpdate } from 'svelte';
 import type { DayFinal } from "../lib/DataTypes";
 import Day from "./Day.svelte";
 
@@ -23,7 +23,7 @@ function gotoCurrentMonth() {
   resetDate();
 }
 
-function resetDate() {
+function resetDate() {  
   currentMonth = currentMonth;
   
   monthArr = [];
@@ -129,6 +129,7 @@ function populateCalendarData() {
   }
 
   monthArr = monthArr; 
+  console.log(monthArr);
 }
 
 function getDayNum(index: number): number {

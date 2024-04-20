@@ -25,10 +25,12 @@ function getRequiredImports(periodInp: string): Array<string> {
 //abbrv to remove confusion with variable of similar name - Dyaln
 function parseSFS(): object {
   let parsedSessionFiles: object = {};
+  let counter = 0;
 
-  Object.entries(unparsedSessionFiles).forEach(([key, value]) => {
+  Object.entries(unparsedSessionFiles).forEach(([key, value]) => {    
     let s: Session = parseSF(value);
-    parsedSessionFiles[s.Metadata.Title] = s;
+    parsedSessionFiles[requiredImports[counter]] = s;
+    counter++;
   });
   return parsedSessionFiles;
 }
@@ -45,7 +47,6 @@ function parseSF(sessionInp: string): Session {
 }
 
 function parseFullPeriod(periodInp: string, sessions: Object): PeriodFile {
-  let fullParse: PeriodFile;
   try {
     return ParseFull(periodInp, sessions);
   } catch (e) {
@@ -84,9 +85,10 @@ function parseAll() {
     return;
   }
 
-  // console.log("Parsed Sessions", parsedSessions);
-  // console.log("Parsed Period file uo", parsedPeriodFile);
-  // console.log("Days", days);
+  //todo: delete
+  console.log("Parsed Sessions", parsedSessions);
+  console.log("Parsed Period file uo", parsedPeriodFile);
+  console.log("Days", days);
   
 
   //todo: process metadata

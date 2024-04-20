@@ -1,5 +1,5 @@
 import { SessionMetadata, Section, WorkloadExtended, WLType, Workload, Session } from "./DataTypes";
-import { removeSpeechMarks, capitalizeFirstLetter, sportStringToValidSport } from "./HelperFunctions";
+import { removeSpeechMarks, capitalizeFirstLetter, sportStringToValidSport, stringToZone } from "./HelperFunctions";
 import SessionFileListener from "./lt/SessionFileListener";
 
 export default class SessionListener extends SessionFileListener {
@@ -68,26 +68,27 @@ export default class SessionListener extends SessionFileListener {
     }
 
     wlType: WLType = null;
-    wlZone = null;
+    wlZone = [];
 
     enterWorkload() {
         this.wlType = null;
-        this.wlZone = null;
+        this.wlZone = [];
     }
 
     enterLt(ctx) {
         this.wlType = WLType.LessThan;
-        this.wlZone = ctx.WORD().getText();
+        this.wlZone[0] = stringToZone(ctx.WORD().getText());
     }
 
     enterGt(ctx) {
         this.wlType = WLType.GreaterThan;
-        this.wlZone = ctx.WORD().getText();
+        this.wlZone[0] = stringToZone(ctx.WORD().getText());
     }
 
     enterBetween(ctx) {
         this.wlType = WLType.Between;
-        this.wlZone = [ctx.children[0].getText(), ctx.children[2].getText()];
+        this.wlZone[0] = stringToZone(ctx.children[0].getText());
+        this.wlZone[1] = stringToZone(ctx.children[2].getText());
     }
 
     note:string = null
@@ -103,7 +104,7 @@ export default class SessionListener extends SessionFileListener {
         if (this.wlType == null) { //still unitialised
             if (ctx.children.length == 2) {
                 this.wlType = WLType.At;
-                this.wlZone = ctx.children[1].getText();
+                this.wlZone[0] = stringToZone(ctx.children[1].getText());
             } else if (ctx.children.length == 1) { 
                 this.wlType = WLType.None;
             }

@@ -17,10 +17,12 @@ period // e.g. a week
     ;
 
 day
-    : WORD ':' dayData ('&&' dayData)* //specified day
-    | NUM '*' '{' dayData '}' //looped days (unspecified day)
-    | dayData ('&&' dayData)* //non-specified day
+    : WORD ':' dayLoop //specified day
+    | NUM '*' '{' dayLoop '}' //looped days (unspecified day)
+    | dayLoop //non-specified day
     ;
+
+dayLoop: dayData ('&&' dayData)*;
 
 dayData
     : imported //imported
@@ -29,9 +31,9 @@ dayData
     | NOTES WORD
     ;
 
-imported: IMPORTED;
-
 workout: SPORT workloadL;
+
+imported: IMPORTED;
 
 session //inline session
     : '{' SPORT (sessionSection)+ '}' //name of sport and the sections of the session
@@ -41,7 +43,7 @@ sessionSection: WORD '{' (workloads | NUM '*' '{' workloads '}') '}'; //single w
 
 workloads: workloadL ('&&' workloadL)*;
 
-workloadL: workload (LOAD NUM)? (NOTES WORD)?; // workload load notes
+workloadL: (workload)? (LOAD NUM)? (NOTES WORD)?; // workload load notes (all are optional)
 
 workload
     : WORD // no specified intensity (just time)

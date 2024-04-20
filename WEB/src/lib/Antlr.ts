@@ -46,7 +46,7 @@ export function ParseImports(input: string): Array<string>{
 
 	parser.buildParseTrees = true;
 
-	parser.removeErrorListeners;
+	parser.removeErrorListeners();
 	var customErrorListener = new CustomErrorListener();
 	parser.addErrorListener(customErrorListener);
 

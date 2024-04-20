@@ -1,4 +1,4 @@
-import { DayFinal, type Day, type Period, type PeriodFile, ValidSport } from "./DataTypes";
+import { DayFinal, type Day, type Period, type PeriodFile, ValidSport, IntensityZone } from "./DataTypes";
 
 function dayNameToIndex(dayName: string): number {
     // Convert the day name to lowercase for case insensitivity
@@ -104,23 +104,22 @@ export function sportStringToValidSport(str: string): ValidSport {
     let cStr = removeBoth(str.toLowerCase());
 
     switch (cStr) {
-        case 'swimming':
-            case 'swim': case 'pool':
-                return ValidSport.Swimming;
-            case 'cycling': case 'cycle': case 'bike': case 'biking':
-                return ValidSport.Cycling;
-            case 'running': case 'run':
-                return ValidSport.Running;
-            case 'walking': case 'walk':
-                return ValidSport.Walking;
-            case 'gym': case 'strength': case 'strength training':
-                return ValidSport.Gym;
-            case 'other':
-                return ValidSport.Other;
-            case 'note':
-                return ValidSport.Note;
-            default:
-                throw new Error("Invalid sport " + cStr);
+        case 'swimming': case 'swim': case 'pool':
+            return ValidSport.Swimming;
+        case 'cycling': case 'cycle': case 'bike': case 'biking':
+            return ValidSport.Cycling;
+        case 'running': case 'run':
+            return ValidSport.Running;
+        case 'walking': case 'walk':
+            return ValidSport.Walking;
+        case 'gym': case 'strength': case 'strength training':
+            return ValidSport.Gym;
+        case 'other':
+            return ValidSport.Other;
+        case 'note':
+            return ValidSport.Note;
+        default:
+            throw new Error("Invalid sport " + cStr);
     }
 }
 
@@ -176,5 +175,47 @@ export function stringToDate(dateString: string):Date {
         return date;
     } catch (e) {
         throw e;
+    }
+}
+
+export function stringToZone(inp: string): IntensityZone {
+    let cInp = removeBoth(inp.toLowerCase())
+    switch (cInp) {
+        case 'hrz1': case 'heartratezone1':
+            return IntensityZone.HRZ1
+        case 'hrz2': case 'heartratezone2':
+            return IntensityZone.HRZ2
+        case 'hrz3': case 'heartratezone3':
+            return IntensityZone.HRZ3
+        case 'hrz4': case 'heartratezone4':
+            return IntensityZone.HRZ4
+        case 'hrz5': case 'heartratezone5':
+            return IntensityZone.HRZ5
+
+        case 'pwz1': case 'powerzone1':
+            return IntensityZone.PWZ1 
+        case 'pwz2': case 'powerzone2':
+            return IntensityZone.PWZ2 
+        case 'pwz3': case 'powerzone3':
+            return IntensityZone.PWZ3 
+        case 'pwz4': case 'powerzone4':
+            return IntensityZone.PWZ4 
+        case 'pwz5': case 'powerzone5':
+            return IntensityZone.PWZ5 
+        case 'pwz6': case 'powerzone6':
+            return IntensityZone.PWZ6 
+        case 'pwz7': case 'powerzone7':
+            return IntensityZone.PWZ7 
+
+        case 'ltz1': case 'lactatethresholdzone1':
+            return IntensityZone.LTZ1
+        case 'ltz2': case 'lactatethresholdzone2':
+            return IntensityZone.LTZ2
+        case 'ltz3': case 'lactatethresholdzone3':
+            return IntensityZone.LTZ3
+
+        default:
+            throw new Error("Invalid intensity zone " + cInp);
+            return null
     }
 }

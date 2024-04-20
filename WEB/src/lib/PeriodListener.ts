@@ -1,5 +1,5 @@
-import { Day, DayData, Period, PeriodFile, PeriodMetadata, Section, Session, WLType, Workload, WorkloadExtended } from './DataTypes';
-import { capitalizeFirstLetter, removeSpeechMarks, stringToDate, sportStringToValidSport } from './HelperFunctions';
+import { Day, DayData, IntensityZone, Period, PeriodFile, PeriodMetadata, Section, Session, WLType, Workload, WorkloadExtended } from './DataTypes';
+import { capitalizeFirstLetter, removeSpeechMarks, stringToDate, sportStringToValidSport, stringToZone } from './HelperFunctions';
 import LTListener  from './lt/PeriodFileListener.js';
 export default class PeriodListener extends LTListener { 
     private importedFiles: Object;
@@ -71,11 +71,14 @@ export default class PeriodListener extends LTListener {
             this.repeats = 0;
         }
 
-        this.sessions = [];
+        this.sessions = []; 
     }
 
     //todo imported sessions could be loaded here instead?
     enterImported(ctx: any): void {
+        console.log(this.importedFiles);
+        
+
         let session: DayData = new DayData;
 
         let importName: string = ctx.IMPORTED().getText().replace(/\[|\]/g, '');
@@ -85,6 +88,10 @@ export default class PeriodListener extends LTListener {
         }
 
         let importedFile: Session = this.importedFiles[importName];
+
+
+        console.log(importedFile);
+        
 
         session.Sections = importedFile.Sections;
         session.Sport = importedFile.Metadata.Sport;
@@ -103,25 +110,27 @@ export default class PeriodListener extends LTListener {
     }
 
     private wlType: WLType = null;
-    private wlZone = null;
+    private wlZone: Array<IntensityZone> = [];
+
     enterWorkload() {
         this.wlType = null;
-        this.wlZone = null;
+        this.wlZone = [];
     }
 
     enterLt(ctx) {
         this.wlType = WLType.LessThan;
-        this.wlZone = ctx.WORD().getText();
+        this.wlZone[0] = stringToZone(ctx.WORD().getText());
     }
 
     enterGt(ctx) {
         this.wlType = WLType.GreaterThan;
-        this.wlZone = ctx.WORD().getText();
+        this.wlZone[0] = stringToZone(ctx.WORD().getText());
     }
 
     enterBetween(ctx) {
         this.wlType = WLType.Between;
-        this.wlZone = [ctx.children[0].getText(), ctx.children[2].getText()];
+        this.wlZone[0] = stringToZone(ctx.children[0].getText());
+        this.wlZone[1] = stringToZone(ctx.children[2].getText());
     }
 
     private curWl: Workload = new Workload;
@@ -133,7 +142,7 @@ export default class PeriodListener extends LTListener {
         if (this.wlType == null) { //still unitialised
             if (ctx.children.length == 2) {
                 this.wlType = WLType.At;
-                this.wlZone = ctx.children[1].getText();
+                this.wlZone[0] = stringToZone(ctx.children[1].getText());
             } else if (ctx.children.length == 1) { 
                 this.wlType = WLType.None;
             }

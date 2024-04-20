@@ -8,10 +8,12 @@ IMPORT: 'import';
 LOAD: 'load=';
 NOTES: 'note=';
 
-NUM: [0-9]+;
-WORD: [a-zA-Z0-9_/]+ | '"' (ESC|.)*? '"';
 SPORT: '(' WORD ')';
 IMPORTED: '[' WORD ']';
+
+NUM: [0-9]+;
+WORD: [a-zA-Z0-9_/]+ | '"' (ESC|.)*? '"';
+
 
 
 LINE_COMMENT : '//' .*? '\r'? '\n' -> skip ;
