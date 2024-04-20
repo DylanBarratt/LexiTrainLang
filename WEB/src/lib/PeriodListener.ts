@@ -76,9 +76,6 @@ export default class PeriodListener extends LTListener {
 
     //todo imported sessions could be loaded here instead?
     enterImported(ctx: any): void {
-        console.log(this.importedFiles);
-        
-
         let session: DayData = new DayData;
 
         let importName: string = ctx.IMPORTED().getText().replace(/\[|\]/g, '');
@@ -88,11 +85,7 @@ export default class PeriodListener extends LTListener {
         }
 
         let importedFile: Session = this.importedFiles[importName];
-
-
-        console.log(importedFile);
         
-
         session.Sections = importedFile.Sections;
         session.Sport = importedFile.Metadata.Sport;
         session.Notes = importedFile.Metadata.Note;

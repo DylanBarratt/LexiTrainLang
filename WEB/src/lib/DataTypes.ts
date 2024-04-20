@@ -88,6 +88,32 @@ export enum IntensityZone {
     PWZ1, PWZ2, PWZ3, PWZ4, PWZ5, PWZ6,PWZ7 //matching Dr Coggan's model
 }
 
+type IntensityZoneProperties = {
+    name: string;
+    type: number;
+}
+
+export const intensityZoneProperties: Record<IntensityZone, IntensityZoneProperties> = {
+    // [Fruit.Apple]: { color: 'red', taste: 'sweet' },
+    [IntensityZone.HRZ1]: {name: "HRZ1", type: 0},
+    [IntensityZone.HRZ2]: {name: "HRZ2", type: 0},
+    [IntensityZone.HRZ3]: {name: "HRZ3", type: 0},
+    [IntensityZone.HRZ4]: {name: "HRZ4", type: 0},
+    [IntensityZone.HRZ5]: {name: "HRZ5", type: 0},
+
+    [IntensityZone.LTZ1]: {name: "HRZ1", type: 1},
+    [IntensityZone.LTZ2]: {name: "HRZ1", type: 1},
+    [IntensityZone.LTZ3]: {name: "HRZ1", type: 1},
+
+    [IntensityZone.PWZ1]: {name: "HRZ1", type: 2},
+    [IntensityZone.PWZ2]: {name: "HRZ1", type: 2},
+    [IntensityZone.PWZ3]: {name: "HRZ1", type: 2},
+    [IntensityZone.PWZ4]: {name: "HRZ1", type: 2},
+    [IntensityZone.PWZ5]: {name: "HRZ1", type: 2},
+    [IntensityZone.PWZ6]: {name: "HRZ1", type: 2},
+    [IntensityZone.PWZ7]: {name: "HRZ1", type: 2},
+
+};
 
 
 export class FileUploadOut {

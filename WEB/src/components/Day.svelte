@@ -2,7 +2,7 @@
 import { afterUpdate } from 'svelte';
 import { ValidSport, type DayFinal } from "../lib/DataTypes";
 import DayModal from './DayModal.svelte';
-  import SportIcon from './SportIcon.svelte';
+import SportIcon from './SportIcon.svelte';
 
 export let dayNum: number;
 export let dayData: DayFinal;
