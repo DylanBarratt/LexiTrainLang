@@ -86,6 +86,15 @@ export default class PeriodFileListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by PeriodFileParser#dayNotes.
+	enterDayNotes(ctx) {
+	}
+
+	// Exit a parse tree produced by PeriodFileParser#dayNotes.
+	exitDayNotes(ctx) {
+	}
+
+
 	// Enter a parse tree produced by PeriodFileParser#workout.
 	enterWorkout(ctx) {
 	}

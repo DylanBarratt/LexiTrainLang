@@ -116,6 +116,7 @@ function populateCalendarData() {
   // all other dates are just imcrement from that one.
   for (let i = 0; i < getDateIndent(currentMonth) + getDaysInMonth(currentMonth) + getDateOutdent(currentMonth); i++) {
     let found = filterDataByDate(dateI);
+    console.log(dateI.toDateString() + ": " + found);
 
     if (found == null) {
       monthArr.push(null);

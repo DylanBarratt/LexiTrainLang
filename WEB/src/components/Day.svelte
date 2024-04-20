@@ -1,6 +1,8 @@
 <script lang="ts">
 import { afterUpdate } from 'svelte';
-import type { DayFinal, ValidSport } from "../lib/DataTypes";
+import { ValidSport, type DayFinal } from "../lib/DataTypes";
+import DayModal from './DayModal.svelte';
+  import SportIcon from './SportIcon.svelte';
 
 export let dayNum: number;
 export let dayData: DayFinal;
@@ -14,15 +16,22 @@ function loadDaySports() {
     if (typeof dayData === 'undefined') return;
     
     dayData.Sessions.forEach(session => {
-        sports.push(session.Sport);
+        if (session.Sport == null && session.Notes != null) {
+            sports.push(ValidSport.Note)
+        } else {
+            sports.push(session.Sport);
+        }
     });
 
     sports = sports;
 }
 
 function showDataModal() {
-    console.log(dayData);
-    
+    //day modal is generated on press rather than pre generated per day
+    var dataModal = new DayModal({
+        target: document.body,
+        props: {dayData}
+    })
 }
 
 afterUpdate(loadDaySports);
@@ -63,6 +72,7 @@ afterUpdate(loadDaySports);
 
 {#if dayData != null}
 <div class="day">
+    <!-- TODO: display notes here somehow -->
     <button class="dayNotNull" 
     on:click={showDataModal}>
         <p class="dayNum">
@@ -72,17 +82,14 @@ afterUpdate(loadDaySports);
                 {dayNum}
             {/if}    
         </p>
-        
+
         {#if sports.length > 0} 
             {#each sports as sport}
-                <i class={sport}></i>
+                <SportIcon sport={sport} />
                 <br />
             {/each}
         {/if}     
     </button>
-<div>
-        
-</div>
 </div>
 
 

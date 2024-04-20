@@ -28,8 +28,10 @@ dayData
     : imported //imported
     | workout //single line session
     | session //inline session
-    | NOTES WORD
+    | dayNotes
     ;
+
+dayNotes: NOTES WORD;
 
 workout: SPORT workloadL;
 

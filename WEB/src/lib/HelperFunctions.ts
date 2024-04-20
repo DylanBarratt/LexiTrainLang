@@ -7,54 +7,86 @@ function dayNameToIndex(dayName: string): number {
     // Define a map of day names to their indices
     var dayMap = {
         'sun': 0,
-        'sunday': 0,
         'mon': 1,
-        'monday': 1,
         'tue': 2,
-        'tuesday': 2,
         'wed': 3,
-        'wednesday': 3,
         'thu': 4,
-        'thursday': 4,
         'fri': 5,
-        'friday': 5,
         'sat': 6,
-        'saturday': 6
     };
 
     // Look up the day index in the map
     return dayMap[lowerCaseDayName];
 }
 
+function daysToWeek(days: Array<Day>): Array<Day> {
+    var fullWeek: Array<Day> = Array(7).fill(null);
+    days.forEach((day: Day) => {
+        switch (day.DayName) {
+            case "Mon":
+                fullWeek[0] = day
+                break;
+            case "Tue":
+                fullWeek[1] = day
+                break;
+            case "Wed":
+                fullWeek[2] = day
+                break;
+            case "Thu":
+                fullWeek[3] = day
+                break;
+            case "Fri":
+                fullWeek[4] = day
+                break;
+            case "Sat":
+                fullWeek[5] = day
+                break;
+            case "Sun":
+                fullWeek[6] = day
+                break;
+            default:
+                break;
+        }
+    });
+
+    return fullWeek;
+}
+
+//I don't like this function... feels messy - Dylan
 // flatten periods in a period file
 export function flattenPeriods(periodFile: PeriodFile): Array<DayFinal> {
-    let combinedDaysRaw: Array<Day> = [];
+    let combinedDaysRaw: Array<Day | null> = [];
     let daysUntilFirst: number = 0;
-    let firstNamedDay: string = null;
+    let firstNamedDayI: number = null;
 
     // combine weeks into single array with missed days as null
     periodFile.Periods.forEach((period: Period) => { 
-        let weekData: Array<Day> = Object.values(period.Days);
-
-        //assumes 7 days a period
+        let weekData: Array<Day | null> = daysToWeek(period.Days);
+        
         for (let i = 0; i < 7; i++) {
-            if ((typeof weekData[i] === 'undefined')) { 
-                combinedDaysRaw.push(null);
-            } else {
-                combinedDaysRaw.push(weekData[i]);
+            //skip null days before first date
+            if (!(firstNamedDayI == null && weekData[i] == null)) {
+                combinedDaysRaw.push(weekData[i]); 
+            } 
 
-                if (firstNamedDay == null && weekData[i].DayName != null) {
-                    firstNamedDay = weekData[i].DayName;
-                } else if (firstNamedDay == null) {
+            //saves first named day
+            if (weekData[i] != null && firstNamedDayI == null) {
+                if (weekData[i].DayName != null) {
+                    firstNamedDayI = dayNameToIndex(weekData[i].DayName);
+                } else if (firstNamedDayI == null) {
                     daysUntilFirst++;
                 }
             }
-        }
+        }    
     }); 
+
+    console.log(combinedDaysRaw);
     
+    //start date
     let date: Date = new Date();
     let reverse: boolean = false;
     
+    //trick code here - just fills the array in backwards for an end date ;)
     if (typeof periodFile.Metadata.End_Date === 'string') { 
         date = stringToDate(periodFile.Metadata.End_Date);
         reverse = true; 
@@ -63,14 +95,16 @@ export function flattenPeriods(periodFile: PeriodFile): Array<DayFinal> {
         date = stringToDate(periodFile.Metadata.Start_Date);
     } 
   
-    if (firstNamedDay != null) { //if null just start on today. date left as initialised
+    //if null just start on today. date left as initialised
+    if (firstNamedDayI != null) { 
+        //find first instance of first day 
         let dateFound: boolean = false;
         while (!dateFound) {
-            if (date.getDay() == dayNameToIndex(firstNamedDay)) {
+            if (date.getDay() == firstNamedDayI) {
                 dateFound = true;
                 break;
             }
-    
+            
             date.setDate(date.getDate() + 1);
         }
     
@@ -81,15 +115,17 @@ export function flattenPeriods(periodFile: PeriodFile): Array<DayFinal> {
     // give each day a date starting with the first available date that 
     // matches the specified day. If day not recognised, error
     combinedDaysRaw.forEach((day: Day) => {
-        if (day != null) { //ignore empty days
+        if (day != null) { //don't date empty days
             let finalDay: DayFinal = new DayFinal;
             finalDay.Sessions = day.Sessions;
 
             finalDay.Dated = (day.DayName != null);
             finalDay.Date = new Date(date);
+            
             finalDays.push(finalDay);
         }
 
+        //increment (including if empty day)
         if (reverse) {
             date.setDate(date.getDate() - 1);
         } else {
@@ -97,6 +133,8 @@ export function flattenPeriods(periodFile: PeriodFile): Array<DayFinal> {
         }
     });
 
+    console.log(finalDays);
+    
     return finalDays;
 }
 
@@ -110,6 +148,10 @@ export function sportStringToValidSport(str: string): ValidSport {
             return ValidSport.Cycling;
         case 'running': case 'run':
             return ValidSport.Running;
+        case 'triathlon': case 'tri':
+            return ValidSport.Triathlon;
+        case 'duathlon':
+            return ValidSport.Duathlon 
         case 'walking': case 'walk':
             return ValidSport.Walking;
         case 'gym': case 'strength': case 'strength training':

@@ -162,13 +162,13 @@ export default class PeriodListener extends LTListener {
         }
 
         if (ctx.WORD()) {
-            wlL.Notes = ctx.WORD().getText();
+            wlL.Notes = removeSpeechMarks(ctx.WORD().getText());
         }
         
         if (this.sessionSectionRepeats) {
             wlL.Repeats = this.sessionSectionRepeats;
         }
-
+        
         this.workloads[this.workloads.length - 1] = wlL;
     }
 
@@ -181,6 +181,7 @@ export default class PeriodListener extends LTListener {
         let section: Section = new Section;
 
         section.Workloads = this.workloads;
+        
         session.Sections.push(section);
         this.workloads = [];
 
@@ -219,13 +220,13 @@ export default class PeriodListener extends LTListener {
         this.sessionSections = [];
     }
 
-    exitDayData(ctx: any): void {
-        if (ctx.NOTES()) {
-            let session: DayData = new DayData;
-            session.Notes = removeSpeechMarks(ctx.WORD().getText());
-            this.sessions.push(session);
-        }
+    exitDayNotes(ctx: any): void {
+        let session: DayData = new DayData;
+        session.Notes = removeSpeechMarks(ctx.WORD().getText());
+        this.sessions.push(session);
+    }
 
+    exitDayData(ctx: any): void {
         if (this.repeats > 0) {
             let repeat: DayData = this.sessions[this.sessions.length - 1];
 

@@ -2,74 +2,38 @@
 import { createEventDispatcher } from 'svelte';
 const dispatch = createEventDispatcher();
 
-let textareaData = `title: "chrim!bo".
-author:"Dylan Barratt".
+let textareaData = `title: "IM meso 3".
+author: "Dylan Barratt".
 
-//this is a comment!
-
-import base.
+import run_base.
 
 "week 1" {
-	Mon: (bike) 1hr HRZ1 note="cool bike yo",
-	Tue: {
-        (run)
-        "warmup" {60min HRZ1 - HRZ2}
-
-        "main set" {
-            2hours HRZ2 - HRZ3 &&
-            1hours > HRZ2
-        }
-
-        "cool down" {
-            60min HRZ1 - HRZ2
-        }
-    },
-	Wed: (swim) 1hr hrz2,
-	Thu: (bike) 1hr HRZ2&&(run) 1hr HRZ2,
-	Fri: [base],
-	Sat: [base] && (run) 1hr30min HRZ2
+	Tue: (bike) 4hr < HRZ3 note="long ride road",
+	Wed: (swim) 30min load=20 note="swim lesson",
+	Thu: [run_base],
+	Fri: (swim) 1hr30min load=70 note="long swim",
+	Sat: (swim) 1hr load=40 note="tech swim" && (bike) 1hr30min HRZ2,
+	Sun: (run) 2hr30min < HRZ3 note="long run"
 }
 
-"week 2"{
-	Mon: (run)1hr HRZ2 note="Chrimbo run!",
-	Tue:(bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
-	Wed: [base],
-	Thu: {
-        (bike)
-        warmup {
-            1hr HRZ1
-        }
 
-        main {
-            5*{
-                5min HRZ5 &&
-                5min HRZ3
-            }
-        }
-
-        cooldown {
-            30min HRZ1 - HRZ2
-        }
-    },
-	Fri: (bike) 2hr30min HRZ2,
-	Sat: (bike) 2hr HRZ2,
-	Sun: (run) 1hr30min HRZ2 && (bike) 1hr HRZ2
+"week 2" {
+	Mon: note="Slight deload week with varsity. Could cycle to watch cycling varsity?",
+	Tue: (bike) 3hr HRZ2,
+	Wed: (tri) 60min load=60 note="Varsity Race!",
+	Thu: [run_base],
+	Fri: (swim) 1hr30min load=70 note="long swim",
+	Sat: (swim) 1hr load=40 note="tech swim" && (bike) 1hr HRZ2,
+	Sun: (run) 2hr30min < HRZ3 note="long run"
 }
 
 "week 3" {
-	Mon: note="10mile tt?",
-	Tue: (bike) 1hr30min HRZ2 && (run) 1hr HRZ2,
-	Wed: (bike) 2hr HRZ2,
-	Thu: (swim) 30min load=30 && (run) 1hr HRZ2,
-	Fri: (bike) 2hr30min HRZ2,
-	Sat: (bike) 2hr HRZ2 && (swim) 1hr load=40,
-	Sun: (run) 1hr30min HRZ2 && (bike) 1hr HRZ2
-}
-
-"week 2" {
-	5* {
-        [base]
-	}
+	Tue: (bike) 4hr < HRZ3 note="long ride road",
+	Wed: (swim) 30min load=40 note="tech work",
+	Thu: [run_base],
+	Fri: (swim) 1hr load=50 note="long swim" && (bike) 1hr HRZ2,
+	Sat: (swim) 1hr load=40 note="tech swim" && (bike) 1hr30min HRZ2,
+	Sun: (tri) load=60 note="bucs sprint tri"
 }`;
 
 function btnSubmit() {
