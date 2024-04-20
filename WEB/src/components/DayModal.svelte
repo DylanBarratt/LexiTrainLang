@@ -35,13 +35,13 @@ function destroyModal() {
     top: 50%; 
     left: 50%; 
 
-    width: 75%;
-    height: 75%;
+    width: auto;
+    height: auto;
 
     transform: translate(-50%, -50%); 
 
     background-color: white; 
-    padding: 20px; 
+    padding: 15px 15px 25px 25px;
     border-radius: 8px; 
 
     display: grid;

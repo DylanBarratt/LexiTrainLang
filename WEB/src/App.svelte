@@ -1,6 +1,7 @@
 <!-- App.svelte -->
 <script lang="ts">
 import Calendar from './components/Calendar.svelte';
+import FileUpload from './components/FileUpload.svelte';
 import Ide from './components/IDE.svelte';
 import SessionUpload from './components/SessionUpload.svelte';
 
@@ -96,8 +97,9 @@ function parseAll() {
 
 <main>
   <h1>Enter ur training</h1>
-  <Ide on:textSubmitted={updateIdeText} />
 
+  <Ide on:textSubmitted={updateIdeText} />
+  
   {#if requiredImports.length > 0}
     {#each requiredImports as importName}
       <SessionUpload 

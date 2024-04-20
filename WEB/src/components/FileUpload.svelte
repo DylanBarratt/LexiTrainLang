@@ -7,6 +7,7 @@ const dispatch = createEventDispatcher<{FileUploaded: FileUploadOut}>();
 
 export let fileNeeded: string;
 export let file: File = null;
+export let fileExtensions: Array<String> = [];
 
 let errorMessage = '';
 
@@ -19,11 +20,13 @@ function handleFileUpload(event) {
     }
     
     // Check file extension
-    const allowedExtensions = ['slt'];
-    const fileExtension = selectedFile.name.split('.').pop().toLowerCase();
+    const allowedExtensions = fileExtensions;
+    const fileExtension = '.' + selectedFile.name.split('.').pop().toLowerCase();
 
+    console.log(fileExtension, allowedExtensions[0]);
+    
     if (!allowedExtensions.includes(fileExtension)) {
-        errorMessage = 'Invalid file type. Please select a .slt file.';
+        errorMessage = 'Invalid file type. Please select a ' + fileExtensions + ' file.';
         return;
     }
 
@@ -44,7 +47,7 @@ function handleFileUpload(event) {
     <label for="fileUpload">Upload {fileNeeded}</label>
     <br />
     <hr />
-    <input type="file" id="fileUpload" accept=".slt" class="file-upload-input" on:change={handleFileUpload}>
+    <input type="file" id="fileUpload" accept={fileExtensions.join(',')} class="file-upload-input" on:change={handleFileUpload}>
     
     {#if errorMessage}
         <div class="error">

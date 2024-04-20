@@ -35,7 +35,10 @@ function fileUploaded(event: CustomEvent<FileUploadOut>) {
 </script>
 
 <div>
-    <FileUpload {fileNeeded} on:FileUploaded={fileUploaded}/>
+    <FileUpload 
+        {fileNeeded} 
+        fileExtensions={[".slt"]}
+        on:FileUploaded={fileUploaded}/>
 
     {#if fileContents}
         <!-- todo probs very unsafe lol -->
