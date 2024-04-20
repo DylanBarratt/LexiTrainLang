@@ -1,5 +1,5 @@
 import { Day, DayData, IntensityZone, Period, PeriodFile, PeriodMetadata, Section, Session, WLType, Workload, WorkloadExtended } from './DataTypes';
-import { capitalizeFirstLetter, removeSpeechMarks, stringToDate, sportStringToValidSport, stringToZone } from './HelperFunctions';
+import { capitalizeFirstLetter, removeSpeechMarks, stringToDate, sportStringToValidSport, stringToZone, validTimeString } from './HelperFunctions';
 import LTListener  from './lt/PeriodFileListener.js';
 export default class PeriodListener extends LTListener { 
     private importedFiles: Object;
@@ -130,7 +130,13 @@ export default class PeriodListener extends LTListener {
     exitWorkload(ctx: any): void {
         this.curWl = {Time: null, Type: null, Zone: null};
 
-        this.curWl.Time = ctx.children[0].getText();
+        var timeSt: string = ctx.children[0].getText();
+        if (!validTimeString(timeSt)) {
+            throw new Error("Invalid time string: " + timeSt);
+        } 
+
+        this.curWl.Time = timeSt;        
+
 
         if (this.wlType == null) { //still unitialised
             if (ctx.children.length == 2) {

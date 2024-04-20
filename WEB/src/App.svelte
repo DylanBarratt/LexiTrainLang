@@ -89,7 +89,6 @@ function parseAll() {
   console.log("Parsed Sessions", parsedSessions);
   console.log("Parsed Period file uo", parsedPeriodFile);
   console.log("Days", days);
-  
 
   //todo: process metadata
 }

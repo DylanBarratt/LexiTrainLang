@@ -261,3 +261,8 @@ export function stringToZone(inp: string): IntensityZone {
             return null
     }
 }
+
+export function validTimeString(inp: String): boolean {
+    const pattern = /^(\d+)(hours?|hrs?)?(\d+)?(mins?|minutes?)?$/;
+    return pattern.test(inp.replace(/\s/g, ''));
+}

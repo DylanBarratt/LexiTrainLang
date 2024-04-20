@@ -1,5 +1,5 @@
 import { SessionMetadata, Section, WorkloadExtended, WLType, Workload, Session } from "./DataTypes";
-import { removeSpeechMarks, capitalizeFirstLetter, sportStringToValidSport, stringToZone } from "./HelperFunctions";
+import { removeSpeechMarks, capitalizeFirstLetter, sportStringToValidSport, stringToZone, validTimeString } from "./HelperFunctions";
 import SessionFileListener from "./lt/SessionFileListener";
 
 export default class SessionListener extends SessionFileListener {
@@ -99,7 +99,12 @@ export default class SessionListener extends SessionFileListener {
     exitWorkload(ctx) {
         let workload: Workload = {Time: null, Type: null, Zone: null};
 
-        workload.Time = ctx.children[0].getText();
+        var timeSt: string = ctx.children[0].getText();
+        if (!validTimeString(timeSt)) {
+            throw new Error("Invalid time string: " + timeSt);
+        } 
+
+        workload.Time = timeSt;
 
         if (this.wlType == null) { //still unitialised
             if (ctx.children.length == 2) {
