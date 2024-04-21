@@ -1,7 +1,7 @@
 <script lang="ts">
 import { afterUpdate } from 'svelte';
 
-export let msg;
+export let msg: string;
 
 //in ms
 const TIME_SHOWN = 5000;
@@ -19,7 +19,6 @@ function scheduleDestroy() {
 
 function hide() {
     msg = null;
-    console.log(msg);
 }
 
 afterUpdate(scheduleDestroy);

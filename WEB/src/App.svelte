@@ -1,7 +1,7 @@
 <!-- App.svelte -->
 <script lang="ts">
 import Calendar from './components/Calendar.svelte';
-import Error from './components/Error.svelte';
+import ErrorC from './components/ErrorC.svelte';
 import Ide from './components/IDE.svelte';
 import SessionUpload from './components/SessionUpload.svelte';
 
@@ -17,7 +17,6 @@ let extraDays: Array<ExtraDayT> = [];
 let dated: boolean = false;
 
 let errorMessage: string = null;
-
 function getRequiredImports(periodInp: string): Array<string> {
   try {
     return ParseImports(periodInp);
@@ -32,6 +31,11 @@ function getRequiredImports(periodInp: string): Array<string> {
 function parseSFS(): object {
   let parsedSessionFiles: object = {};
   let counter = 0;
+
+  console.log();
+  if (requiredImports.length != Object.entries(unparsedSessionFiles).length) {
+    throw new Error('Missing session files');
+  }
 
   Object.entries(unparsedSessionFiles).forEach(([key, value]) => {    
     let s: Session = parseSF(value);
@@ -110,7 +114,7 @@ function parseAll() {
 }
 </script>
 
-<Error bind:msg={errorMessage}/>
+<ErrorC bind:msg={errorMessage}/>
 <main>
 <h1>Enter ur training</h1>
 
