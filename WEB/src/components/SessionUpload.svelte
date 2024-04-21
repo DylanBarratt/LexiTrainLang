@@ -7,6 +7,7 @@ const dispatch = createEventDispatcher<{FileProccessed: FileString, RemoveOldNam
 
 
 export let fileNeeded: string;
+export let i: number;
 
 let fileContents: string;
 let oldFileName: string;
@@ -14,7 +15,7 @@ let oldFileName: string;
 $: fileContents;
 
 function fileUploaded(event: CustomEvent<FileUploadOut>) {
-    dispatch('RemoveOldName', oldFileName);
+    dispatch('RemoveOldName', oldFileName + i);
     
     let fileRaw = event.detail;
 
@@ -23,7 +24,7 @@ function fileUploaded(event: CustomEvent<FileUploadOut>) {
     reader.onload = function(event) {
         fileContents = event.target.result as string;
         oldFileName = fileRaw.Name;
-        dispatch('FileProccessed', {Name: fileRaw.Name, FileContents: fileContents});
+        dispatch('FileProccessed', {Name: fileRaw.Name + i, FileContents: fileContents});
     };
 
     reader.onerror = function(event) {

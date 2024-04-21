@@ -32,7 +32,6 @@ function parseSFS(): object {
   let parsedSessionFiles: object = {};
   let counter = 0;
 
-  console.log();
   if (requiredImports.length != Object.entries(unparsedSessionFiles).length) {
     throw new Error('Missing session files');
   }
@@ -94,10 +93,19 @@ function parseAll() {
 
   try {
     parsedSessions = parseSFS();
-    parsedPeriodFile = parseFullPeriod(periodInp, parsedSessions);
-    days = flattenPeriods(parsedPeriodFile)[0];
-    extraDays = flattenPeriods(parsedPeriodFile)[1];
-    dated = flattenPeriods(parsedPeriodFile)[2];
+  } catch (e) {
+    errorMessage = e;
+    console.error(e);
+    return;
+  }
+
+  parsedPeriodFile = parseFullPeriod(periodInp, parsedSessions);
+
+  try {
+    var fpResult = flattenPeriods(parsedPeriodFile) 
+    days = fpResult[0];
+    extraDays = fpResult[1];
+    dated = fpResult[2];
   } catch (e) {
     errorMessage = e;
     console.error(e);
@@ -121,8 +129,9 @@ function parseAll() {
 <Ide on:textSubmitted={updateIdeText} />
 
 {#if requiredImports.length > 0}
-  {#each requiredImports as importName}
+  {#each requiredImports as importName, i}
     <SessionUpload 
+      {i}
       fileNeeded={importName} 
       on:FileProccessed={sessionFileProcessed}
       on:RemoveOldName={removeOldSessionFile}/>
