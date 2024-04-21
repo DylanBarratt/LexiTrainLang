@@ -1,0 +1,8 @@
+site_name: LexiTrain Docs
+nav:
+  - Home: index.md
+  - Period File: PeriodFile.md
+  - Session File: SessionFile.md
+  - Tokens: Tokens.md
+theme:
+  name: material
