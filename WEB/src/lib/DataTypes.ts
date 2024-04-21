@@ -131,12 +131,12 @@ export class FileString {
 //todo the title of periods is ignored, if not used can be removed from data
 // maybe store it as a note?
 export class DayFinal {
-    Date: Date;
-    Sessions: Array<DayData>;
+    Date: Date = null;
+    Sessions: Array<DayData> = null;
     Dated: boolean = false; // false for undated (not given a specific day in the week)
 }
 
-export class ExtraDay {
+export class ExtraDayT {
     Sessions: Array<DayData>;
     Period: number;
 }

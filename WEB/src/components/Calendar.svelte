@@ -1,12 +1,16 @@
 <script lang="ts">
-import { afterUpdate, beforeUpdate } from 'svelte';
-import type { DayFinal } from "../lib/DataTypes";
+import { afterUpdate } from 'svelte';
+import { DayFinal, ExtraDayT } from "../lib/DataTypes";
 import Day from "./Day.svelte";
+import ExtraDay from './ExtraDay.svelte';
 
 export let days: Array<DayFinal>;
+export let extraDays: Array<ExtraDayT>;
+export let dated: boolean;
 
 let currentMonth : Date = getFirstDayOfMonth(new Date());
 let monthArr: Array<DayFinal> = [];
+let weekStarted: number = undefined;
 
 function prevMonth() {
   currentMonth.setMonth(currentMonth.getMonth() - 1);
@@ -27,6 +31,7 @@ function resetDate() {
   currentMonth = currentMonth;
   
   monthArr = [];
+  weekStarted = undefined;
 }
 
 function getDaysInMonth(date: Date): number {
@@ -98,8 +103,12 @@ function filterDataByDate(targetDate: Date) {
     return targetYear === itemYear && targetMonth === itemMonth && targetDay === itemDay;
   });
 
+  if (filteredData.length > 0) {
+    return filteredData;
+  }
+
   // Return null if no matching item is found
-  return filteredData.length > 0 ? filteredData : null;
+  return null;
 }
 
 function populateCalendarData() {
@@ -113,19 +122,28 @@ function populateCalendarData() {
   dateI = getNextDay(currentMonth, -getDateIndent(currentMonth));
   
   // find first date from data in this month (if any)
-  // all other dates are just imcrement from that one.
+  // all other dates are just imcrement from that one. 
   for (let i = 0; i < getDateIndent(currentMonth) + getDaysInMonth(currentMonth) + getDateOutdent(currentMonth); i++) {
     let found = filterDataByDate(dateI);
 
     if (found == null) {
       monthArr.push(null);
     } else {
-      found.forEach(day => {
-      monthArr.push(day); 
-    });
-    }
 
+      if (weekStarted === undefined) {
+        weekStarted = Math.floor(i / 7);
+        console.log(weekStarted);
+      }
+
+      found.forEach(day => {
+        monthArr.push(day); 
+      });
+    }
     dateI = getNextDay(dateI, 1);
+  }
+
+  if (!dated) {
+    weekStarted = 0;
   }
 
   monthArr = monthArr; 
@@ -158,12 +176,12 @@ afterUpdate(populateCalendarData);
 
 .dayContainer {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(8, 1fr);
 }
 
 .day-names {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   border: 1px solid rgb(110, 110, 110);
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -180,19 +198,25 @@ afterUpdate(populateCalendarData);
 
   {#if monthArr.length > 0}
     <div class="day-names grid">
-      {#each ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] as day}
+      {#each ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Any"] as day}
         <div>{day}</div>
       {/each}
     </div>
     <div class="dayContainer grid">  
       {#each monthArr as day, i}
-        {#if day != null && !day.Dated}
-          <!-- todo undated days go here -->
+        {#if day === null}
           <Day dayNum={getDayNum(i)} dayData={null}/>
-        {:else}
+        {:else if day.Dated}
           <Day dayNum={getDayNum(i)} dayData={day}/>
         {/if}
-        
+
+        {#if i % 7 === 6}
+          {#if Math.floor(i / 7) === weekStarted || !dated}
+            <ExtraDay eDs={extraDays.filter(obj => obj.Period === Math.floor(i / 7) - weekStarted)} /> 
+          {:else}
+            <ExtraDay eDs={[]} />
+          {/if}
+        {/if}
       {/each}
     </div>
   {/if}

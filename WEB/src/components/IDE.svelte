@@ -14,9 +14,8 @@ import run_base.
 	Tue: (bike) 4hr < HRZ3 note="long ride road",
 	Wed: (swim) 30min load=20 note="swim lesson",
 	Thu: [run_base],
-	Fri: (swim) 1hr30min load=70 note="long swim",
-	Sat: (swim) 1hr load=40 note="tech swim" && (bike) 1hr30min HRZ2,
-	Sun: (run) 2hr30min < HRZ3 note="long run"
+	3 * {[run_base]}
+
 }
 
 

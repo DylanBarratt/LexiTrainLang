@@ -6,14 +6,15 @@ import Ide from './components/IDE.svelte';
 import SessionUpload from './components/SessionUpload.svelte';
 
 import { ParseFull, ParseImports, ParseSession } from './lib/Antlr';
-import type { Day, DayFinal, ExtraDay, FileString, PeriodFile, Session } from './lib/DataTypes';
+import type { Day, DayFinal, ExtraDayT, FileString, PeriodFile, Session } from './lib/DataTypes';
 import { flattenPeriods } from './lib/HelperFunctions';
 
 let periodInp: string;
 let requiredImports: Array<string> = [];
 let unparsedSessionFiles: object = {};
 let days: Array<DayFinal> = [];
-let extraDays: Array<ExtraDay> = [];
+let extraDays: Array<ExtraDayT> = [];
+let dated: boolean = false;
 
 function getRequiredImports(periodInp: string): Array<string> {
   try {
@@ -87,6 +88,7 @@ function parseAll() {
     parsedPeriodFile = parseFullPeriod(periodInp, parsedSessions);
     days = flattenPeriods(parsedPeriodFile)[0];
     extraDays = flattenPeriods(parsedPeriodFile)[1];
+    dated = flattenPeriods(parsedPeriodFile)[2];
   } catch (e) {
     return;
   }
@@ -119,7 +121,7 @@ function parseAll() {
 {/if}
 
 {#if days.length > 0 || extraDays.length > 0}
-  <Calendar {days} />
+  <Calendar {days} {extraDays} {dated}/>
 {/if}
 </Error>
 </main>

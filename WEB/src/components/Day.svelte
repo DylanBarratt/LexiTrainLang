@@ -1,8 +1,8 @@
 <script lang="ts">
 import { afterUpdate } from 'svelte';
 import { ValidSport, type DayFinal } from "../lib/DataTypes";
-import DayModal from './DayModal.svelte';
 import SportIcon from './SportIcon.svelte';
+import Modal from './Modal.svelte';
 
 export let dayNum: number;
 export let dayData: DayFinal;
@@ -28,9 +28,9 @@ function loadDaySports() {
 
 function showDataModal() {
     //day modal is generated on press rather than pre generated per day
-    var dataModal = new DayModal({
+    var dataModal = new Modal({
         target: document.body,
-        props: {dayData}
+        props: { modalType: 0, data: dayData }
     })
 }
 
@@ -54,13 +54,6 @@ afterUpdate(loadDaySports);
         align-items: flex-start; 
         justify-content: flex-start; 
         flex-direction: column;
-    }
-
-    .day {
-        border: 1px solid #ccc;
-        height: 125px;  
-        padding: 10px;
-        margin: 0;
     }
     
     .dayNum {

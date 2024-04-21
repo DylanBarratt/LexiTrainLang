@@ -220,16 +220,6 @@ export default class PeriodListener extends LTListener {
         session.Notes = removeSpeechMarks(ctx.WORD().getText());
         this.sessions.push(session);
     }
-
-    // exitDayData(ctx: any): void {
-    //     if (this.repeats > 0) {
-    //         let repeat: DayData = this.sessions[this.sessions.length - 1];
-
-    //         for (let i = 0; i < this.repeats - 1; i++) {
-    //             this.sessions.push(repeat);
-    //         }
-    //     }
-    // }
     
     exitDay(ctx: any): void {
         this.currDay.Sessions = this.sessions;

@@ -1,4 +1,4 @@
-import { DayFinal, type Day, type Period, type PeriodFile, ValidSport, IntensityZone, ExtraDay } from "./DataTypes";
+import { DayFinal, type Day, type Period, type PeriodFile, ValidSport, IntensityZone, ExtraDayT } from "./DataTypes";
 
 function dayNameToIndex(dayName: string): number {
     // Convert the day name to lowercase for case insensitivity
@@ -57,14 +57,15 @@ function daysToWeek(days: Array<Day>): Array<Day> {
 
 // I don't like this function... feels messy - Dylan
 // flatten periods in a period file
-export function flattenPeriods(periodFile: PeriodFile): [Array<DayFinal>, Array<ExtraDay>] {
+export function flattenPeriods(periodFile: PeriodFile): [Array<DayFinal>, Array<ExtraDayT>, boolean] {
     let combinedDaysRaw: Array<Day | null> = [];
-    let extraDays: Array<ExtraDay> = [];
+    let extraDays: Array<ExtraDayT> = [];
 
     let daysUntilFirst: number = 0; 
     let firstNamedDayI: number = null;
 
     let periodCount = 0;
+    let dated = false;
     // combine weeks into single array with missed days as null
     periodFile.Periods.forEach((period: Period) => { 
         let weekData: Array<Day | null> = daysToWeek(period.Days);
@@ -79,6 +80,7 @@ export function flattenPeriods(periodFile: PeriodFile): [Array<DayFinal>, Array<
             if (weekData[i] != null && firstNamedDayI == null) {
                 if (weekData[i].DayName != null) {
                     firstNamedDayI = dayNameToIndex(weekData[i].DayName);
+                    dated = true;
                 } else if (firstNamedDayI == null) {
                     daysUntilFirst++;
                 }
@@ -87,7 +89,7 @@ export function flattenPeriods(periodFile: PeriodFile): [Array<DayFinal>, Array<
 
         //extra days
         for (let i = 7; i < weekData.length; i++) {
-            let ed: ExtraDay = new ExtraDay;
+            let ed: ExtraDayT = new ExtraDayT;
             ed.Sessions = weekData[i].Sessions;
             ed.Period = periodCount;
             extraDays.push(ed)
@@ -102,10 +104,12 @@ export function flattenPeriods(periodFile: PeriodFile): [Array<DayFinal>, Array<
     //trick code here - just fills the array in backwards for an end date ;)
     if (typeof periodFile.Metadata.End_Date === 'string') { 
         date = stringToDate(periodFile.Metadata.End_Date);
+        dated = true;
         reverse = true; 
         combinedDaysRaw.reverse();
     } else if (typeof periodFile.Metadata.Start_Date === 'string') { 
         date = stringToDate(periodFile.Metadata.Start_Date);
+        dated = true;
     } 
   
     //if null just start on today. date left as initialised
@@ -146,7 +150,7 @@ export function flattenPeriods(periodFile: PeriodFile): [Array<DayFinal>, Array<
         }
     });
     
-    return [finalDays, extraDays];
+    return [finalDays, extraDays, dated];
 }
 
 export function sportStringToValidSport(str: string): ValidSport {
