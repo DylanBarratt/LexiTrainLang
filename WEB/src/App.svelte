@@ -16,10 +16,13 @@ let days: Array<DayFinal> = [];
 let extraDays: Array<ExtraDayT> = [];
 let dated: boolean = false;
 
+let errorMessage: string = null;
+
 function getRequiredImports(periodInp: string): Array<string> {
   try {
     return ParseImports(periodInp);
   } catch (e) {
+    errorMessage = e;
     console.error(e);
     return;
   }
@@ -44,6 +47,7 @@ function parseSF(sessionInp: string): Session {
   try {
     return ParseSession(sessionInp);
   } catch (e) {
+    errorMessage = e;
     console.error(e);
     return;
   }
@@ -53,6 +57,7 @@ function parseFullPeriod(periodInp: string, sessions: Object): PeriodFile {
   try {
     return ParseFull(periodInp, sessions);
   } catch (e) {
+    errorMessage = e;
     console.error(e);
     return;
   }
@@ -90,6 +95,8 @@ function parseAll() {
     extraDays = flattenPeriods(parsedPeriodFile)[1];
     dated = flattenPeriods(parsedPeriodFile)[2];
   } catch (e) {
+    errorMessage = e;
+    console.error(e);
     return;
   }
 
@@ -103,8 +110,8 @@ function parseAll() {
 }
 </script>
 
+<Error bind:msg={errorMessage}/>
 <main>
-<Error>
 <h1>Enter ur training</h1>
 
 <Ide on:textSubmitted={updateIdeText} />
@@ -123,5 +130,4 @@ function parseAll() {
 {#if days.length > 0 || extraDays.length > 0}
   <Calendar {days} {extraDays} {dated}/>
 {/if}
-</Error>
 </main>

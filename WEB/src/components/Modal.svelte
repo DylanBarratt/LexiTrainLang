@@ -2,7 +2,7 @@
 import {get_current_component} from 'svelte/internal'
 import DayModal from './DayModal.svelte';
 import type { DayFinal } from '../lib/DataTypes';
-  import ExtraModal from './ExtraModal.svelte';
+import ExtraModal from './ExtraModal.svelte';
 
 //0 for day, 1 for extra day
 export let modalType:number;

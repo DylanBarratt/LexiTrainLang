@@ -1,52 +1,46 @@
-<script>
-let errorMessage = '';
-let showError = false;
+<script lang="ts">
+import { afterUpdate } from 'svelte';
 
-// Function to handle errors
-function handleError(error) {
-    errorMessage = error.message || 'An error occurred';
-    showError = true;
+export let msg;
 
-    // Hide the error message after 5 seconds
-    setTimeout(() => {
-    showError = false;
-    }, 5000);
+//in ms
+const TIME_SHOWN = 5000;
+var lastTimeout: number = undefined;
+
+function scheduleDestroy() {
+    if (lastTimeout != undefined) {
+        clearTimeout(lastTimeout);
+    }
+    
+    lastTimeout = setTimeout(() => {
+        hide()
+    }, TIME_SHOWN); // Hide after 5 seconds
 }
 
-// Function to dismiss the error message
-function dismissError() {
-    showError = false;
+function hide() {
+    msg = null;
+    console.log(msg);
 }
 
-// Error boundary component to catch errors
-let ErrorBoundary = null;
-$: ErrorBoundary = {
-    $$inline: true,
-    component: null,
-    subscribe: handleError
-};
+afterUpdate(scheduleDestroy);
 </script>
 
 <style>
-    .error-popup {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background-color: #ff5555;
-        color: white;
-        padding: 10px;
-        border-radius: 5px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-        cursor: pointer;
+    .error {
+        position: fixed; 
+        bottom: 20px; 
+        right: 20px; 
+        background-color: #ff3333; 
+        color: #fff; 
+        padding: 10px; 
+        border-radius: 5px; 
+        z-index: 9999;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
     }
-    </style>
+</style>
 
-{#if showError}
-<div class="error-popup" on:click={dismissError}>
-    <p>{errorMessage}</p>
+{#if msg != null} 
+<div class="error">
+    {msg}
 </div>
 {/if}
-
-<slot></slot>
-
-  
