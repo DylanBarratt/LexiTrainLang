@@ -1,15 +1,9 @@
-# Welcome to the LexiTrain documentation
+# Welcome to the LexiTrain documentation!
 
-## Commands
+## Get Started
+To create a training plan, a period file (.lt) must be created. This can be viewed at [period file](PeriodFile.md#period-file)
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+Period files can be written and compiled in the LexiTrain based web calender at [www.LexiTrain.com/calendar](/)
 
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+<br>
+<h1 style="text-align: center;">Happy Training :)</h1> 

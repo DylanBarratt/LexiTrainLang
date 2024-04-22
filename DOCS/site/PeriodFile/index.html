@@ -1,0 +1,892 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../SessionFile/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.18">
+    
+    
+      
+        <title>Period File - LexiTrain Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.66ac8b77.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#period-file" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="LexiTrain Docs" class="md-header__button md-logo" aria-label="LexiTrain Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            LexiTrain Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Period File
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="LexiTrain Docs" class="md-nav__button md-logo" aria-label="LexiTrain Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    LexiTrain Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Period File
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Period File
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#comments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-comment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Comment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metadata
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Metadata">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#valid-metadata-tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      Valid Metadata Tags
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Valid Metadata Tags">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#training-plan-start-date" class="md-nav__link">
+    <span class="md-ellipsis">
+      Training Plan Start Date
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Metadata
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#importing-session-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importing Session Files
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#periods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Periods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Periods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-period" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Period
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#day-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Day Types
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#day-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Day Data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supported-sports" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported Sports
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workloads" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workloads
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workloads">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#time-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Time Formats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zones
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-period-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Period File
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SessionFile/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Session File
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Tokens/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tokens
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#comments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-comment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Comment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metadata
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Metadata">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#valid-metadata-tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      Valid Metadata Tags
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Valid Metadata Tags">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#training-plan-start-date" class="md-nav__link">
+    <span class="md-ellipsis">
+      Training Plan Start Date
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Metadata
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#importing-session-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importing Session Files
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#periods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Periods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Periods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-period" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Period
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#day-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Day Types
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#day-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Day Data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supported-sports" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported Sports
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workloads" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workloads
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workloads">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#time-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Time Formats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zones
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-period-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Period File
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="period-file">Period File</h1>
+<p>A period file is the main file in a LexiTrain training plan. The period file is used to describe all the training for the given training plan, split into different periods or <a href="https://www.trainingpeaks.com/blog/macrocycles-mesocycles-and-microcycles-understanding-the-3-cycles-of-periodization/?utm_source=instagram&amp;utm_medium=social&amp;utm_content=image&amp;utm_campaign=athlete2023_performance">mesocycles</a>. </p>
+<p>A period file is made up of three parts. 
+These are: <a href="#metadata">metadata</a>, <a href="#importing-session-files">session imports</a>, and <a href="#periods">periods</a>.</p>
+<p>A period file is saved with a <code>.lt</code> file extension. 
+For example: <code>meso_3.lt</code></p>
+<h2 id="comments">Comments</h2>
+<p>Comments can be included in a period file with a <code>//</code>.
+Any text after the <code>//</code> on the same line is ignored when the file is compiled.
+Comments can be used to annotate parts of the code that only the author (or anyone with access to the source files can see).</p>
+<h3 id="example-comment">Example Comment</h3>
+<p><code>//this is a comment! Hello World</code></p>
+<h2 id="metadata">Metadata</h2>
+<p><em>Metadata: information about the file</em>
+Metadata is written at the top of the period file and should include important  information about the session.
+Metadata lines are made up of two parts. The tags and data. 
+Tags are not case sensitive. 
+Data must be in <a href="../Tokens/#word">WORD</a> format</p>
+<h3 id="valid-metadata-tags">Valid Metadata Tags</h3>
+<p>File name (<code>title</code>)<br>
+Author (<code>author</code>)<br> 
+Date written (<code>date</code>)<br>
+Starting date (<code>start_date</code>)<br>
+Ending date (<code>date_date</code>)<br></p>
+<h4 id="training-plan-start-date">Training Plan Start Date</h4>
+<p>Both start and end date are not supported.
+If no date is set, the first named day is in the period file and the start date is the next found instance of that named day from current date.
+In the case that the period file contains no named days or any date metadata, the start day is the current day.</p>
+<h3 id="example-metadata">Example Metadata</h3>
+<pre><code>title: &quot;over unders&quot;.
+sport: cycling.
+author: &quot;Dylan Barratt&quot;.
+</code></pre>
+<h2 id="importing-session-files">Importing Session Files</h2>
+<p>A <a href="../SessionFile/">session file</a> describes a single workout in the training plan. 
+It is written in a seperate file and must be imported at the top of the period file 
+<code>import "session name".</code>
+The keyword <code>import</code> must be lower case
+The session name is a <a href="../Tokens/#word">WORD</a>.
+The session import line is ended by a <code>.</code></p>
+<h2 id="periods">Periods</h2>
+<p>A period is a week <a href="https://www.trainingpeaks.com/blog/macrocycles-mesocycles-and-microcycles-understanding-the-3-cycles-of-periodization/?utm_source=instagram&amp;utm_medium=social&amp;utm_content=image&amp;utm_campaign=athlete2023_performance">(microcycle)</a> in the training plan. It contains all the days to be completed that week
+A period file can contain any non-zero number of periods. 
+A period must be given a name using a <a href="../Tokens/#word">WORD</a>. 
+The period's days are then written between <code>{}</code></p>
+<h3 id="example-period">Example Period</h3>
+<pre><code>&quot;week 1&quot; {
+    Tue: (bike) 4hr &lt; HRZ3 note=&quot;long ride road&quot;,
+    Wed: (swim) 30min load=20 note=&quot;swim lesson&quot;,
+    Thu: [run_base],
+    (swim) 1hr30min load=70 note=&quot;long swim&quot;,
+    Sat: (swim) 1hr load=40 note=&quot;tech swim&quot; &amp;&amp; (bike) 1hr30min HRZ2,
+}
+</code></pre>
+<p>In the example the period is named <code>week 1</code></p>
+<h2 id="day-types">Day Types</h2>
+<p>A day is one part of a period. It contains the sessions to be completed in that day. 
+There are three types of days: <br>
+<strong>Specified</strong> - A specified day is given a day of the week that it corresponds to. This day is a <a href="../Tokens/#word">WORD</a> and must be in a specific format: <br>
+(not case sensitive) <br>
+Monday, Mon <br>
+Tuesday, Tue <br>
+Wednesday, Wed <br>
+Thursday, Thu <br>
+Friday, Fri <br>
+Saturday, Sat<br>
+Sunday, Sun <br>
+Example: <code>Tue: (bike) 4hr &lt; HRZ3 note="long ride road"</code></p>
+<p><strong>Unspecified</strong> - An unspecified day is for the athlete to decide what day to complete the given set of sessions on. In compilation this is put in an any section
+Example: <code>(swim) 1hr30min load=70 note="long swim"</code></p>
+<p><strong>Unspecified Loop</strong> - An unsepcified loop is a repeat of unspecified days. For example if the athlete is to complete three one hour runs in a week it can be written as:
+<code>3 * {(run) 1hr HRZ2}</code></p>
+<p>Days in a period are seperated by a comma (<code>,</code>) including the last day.</p>
+<h2 id="day-data">Day Data</h2>
+<p>A day can contain multiple day data entries. For example two sessions. Day data is seperated with <code>&amp;&amp;</code>. 
+Day data can be one of four types:</p>
+<p><strong>Imported</strong> - an imported session references one of the sessions imported at the top of the session file. The syntax is the imported name surronded by <code>[]</code>. Example: <code>[run_base]</code></p>
+<p><strong>Workout</strong> - a workout is a single line session. This includes a <a href="#supported-sports">supported sport</a>, sytnatically <code>(WORD)</code> e.g. <code>(run)</code>; a session <a href="#workloads">workload</a>; an optional load <code>load=</code><a href="../Tokens/#num">NUM</a>; and an optional note <code>note=</code> <a href="../Tokens/#word">WORD</a>. Example: <code>(bike) 4hr &lt; HRZ3 load=140 note="long ride road"</code></p>
+<p><strong>Session</strong> - a session is an inline version of a <a href="../SessionFile/">session file</a> see that page for the syntax</p>
+<p><strong>Notes</strong> - a note is a place the author can tell the athlete something on a day. <code>note=</code><a href="../Tokens/#word">WORD</a></p>
+<h2 id="supported-sports">Supported Sports</h2>
+<p>(not case sensitive)
+Swimming - 'swimming' 'swim' 'pool'
+Cycling  - 'cycling' 'cycle' 'bike' 'biking'
+Triathlon - 'triathlon' 'tri' 
+Duathlon  - 'duathlon' 
+Running - 'running' 'run'
+Walking 'walking' 'walk'
+Gym - 'gym' 'strength' 'strength training'
+Other - 'other'
+Note - 'note'</p>
+<h2 id="workloads">Workloads</h2>
+<p>A workload is made up of duration and intensity. It is described by a <a href="#time-formats">unit of time</a> and optionally a range from the <a href="#zones">accepted zones</a>.
+The supported workloads are: 
+<strong>No intensity</strong> - just a unit of time
+<strong>Less than</strong> - <code>&lt;</code> a zone
+<strong>Greater than</strong> - <code>&gt;</code> a zone
+<strong>Between</strong> - zone <code>-</code> zone
+<strong>At</strong> - unit of time zone</p>
+<h3 id="time-formats">Time Formats</h3>
+<p><em>Case ignored, whitespace ignored</em>
+<a href="../Tokens/#num">NUM</a> hours/hour/hrs/hr
+<a href="../Tokens/#num">NUM</a> minutes/minute/mins/min</p>
+<h3 id="zones">Zones</h3>
+<p><em>capitalisation ignored</em>
+<a href="https://www.trainingpeaks.com/blog/power-training-levels/"><strong>Power Zones</strong></a>
+PWZ1, PWZ2, PWZ3, PWZ4, PWZ5, PWZ6, PWZ7
+Also valid formats: PowerZone1, ...</p>
+<p><a href="https://journals.humankinetics.com/view/journals/ijspp/5/3/article-p276.xml"><strong>Heart Rate Zones</strong></a>
+HRZ1, HRZ2, HRZ3, HRZ4, HRZ5
+Also valid formats: HeartRateZone1, ...</p>
+<p><a href="https://journals.humankinetics.com/view/journals/ijspp/5/3/article-p276.xml"><strong>LT Zones</strong></a>
+LTZ1, LTZ2, LTZ3
+Also valid formats: LactateThresholdZone1, ...</p>
+<h2 id="example-period-file">Example Period File</h2>
+<pre><code>//metadata
+title: &quot;IM meso 3&quot;.
+author: &quot;Dylan Barratt&quot;.
+
+//session imports
+import run_base.
+
+//periods
+&quot;week 1&quot; {
+    Tue: (bike) 4hr &lt; HRZ3 note=&quot;long ride road&quot;,
+    Wed: (swim) 30min load=20 note=&quot;swim lesson&quot;,
+    Thu: [run_base],
+    Sun: (run) 2hr30min &lt; HRZ3 note=&quot;long run&quot;
+}
+
+
+&quot;week 2&quot; {
+    Mon: note=&quot;Wow cool note!!&quot;,
+    Wed: (tri) 60min load=60 note=&quot;Varsity Race!&quot;,
+    Thu: [run_base],
+    Fri: (swim) 1hr30min load=70 note=&quot;long swim&quot;,
+    Sun: (run) 2hr30min &lt; HRZ3 note=&quot;long run&quot;
+}
+
+loop_week {
+    3 * {(run) 1hr HRZ2}
+}
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.3220b9d7.min.js"></script>
+      
+    
+  </body>
+</html>
