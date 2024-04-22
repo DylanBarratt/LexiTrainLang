@@ -1,4 +1,4 @@
-import { DayFinal, type Day, type Period, type PeriodFile, ValidSport, IntensityZone, ExtraDayT } from "./DataTypes";
+import { DayFinal, type Day, type Period, type PeriodFile, ValidSport, IntensityZone, ExtraDayT, Session, DayData, WLType, intensityZoneProperties } from "./DataTypes";
 
 function dayNameToIndex(dayName: string): number {
     // Convert the day name to lowercase for case insensitivity
@@ -280,4 +280,62 @@ export function stringToZone(inp: string): IntensityZone {
 export function validTimeString(inp: String): boolean {
     const pattern = /^(\d+)(hours?|hrs?)?(\d+)?(mins?|minutes?)?$/;
     return pattern.test(inp.replace(/\s/g, '').toLowerCase());
+}
+
+export function DayDataToString(inp: Array<DayData>): string {
+    var out: string = '';
+
+    inp.forEach((_, i) => {
+        if (inp[i].Sport != null) {
+            out += inp[i].Sport + ": \n";
+        }
+
+        if (inp[i].Sections !== undefined) {
+            inp[i].Sections.forEach(section => {
+                if (section.Title != null) {
+                    out += section.Title + ': \n';
+                }
+                section.Workloads.forEach(workload => {
+                    if (workload.Load !== null) {
+                        out += "load " + workload.Load + '\n';
+                    }
+        
+                    if (workload.Notes !== null) {
+                        out += '"' + workload.Notes + '"' + '\n';
+                    }
+        
+                    for (let i = 0; i < workload.Repeats; i++) {
+                        if (workload.Workload.Type == WLType.LessThan) {
+                            out += workload.Workload.Time + "<" + intensityZoneProperties[workload.Workload.Zone[0]].name
+                        } else if (workload.Workload.Type == WLType.GreaterThan) {
+                            out += workload.Workload.Time + ">" + intensityZoneProperties[workload.Workload.Zone[0]].name
+                        } else if (workload.Workload.Type == WLType.Between) {
+                            out += workload.Workload.Time + " " + intensityZoneProperties[workload.Workload.Zone[0]].name + "-" +intensityZoneProperties[workload.Workload.Zone[1]].name
+                        } else if (workload.Workload.Type == WLType.At) {
+                            out += workload.Workload.Time + " " + intensityZoneProperties[workload.Workload.Zone[0]].name
+                        } else if (workload.Workload.Type == WLType.None) {
+                            out += workload.Workload.Time
+                        }
+
+                        out += '\n\n';
+                    }
+                })
+            })
+        }
+
+        if (inp[i].Notes != null) {
+            out += "Notes: \"" + inp[i].Notes + '"' + '\n';
+        }
+
+        out += '\n';
+    })
+
+    return out;
+}
+
+export function shortenString(str: string, maxLength: number) {
+    if (str.length > maxLength) {
+      return str.substring(0, maxLength - 3) + '...';
+    }
+    return str;
 }

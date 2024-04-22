@@ -8,7 +8,7 @@ export default class SessionListener extends SessionFileListener {
     sections: Array<Section> = [];
 
     workloads: Array<WorkloadExtended> = [];
-    repeats: number = 0;
+    repeats: number = 1;
 
     currSection:number = 0;
 
@@ -64,7 +64,7 @@ export default class SessionListener extends SessionFileListener {
     }
 
     exitStructure() {
-        this.repeats = 0;
+        this.repeats = 1;
     }
 
     wlType: WLType = null;

@@ -16,6 +16,7 @@
   "dependencies": {
     "antlr4": "^4.13.1-patch-1",
     "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
     "svelte-routing": "^2.12.0"
   }
 }

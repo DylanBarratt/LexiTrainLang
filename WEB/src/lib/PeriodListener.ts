@@ -53,18 +53,18 @@ export default class PeriodListener extends LTListener {
     }
 
     private currDay: Day;
-    private repeats: number = 0;
+    private repeats: number = 1;
     private sessions: Array<DayData>
     enterDay(ctx: any): void {
         this.currDay = new Day;
 
         if (ctx.WORD()) { //specified day
             this.currDay.DayName = ctx.WORD().getText();
-            this.repeats = 0;
+            this.repeats = 1;
         } else if (ctx.NUM()) {
             this.repeats = parseInt(ctx.NUM().getText(), 10);  //num of loops
         } else {
-            this.repeats = 0;
+            this.repeats = 1;
         }
 
         this.sessions = []; 
@@ -226,7 +226,7 @@ export default class PeriodListener extends LTListener {
 
         this.periods[this.currPeriod].Days.push(this.currDay);
         
-        if (this.repeats > 0) {
+        if (this.repeats > 1) {
             for (let i = 0; i < this.repeats - 1; i++) {
                 this.periods[this.currPeriod].Days.push(this.currDay)
             }

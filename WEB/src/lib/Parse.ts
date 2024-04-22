@@ -61,7 +61,7 @@ export function removeOldSessionFile(oldName: string, unparsedSessionFiles: obje
     return unparsedSessionFiles;
 }
 
-export function parseAll(ideText: string, requiredImports: Array<string>, unparsedSessionFiles: object): parseReturnObj {
+export function parseAll(ideText: string, requiredImports: Array<string>, unparsedSessionFiles: object): PeriodFile {
     let parsedSessions: object = null;
     let parsedPeriodFile: PeriodFile = null;
 
@@ -71,19 +71,5 @@ export function parseAll(ideText: string, requiredImports: Array<string>, unpars
         throw e;
     }
 
-    parsedPeriodFile = parseFullPeriod(ideText, parsedSessions);
-
-    var returnObj: parseReturnObj = {days: null, extraDays: null, dated: null};
-    try {
-        var fpResult = flattenPeriods(parsedPeriodFile) 
-        returnObj.days = fpResult[0];
-        returnObj.extraDays = fpResult[1];
-        returnObj.dated = fpResult[2];
-    } catch (e) {
-        throw e;
-    }
-
-    //todo: process metadata
-
-    return returnObj;
+    return parseFullPeriod(ideText, parsedSessions);
 }

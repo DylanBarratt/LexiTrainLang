@@ -71,15 +71,15 @@ export class Workload {
 };
 
 export enum ValidSport {
-    Swimming,
-    Cycling,
-    Running,
-    Triathlon, 
-    Duathlon,
-    Walking,
-    Gym,
-    Other,
-    Note
+    Swimming = 'Swim',
+    Cycling = 'Cycle',
+    Running = 'Run',
+    Triathlon = 'Tri', 
+    Duathlon = 'Duathlon',
+    Walking = 'Walk',
+    Gym = 'Gym',
+    Other = 'Other',
+    Note = 'Note'
 }
 
 export enum IntensityZone {
