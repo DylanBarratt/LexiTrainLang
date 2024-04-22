@@ -1,6 +1,5 @@
 import { ParseImports, ParseSession, ParseFull } from "./Antlr";
-import type { Session, PeriodFile, FileString, parseReturnObj } from "./DataTypes";
-import { flattenPeriods } from "./HelperFunctions";
+import type { Session, PeriodFile } from "./DataTypes";
 
 export function getRequiredImports(periodInp: string): Array<string> {
     try {
@@ -63,7 +62,7 @@ export function removeOldSessionFile(oldName: string, unparsedSessionFiles: obje
 
 export function parseAll(ideText: string, requiredImports: Array<string>, unparsedSessionFiles: object): PeriodFile {
     let parsedSessions: object = null;
-    
+
     try {
         parsedSessions = parseSFS(requiredImports, unparsedSessionFiles);
     } catch (e) {

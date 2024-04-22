@@ -1,4 +1,4 @@
-import { DayFinal, type Day, type Period, type PeriodFile, ValidSport, IntensityZone, ExtraDayT, Session, DayData, WLType, intensityZoneProperties } from "./DataTypes";
+import { DayFinal, type Day, type Period, type PeriodFile, ValidSport, IntensityZone, ExtraDayT,  DayData, WLType, intensityZoneProperties } from "./DataTypes";
 
 function dayNameToIndex(dayName: string): number {
     // Convert the day name to lowercase for case insensitivity

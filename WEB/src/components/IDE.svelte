@@ -72,24 +72,21 @@ function updateFile(event: CustomEvent<FileUploadOut>) {
 </script>
 
 <style>
-.container {
-  display: flex;
+.ide-container {
+  width: 100%;
+  min-height: 200px;
+  height: 60vh;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-family: 'Courier New', Courier, monospace;
 }
 
-.line-numbers {
-  font-family: monospace;
-  margin-right: 5px;
-  margin-left: 10px;
-  background-color: #f4f4f4;
-}
-
-.textarea-container {
-  flex: 1;
-}
-
-textarea {
-  width: 90vw;
-  height: 600px;
+.code-input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
   resize: none;
 }
 </style>
@@ -100,15 +97,8 @@ textarea {
     <button on:click|preventDefault={togglePeriodUpload}>{changePeriodUpload ? 'Use File Upload' : 'Use IDE'}</button>
     <br /><br />
     {#if changePeriodUpload}
-      <div class="container">
-        <div class="line-numbers">
-          {#each textareaData.split('\n') as line, i (i)}
-            <div>{i + 1}</div>
-          {/each}
-        </div>
-        <div class="textarea-container">
-          <textarea bind:value={textareaData}></textarea>
-        </div>
+      <div class="ide-container">
+        <textarea class="code-input" bind:value={textareaData}></textarea>
       </div>
     {:else}
       <FileUpload 

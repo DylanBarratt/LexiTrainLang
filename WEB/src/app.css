@@ -4,6 +4,13 @@
   color: #333;
 }
 
+body {
+  padding-left: 5vw;
+  padding-right: 5vw;
+  margin-top: 5vh;
+  overflow-x: hidden;
+}
+
 .day {
   border: 1px solid #ccc;
   height: 125px;  
