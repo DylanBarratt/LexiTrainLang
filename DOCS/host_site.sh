@@ -7,11 +7,14 @@ SITE_NAME=LexiTrain_docs
 IP=127.0.0.1 # May need to change to your ip 
 
 cleanup() {
-    echo "stopping apache server"
+    echo -e "\nstopping apache server"
     sudo systemctl stop apache2
 }
 
 trap cleanup EXIT
+
+echo "Building site:"
+python3 -m mkdocs build
 
 sudo mkdir -p /var/www/html/$SITE_NAME
 sudo cp -r ./site/* /var/www/html/$SITE_NAME/
@@ -22,6 +25,7 @@ sudo chmod -R 755 /var/www/html/$SITE_NAME
 sudo systemctl restart apache2
 
 echo http://$IP/$SITE_NAME
+echo "Press ctrl+c to exit"
 
 while :
 do
