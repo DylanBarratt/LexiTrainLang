@@ -63,8 +63,7 @@ export function removeOldSessionFile(oldName: string, unparsedSessionFiles: obje
 
 export function parseAll(ideText: string, requiredImports: Array<string>, unparsedSessionFiles: object): PeriodFile {
     let parsedSessions: object = null;
-    let parsedPeriodFile: PeriodFile = null;
-
+    
     try {
         parsedSessions = parseSFS(requiredImports, unparsedSessionFiles);
     } catch (e) {
