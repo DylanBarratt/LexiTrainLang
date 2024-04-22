@@ -17,7 +17,7 @@ sectionContents
     
 structure: NUM '*' '{' workloads '}';
 
-workloads: workload ('&&' workload)*;
+workloads: workload ('&&' workload)* ('&&')?;
 
 note: NOTES WORD;
 

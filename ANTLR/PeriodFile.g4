@@ -13,7 +13,7 @@ sessionImport: IMPORT WORD '.';
 periods: (period)+; // e.g. multiple weeks
 
 period // e.g. a week
-    : WORD '{' day (',' day)* '}' 
+    : WORD '{' day (',' day)* (',')? '}' 
     ;
 
 day
@@ -22,7 +22,7 @@ day
     | dayLoop //non-specified day
     ;
 
-dayLoop: dayData ('&&' dayData)*;
+dayLoop: dayData ('&&' dayData)* ('&&')?;
 
 dayData
     : imported //imported
@@ -43,7 +43,7 @@ session //inline session
 
 sessionSection: WORD '{' (workloads | NUM '*' '{' workloads '}') '}'; //single workloads or repeated workloads
 
-workloads: workloadL ('&&' workloadL)*;
+workloads: workloadL ('&&' workloadL)* ('&&')?;
 
 workloadL: (workload)? (LOAD NUM)? (NOTES WORD)?; // workload load notes (all are optional)
 
