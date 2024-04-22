@@ -132,7 +132,6 @@ function populateCalendarData() {
 
       if (weekStarted === undefined) {
         weekStarted = Math.floor(i / 7);
-        console.log(weekStarted);
       }
 
       found.forEach(day => {
@@ -147,7 +146,6 @@ function populateCalendarData() {
   }
 
   monthArr = monthArr; 
-  console.log(monthArr);
 }
 
 function getDayNum(index: number): number {

@@ -140,3 +140,9 @@ export class ExtraDayT {
     Sessions: Array<DayData>;
     Period: number;
 }
+
+export class parseReturnObj {
+    days: Array<DayFinal>;
+    extraDays: Array<ExtraDayT>;
+    dated: boolean;
+}

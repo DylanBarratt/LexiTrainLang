@@ -4,8 +4,6 @@ import Modal from "./Modal.svelte";
 import SportIcon from "./SportIcon.svelte";
 
 export let eDs: Array<ExtraDayT>;
-
-console.log(eDs);
   
 function showDataModal() {
     //day modal is generated on press rather than pre generated per day

@@ -5,8 +5,6 @@ import IntensityZone from "./IntensityZone.svelte";
 
 export let dayData: DayFinal;
 
-console.log(dayData);
-
 </script>
 
 {#each dayData.Sessions as session}

@@ -60,8 +60,6 @@ function updateFile(event: CustomEvent<FileUploadOut>) {
 
     reader.onload = function(event) {
       uploadedFile = event.target.result as string;
-      console.log(uploadedFile);
-      
     };
 
     reader.onerror = function(event) {
@@ -96,10 +94,11 @@ textarea {
 }
 </style>
 
+<br />
 <div>
   <form>
     <button on:click|preventDefault={togglePeriodUpload}>{changePeriodUpload ? 'Use File Upload' : 'Use IDE'}</button>
-  
+    <br /><br />
     {#if changePeriodUpload}
       <div class="container">
         <div class="line-numbers">
@@ -121,4 +120,4 @@ textarea {
     <br />   
     <button on:click|preventDefault={btnSubmit}>Submit</button>
   </form>
-</div>
+</div> <br />
