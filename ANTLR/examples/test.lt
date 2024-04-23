@@ -1,0 +1,6 @@
+import test_session.
+
+"week one" {
+    mon: [test_session],
+    [test_session]
+}

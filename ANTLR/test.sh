@@ -1,8 +1,8 @@
 #!/bin/bash
 ./out.sh
 
-TEST_FILE="../examples/meso_3.lt"
-TYPE="PeriodFile"
+TEST_FILE="../examples/test.lt"
+TYPE="Imports"
 
 echo "Testing $TEST_FILE"
 cd Java

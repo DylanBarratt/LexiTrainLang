@@ -3,7 +3,7 @@ grammar PeriodFile;
 import BaseLexer;
 
 //parser rules
-file: metaDatas (sessionImport)* periods EOF;
+file: metaDatas (sessionImport)* (periods)* EOF;
 
 metaDatas: (metaData)*;
 metaData: WORD ':' (WORD|NUM) '.';

@@ -216,9 +216,6 @@ export function stringToDate(dateString: string):Date {
             throw new Error('Invalid date format (' + dateString + '). Please use the format dd/mm/yyyy.');
         }
 
-        if (!isValidDate(dateString)) {
-            throw new Error('Invalid date name (' + dateString + ').');
-        }
 
         const parts = dateString.split('/');
         const day = parseInt(parts[0], 10);
