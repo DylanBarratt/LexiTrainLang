@@ -64,13 +64,34 @@ function generatePDF() {
     } else {
         doc.text("LexiTrain", margin , curY);
     }
-
-    //metadata
-    //todo
-
-    //periods
     curY += margin;
 
+    //metadata
+    if (parseReturn.Metadata.Author !== null) {
+        doc.setFontSize(26); 
+        doc.text("By: " + parseReturn.Metadata.Author, margin, curY)
+        curY += margin;
+    }
+
+    if (parseReturn.Metadata.Date !== null) {
+        doc.setFontSize(22); 
+        doc.text("Written on: " + parseReturn.Metadata.Date, margin, curY)
+        curY += margin;
+    }
+
+    if (parseReturn.Metadata.Start_Date !== null) {
+        doc.setFontSize(22); 
+        doc.text("Start on: " + parseReturn.Metadata.Start_Date, margin, curY)
+        curY += margin;
+    }
+
+    if (parseReturn.Metadata.End_Date !== null) {
+        doc.setFontSize(22); 
+        doc.text("Start on: " + parseReturn.Metadata.End_Date, margin, curY)
+        curY += margin;
+    }
+
+    //periods
     let days = [["mon", "tue", "wed", "thu", "fri", "sat", "sun", "any"]]
 
     var bodyData = [];

@@ -1,4 +1,4 @@
-import { DayFinal, type Day, type Period, type PeriodFile, ValidSport, IntensityZone, ExtraDayT,  DayData, WLType, intensityZoneProperties } from "./DataTypes";
+import { DayFinal, type Day, type Period, type PeriodFile, ValidSport, IntensityZone, ExtraDayT,  DayData, WLType, intensityZoneProperties, flattenParseT } from "./DataTypes";
 
 function dayNameToIndex(dayName: string): number {
     // Convert the day name to lowercase for case insensitivity
@@ -57,7 +57,7 @@ function daysToWeek(days: Array<Day>): Array<Day> {
 
 // I don't like this function... feels messy - Dylan
 // flatten periods in a period file
-export function flattenPeriods(periodFile: PeriodFile): [Array<DayFinal>, Array<ExtraDayT>, boolean] {
+export function flattenPeriods(periodFile: PeriodFile): flattenParseT {
     let combinedDaysRaw: Array<Day | null> = [];
     let extraDays: Array<ExtraDayT> = [];
 
@@ -150,7 +150,9 @@ export function flattenPeriods(periodFile: PeriodFile): [Array<DayFinal>, Array<
         }
     });
     
-    return [finalDays, extraDays, dated];
+    let finalR: flattenParseT = {Days: finalDays, ExtraDays: extraDays, Dated: dated, Metadata: periodFile.Metadata};
+
+    return finalR;
 }
 
 export function sportStringToValidSport(str: string): ValidSport {

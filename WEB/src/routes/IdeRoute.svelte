@@ -5,16 +5,14 @@ import ErrorC from '../components/ErrorC.svelte';
 import Ide from '../components/IDE.svelte';
 import SessionUpload from '../components/SessionUpload.svelte';
 
-import type { DayFinal, ExtraDayT, FileString, parseReturnObj } from '../lib/DataTypes';
+import { flattenParseT, type DayFinal, type ExtraDayT, type FileString, type parseReturnObj } from '../lib/DataTypes';
 import { getRequiredImports, parseAll, removeOldSessionFile, sessionFileProcessed } from '../lib/Parse';
 import { flattenPeriods } from '../lib/HelperFunctions';
 
 let periodInp: string;
 let requiredImports: Array<string> = [];
 let unparsedSessionFiles: object = {};
-let days: Array<DayFinal> = [];
-let extraDays: Array<ExtraDayT> = [];
-let dated: boolean = false;
+let flattenedParse: flattenParseT;
 
 let errorMessage: string = null;
 let showCalender: boolean = false;
@@ -38,14 +36,11 @@ function removeOld(e: CustomEvent<string>) {
 }
 
 function parseAllA() {
-    var fpResult;
     try {
-        fpResult = flattenPeriods(parseAll(periodInp, requiredImports, unparsedSessionFiles));
-        //todo: process metadata
-        days = fpResult[0];
-        extraDays = fpResult[1];
-        dated = fpResult[2];
+        flattenedParse = flattenPeriods(parseAll(periodInp, requiredImports, unparsedSessionFiles));
         showCalender = true;
+        console.log(flattenedParse.Metadata);
+        
     } catch (e) {
         errorMessage = e;
     }
@@ -59,6 +54,12 @@ function resetOnChange() {
     showCalender = false;
 }
 </script>
+
+<style>
+    .metaData {
+        padding-left: 5vw;
+    }
+</style>
 
 <ErrorC bind:msg={errorMessage}/>
 <main>
@@ -81,7 +82,20 @@ function resetOnChange() {
 </main>
 
 {#if showCalender}
-    {#if days.length > 0 || extraDays.length > 0}
-        <Calendar {days} {extraDays} {dated}/>
+    <div class="metaData">
+        {#if flattenedParse.Metadata["Title"] !== null} 
+            <h2>{flattenedParse.Metadata["Title"]}</h2>
+        {/if}
+        {#if flattenedParse.Metadata["Author"] !== null} 
+            <h3>Written by: {flattenedParse.Metadata["Author"]}</h3>
+        {/if}
+        {#if flattenedParse.Metadata["Date"] !== null} 
+            <h3>{flattenedParse.Metadata["Date"]}</h3>
+        {/if}
+    </div>
+    
+    {#if flattenedParse.Days.length > 0 || flattenedParse.ExtraDays.length > 0}
+        <Calendar days={flattenedParse.Days} extraDays={flattenedParse.ExtraDays} dated={flattenedParse.Dated}/>
+        <br /><br /><br /><br />
     {/if}
 {/if}

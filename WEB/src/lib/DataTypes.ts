@@ -146,3 +146,10 @@ export class parseReturnObj {
     extraDays: Array<ExtraDayT>;
     dated: boolean;
 }
+
+export class flattenParseT {
+    Days: Array<DayFinal>;
+    ExtraDays: Array<ExtraDayT>;
+    Dated: boolean = false;
+    Metadata: object;
+}
