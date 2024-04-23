@@ -38,10 +38,12 @@ function removeOld(e: CustomEvent<string>) {
 }
 
 function parseAllA() {
-    parseReturn = parseAll(periodInp, requiredImports, unparsedSessionFiles);
-    showPdfBtn = true;
-    console.log(parseReturn);
-    
+    try {
+        parseReturn = parseAll(periodInp, requiredImports, unparsedSessionFiles);
+        showPdfBtn = true;
+    } catch(e) {
+        errorMessage = e;
+    }
 }
 
 function generatePDF() {
@@ -77,8 +79,6 @@ function generatePDF() {
         var week = Array(8).fill("");
         //TODO write a sessions to string function
         period.Days.forEach(day => {
-            console.log(day.Sessions);
-            
             let dn = day.DayName
             if (day.DayName === null) {
                 dn = "any"
@@ -136,28 +136,37 @@ function generatePDF() {
 
     doc.save('compiled.pdf');
 }
+
+function change() {
+    requiredImports = [];
+    unparsedSessionFiles = {};
+    parseReturn = null;
+    showPdfBtn = false;
+}
 </script>
 
 <ErrorC bind:msg={errorMessage}/>
-<h1>LexiTrain to PDF</h1>
+<main>
+    <h1>LexiTrain to PDF</h1>
 
-<Link to="/"> Go to calendar compiler </Link> <br />
+    <Link to="/"> Go to calendar compiler </Link> <br />
 
-<Ide on:textSubmitted={updateIdeText}/> 
+    <Ide on:textSubmitted={updateIdeText} on:change={change}/> 
 
-{#if requiredImports.length > 0}
-{#each requiredImports as importName, i}
-    <SessionUpload 
-        {i}
-        fileNeeded={importName} 
-        on:FileProccessed={updateSessionFile}
-        on:RemoveOldName={removeOld}/>
-{/each}
+    {#if requiredImports.length > 0}
+    {#each requiredImports as importName, i}
+        <SessionUpload 
+            {i}
+            fileNeeded={importName} 
+            on:FileProccessed={updateSessionFile}
+            on:RemoveOldName={removeOld}/>
+    {/each}
 
-<button type="submit" on:click={parseAllA}>Parse all!</button> <br /> <br />
-{/if}
+    <button type="submit" on:click={parseAllA}>Parse all!</button> <br /> <br />
+    {/if}
 
-{#if showPdfBtn}
-    <button on:click={generatePDF}>Generate PDF</button>
-{/if}
+    {#if showPdfBtn}
+        <button on:click={generatePDF}>Generate PDF</button>
+    {/if}
 
+</main>

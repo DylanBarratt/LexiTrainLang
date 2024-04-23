@@ -54,19 +54,25 @@ function btnSubmit() {
 }
 
 function updateFile(event: CustomEvent<FileUploadOut>) {
+  change();
+  
   let fileRaw = event.detail;
 
-    const reader = new FileReader();
+  const reader = new FileReader();
 
-    reader.onload = function(event) {
-      uploadedFile = event.target.result as string;
-    };
+  reader.onload = function(event) {
+    uploadedFile = event.target.result as string;
+  };
 
-    reader.onerror = function(event) {
-        throw new Error('Error occurred while reading the file:', event.target.error);
-    };
+  reader.onerror = function(event) {
+      throw new Error('Error occurred while reading the file:', event.target.error);
+  };
 
-    reader.readAsText(fileRaw.File); 
+  reader.readAsText(fileRaw.File); 
+}
+
+function change() {
+  dispatch('change');
 }
 
 </script>
@@ -98,7 +104,7 @@ function updateFile(event: CustomEvent<FileUploadOut>) {
     <br /><br />
     {#if changePeriodUpload}
       <div class="ide-container">
-        <textarea class="code-input" bind:value={textareaData}></textarea>
+        <textarea class="code-input" on:input={change} bind:value={textareaData}></textarea>
       </div>
     {:else}
       <FileUpload 
