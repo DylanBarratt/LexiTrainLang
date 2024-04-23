@@ -43,6 +43,7 @@ let uploadedFile: string = "";
 let changePeriodUpload = true;
 function togglePeriodUpload() {
   changePeriodUpload = !changePeriodUpload;
+  change();
 }
 
 function btnSubmit() {
