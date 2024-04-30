@@ -1,6 +1,16 @@
+title: "title 123".
+
 import test_session.
+
+weekone {
+    (bike) 1hr HRZ2,
+    tue: (swim) 1hr HRZ1 load=40 note="test note",
+    3 * {(run) 30min},
+    sun: (bike) 1hr HRZ2 - HRZ3 && (run) 1hr < HRZ4,
+}
 
 "week one" {
     mon: [test_session],
-    [test_session]
+    [test_session],
+    wed: {(run) warmup {1hr}  main {1hr PWZ7}  cooldown {30min PW2}}
 }

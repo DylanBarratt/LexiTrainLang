@@ -2,7 +2,7 @@
 ./out.sh
 
 TEST_FILE="../examples/test.lt"
-TYPE="Imports"
+TYPE="PeriodFile"
 
 echo "Testing $TEST_FILE"
 cd Java
