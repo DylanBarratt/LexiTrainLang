@@ -20,7 +20,7 @@ main {
 }
 
 button {
-  background-color: #007bff;
+  background-color: #0084ff;
   color: white;
   padding: 0.5em 1em;
   border: none;
@@ -29,5 +29,5 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #004c9e;
 }

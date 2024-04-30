@@ -1,6 +1,6 @@
 import { DayFinal, type Day, type Period, type PeriodFile, ValidSport, IntensityZone, ExtraDayT,  DayData, WLType, intensityZoneProperties, flattenParseT } from "./DataTypes";
 
-function dayNameToIndex(dayName: string): number {
+export function dayNameToIndex(dayName: string): number {
     // Convert the day name to lowercase for case insensitivity
     var lowerCaseDayName = dayName.toLowerCase();
 
@@ -19,7 +19,7 @@ function dayNameToIndex(dayName: string): number {
     return dayMap[lowerCaseDayName];
 }
 
-function daysToWeek(days: Array<Day>): Array<Day> {
+export function daysToWeek(days: Array<Day>): Array<Day> {
     var fullWeek: Array<Day> = Array(7).fill(null);
     var extraI = 7;
     days.forEach((day: Day) => {
