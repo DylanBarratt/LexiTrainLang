@@ -3,11 +3,13 @@ import { DayDataToString, dayNameToIndex, daysToWeek, flattenPeriods, shortenStr
 
 describe('Testing all helper functions', () => {
   describe('dayNameToIndex function', () => {
-    test('days input', () => {
+    test('Correct days', () => {
       expect(dayNameToIndex('sun')).toBe(0);
       expect(dayNameToIndex('ThU')).toBe(4);
-      expect(dayNameToIndex('fail')).toBe(undefined);
     });
+    test('Incorrect day', () => {
+      expect(dayNameToIndex('fail')).toBe(undefined);
+    })
   });
 
   describe('daysToWeek function', () => {
