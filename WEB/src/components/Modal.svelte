@@ -22,7 +22,7 @@ function destroyModal() {
     left: 0; 
 
     width: 100%; 
-    height: 100%; 
+    height: 75vw; 
 
     background-color: rgba(0, 0, 0, 0.5); 
     z-index: 1000; 
@@ -30,12 +30,11 @@ function destroyModal() {
 
 .modal-content {
     position: absolute; 
-    top: 50%; 
+    top: 35%; 
     left: 50%; 
 
-    width: 50vw;
-    height: 100%;
-    max-height: 75vw;
+    width: 50%;
+    height: 50%;
 
     overflow-y: scroll;
 
