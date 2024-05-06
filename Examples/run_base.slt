@@ -1,0 +1,17 @@
+title: "run base".
+sport: "running".
+author: "Dylan Barratt".
+load: 50.
+
+warmup {
+	15min HRZ1
+}
+
+main {
+	45min < HRZ3
+} 
+
+note="include some strides"
+"cool down w/ strides" {
+	15min < HRZ2
+}
