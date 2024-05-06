@@ -9,4 +9,5 @@ The web code is run using node. The first time will need an npm install (`npm i`
 `npm run dev` will locally run a development build for testing
 
 ## Running the documentation
-mkdocs needs to be installed for a fresh compile. Then the host_site.sh script can be run to serve the documentation on an ubuntu apache server.
+mkdocs needs to be installed for a fresh compile (https://www.mkdocs.org/user-guide/installation/ and https://squidfunk.github.io/mkdocs-material/getting-started/).
+Then the host_site.sh script can be run to serve the documentation on an ubuntu apache server.
