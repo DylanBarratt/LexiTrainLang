@@ -23,31 +23,42 @@ export function daysToWeek(days: Array<Day>): Array<Day> {
     var fullWeek: Array<Day> = Array(7).fill(null);
     var extraI = 7;
     days.forEach((day: Day) => {
-        switch (day.DayName) {
-            case "Mon":
+        var dayName = day.DayName;
+        if (day.DayName != null) {
+            dayName = dayName.toLowerCase()
+            console.log(dayName);
+        }
+        
+        
+        switch (dayName) {
+            case "mon":
                 fullWeek[0] = day
                 break;
-            case "Tue":
+            case "tue":
                 fullWeek[1] = day
                 break;
-            case "Wed":
+            case "wed":
                 fullWeek[2] = day
                 break;
-            case "Thu":
+            case "thu":
                 fullWeek[3] = day
                 break;
-            case "Fri":
+            case "fri":
                 fullWeek[4] = day
                 break;
-            case "Sat":
+            case "sat":
                 fullWeek[5] = day
                 break;
-            case "Sun":
+            case "sun":
                 fullWeek[6] = day
                 break;
-            default:
+            case null:
                 fullWeek[extraI] = day
                 extraI++;
+                break;
+            default:
+                throw new Error ("Invalid day name: " + day.DayName)
+                
                 break;
         }
     });

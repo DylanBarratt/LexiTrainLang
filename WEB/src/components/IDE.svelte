@@ -112,6 +112,12 @@ function change() {
         fileNeeded="Peroid File" 
         fileExtensions={[".lt"]}
         on:FileUploaded={updateFile}/>
+
+        {#if uploadedFile}
+          <!-- todo probs very unsafe lol -->
+          <p>{@html uploadedFile.replace(/\n/g, '<br/>').replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;')}</p>
+          <br />
+        {/if}
     {/if}
   
     <br />   

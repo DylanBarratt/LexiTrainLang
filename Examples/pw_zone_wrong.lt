@@ -1,0 +1,15 @@
+title: "title 123".
+
+import test_session.
+
+weekone {
+    Mon: (bike) 1hr HRZ2,
+    tue: (swim) 1hr HRZ1 load=40 note="test note",
+    Wed: (bike) 1hr HRZ2 - HRZ3 && (run) 1hr < HRZ4,
+}
+
+"week one" {
+    [test_session],
+    [test_session],
+    {(run) warmup {1hr}  main {1hr PWZ7}  cooldown {30min PWZ2}}
+}

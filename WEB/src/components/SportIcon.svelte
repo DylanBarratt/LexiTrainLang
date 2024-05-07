@@ -53,11 +53,19 @@ function getItemType(): void {
 onMount(getItemType);
 </script>
 
+<style>
+    i {
+        width: 32px;
+        height: 32px;
+        margin-top: 5px;
+    }
+</style>
+
 {#if itemType === "3"}
     <i class="fa-solid fa-person-swimming"></i><i class="fa-solid fa-person-biking"></i><i class="fa-solid fa-person-running"></i>
 {:else if itemType === "2"}
-    <i class="fa-solid fa-person-biking"></i><i class="fa-solid fa-person-swimming"></i>
+    <i class="fa-solid fa-person-biking fa-lg"></i><i class="fa-solid fa-person-swimming fa-lg"></i>
 {:else}
-    <i class={itemType}></i>
+    <i class={itemType + " fa-lg"} ></i>
 {/if}
     
