@@ -22,7 +22,7 @@ function destroyModal() {
     left: 0; 
 
     width: 100%; 
-    height: 75vw; 
+    height: 100%; 
 
     background-color: rgba(0, 0, 0, 0.5); 
     z-index: 1000; 
@@ -50,10 +50,11 @@ function destroyModal() {
 .close {
     position: sticky;
     justify-self: end;
-
-    font-size: 20px; 
+    
     cursor: pointer; 
 
+    font-weight: bolder;
+    
     width: 2rem;
     height: 2rem;
 }
