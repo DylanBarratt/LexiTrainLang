@@ -1,8 +1,6 @@
 <p align="center">
-  <img src="./Logo.png" alt="LexiTrain Logo" />
+  <img src="./Logo.png" alt="LexiTrain Logo" width="250" height="250"/>
 </p>
-
-<br />
 
 # LexiTrain project
 LexiTrain was created as a dissertation project in my final year as a computer science undergraduate at Swansea University.
