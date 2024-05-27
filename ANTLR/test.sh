@@ -1,5 +1,12 @@
 #!/bin/bash
+
+if [ "$(basename "$PWD")" != "ANTLR" ]; then
+    cd "ANTLR" || exit 1
+fi
+
+./check_lib.sh
 ./out.sh
+
 
 TEST_FILE="../examples/test.lt"
 TYPE="PeriodFile"

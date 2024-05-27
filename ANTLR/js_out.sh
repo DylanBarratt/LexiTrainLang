@@ -1,5 +1,12 @@
 #!/bin/bash
+
+if [ "$(basename "$PWD")" != "ANTLR" ]; then
+    cd "ANTLR" || exit 1
+fi
+
+./check_lib.sh
 ./out.sh
+
 rm -rf ../WEB/SRC/lib/lt
 
 java -jar /usr/local/lib/antlr-4.13.1-complete.jar ./PeriodFile.g4 -o ../WEB/src/lib/lt -Dlanguage=JavaScript -visitor
