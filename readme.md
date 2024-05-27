@@ -49,5 +49,6 @@ The web code is run using [Node](https://nodejs.org/en/download/). The first tim
 ## Running the Documentation
 A compiled version is [here](./DOCS/site/).
 mkdocs needs to be installed for a fresh compile [mkdocs](https://www.mkdocs.org/user-guide/installation/) & [mcdocs material](https://squidfunk.github.io/mkdocs-material/getting-started/).
-The host_site.sh script can be run to serve the documentation on an ubuntu apache server (works on my Ubuntu 24.04 LTS pc).
+
+The host_site.sh script can be run to serve the documentation on an ubuntu apache server (requires [apache 2](https://ubuntu.com/server/docs/how-to-install-apache2)).
 
