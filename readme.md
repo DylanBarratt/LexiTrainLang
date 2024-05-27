@@ -11,19 +11,17 @@ The project source is split into three parts: the ANTLR code, the website compil
 
 ![LexiTrain Preview](./preview.gif)
 
-<div style="text-align: center;">
   <a href="https://www.antlr.org/" style="text-decoration: none;">
     <img src="https://www.svgrepo.com/show/373431/antlr.svg" alt="ANTLR logo" width="50" height="50" />
   </a>
 
   <a href="https://svelte.dev/" style="text-decoration: none;">
-    <img src="https://www.devoteam.com/wp-content/uploads/2024/02/svelte-logo.png" alt="Svelte logo" width="70" height="30" />
+    <img src="https://www.devoteam.com/wp-content/uploads/2024/02/svelte-logo.png" alt="Svelte logo" width="116" height="50" />
   </a>
 
   <a href="https://www.typescriptlang.org/" style="text-decoration: none;">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/512px-Typescript_logo_2020.svg.png" alt="TypeScript logo" width="50" height="50" />
   </a>
-</div>
 
 ## Running ANTLR Code
 In the Examples directory, the test.sh file will run the test file in ANTLR/examples with the specified grammar. ([ANTLR](https://www.antlr.org/download.html) and Java needs to be installed to run this)
