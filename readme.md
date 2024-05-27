@@ -1,15 +1,20 @@
+<br />
 <p align="center">
-  <img src="./Logo.png" alt="LexiTrain Logo" width="250" height="250"/>
+  <img src="./Logo.png" alt="LexiTrain Logo"/>
 </p>
-# LexiTrain Project
+<br />
+<br />
+
+## About
 LexiTrain is a formal language used to describe training plans for endurance athletes, enabling the compilation of detailed and attractive training plans.
 LexiTrain was created as a dissertation project in my final year as a computer science undergraduate at Swansea University.
 The full dissertaion can be read [here](./dissertation.pdf).
 
 The project source is split into three parts: the ANTLR code, the website compiler code, and the documentation code.
 
+## Demo
 ![LexiTrain Preview](./preview.gif)
-<br /> 
+
 ## Tools Used
 <p>
   <img src="https://www.svgrepo.com/show/373431/antlr.svg" alt="ANTLR logo" width="70" height="70" />
@@ -36,8 +41,9 @@ The project source is split into three parts: the ANTLR code, the website compil
 ## Running ANTLR Code
 In the Examples directory, the test.sh file will run the test file in ANTLR/examples with the specified grammar. ([ANTLR](https://www.antlr.org/download.html) and Java needs to be installed to run this)
 
+Download the ANTLR lib to the correct place for the test.sh file:
 ```sh
-cd /usr/local/lib #downloads ANTLR to the right place for the test.sh script
+cd /usr/local/lib 
 curl -O http://www.antlr.org/download/antlr-4.0-complete.jar
 ```
 
@@ -48,6 +54,6 @@ The web code is run using [Node](https://nodejs.org/en/download/). The first tim
 
 ## Running the Documentation
 A compiled version is [here](./DOCS/site/).
-mkdocs needs to be installed for a fresh compile [mkdocs](https://www.mkdocs.org/user-guide/installation/) & [mcdocs material](https://squidfunk.github.io/mkdocs-material/getting-started/)
+mkdocs needs to be installed for a fresh compile [mkdocs](https://www.mkdocs.org/user-guide/installation/) & [mcdocs material](https://squidfunk.github.io/mkdocs-material/getting-started/).
 The host_site.sh script can be run to serve the documentation on an ubuntu apache server (works on my Ubuntu 24.04 LTS pc).
 
