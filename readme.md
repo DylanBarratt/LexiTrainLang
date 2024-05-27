@@ -11,17 +11,12 @@ The project source is split into three parts: the ANTLR code, the website compil
 
 ![LexiTrain Preview](./preview.gif)
 
-  <a href="https://www.antlr.org/" style="text-decoration: none;">
-    <img src="https://www.svgrepo.com/show/373431/antlr.svg" alt="ANTLR logo" width="50" height="50" />
-  </a>
+## Tools Used
+[![ANTLR logo](https://www.svgrepo.com/show/373431/antlr.svg)](https://www.antlr.org/)
 
-  <a href="https://svelte.dev/" style="text-decoration: none;">
-    <img src="https://www.devoteam.com/wp-content/uploads/2024/02/svelte-logo.png" alt="Svelte logo" width="116" height="50" />
-  </a>
+[![Svelte logo](https://www.devoteam.com/wp-content/uploads/2024/02/svelte-logo.png)](https://svelte.dev/)
 
-  <a href="https://www.typescriptlang.org/" style="text-decoration: none;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/512px-Typescript_logo_2020.svg.png" alt="TypeScript logo" width="50" height="50" />
-  </a>
+[![TypeScript logo](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/512px-Typescript_logo_2020.svg.png)](https://www.typescriptlang.org/)
 
 ## Running ANTLR Code
 In the Examples directory, the test.sh file will run the test file in ANTLR/examples with the specified grammar. ([ANTLR](https://www.antlr.org/download.html) and Java needs to be installed to run this)
