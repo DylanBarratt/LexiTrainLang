@@ -12,15 +12,15 @@ The project source is split into three parts: the ANTLR code, the website compil
 ![LexiTrain Preview](./preview.gif)
 
 <a href="https://www.antlr.org/">
-  <img src="https://www.svgrepo.com/show/373431/antlr.svg" alt="ANTLR logo" width="25" height="25" />
+  <img src="https://www.svgrepo.com/show/373431/antlr.svg" alt="ANTLR logo" width="50" height="50" />
 </a>
 
-<a href="https://www.antlr.org/">
-  <img src="https://www.svgrepo.com/show/373431/antlr.svg" alt="ANTLR logo" width="25" height="25" />
+<a href="https://svelte.dev/">
+  <img src="https://www.devoteam.com/wp-content/uploads/2024/02/svelte-logo.png" alt="Svelte logo" width="70" height="30" />
 </a>
 
-<a href="https://www.antlr.org/">
-  <img src="https://www.svgrepo.com/show/373431/antlr.svg" alt="ANTLR logo" width="25" height="25" />
+<a href="https://www.typescriptlang.org/">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/512px-Typescript_logo_2020.svg.png" alt="TypeScript logo" width="50" height="50" />
 </a>
 
 ## Running ANTLR Code
