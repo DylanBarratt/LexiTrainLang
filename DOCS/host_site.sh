@@ -6,15 +6,23 @@
 SITE_NAME=LexiTrain_docs
 IP=127.0.0.1 # May need to change to your ip 
 
+# Closes server on exit
 cleanup() {
     echo -e "\nstopping apache server"
     sudo systemctl stop apache2
 }
-
 trap cleanup EXIT
 
-echo "Building site:"
-python3 -m mkdocs build
+# Check in correct dir
+if [ "$(basename "$PWD")" != "DOCS" ]; then
+    cd "DOCS" || exit 1
+fi
+
+# Build if specified
+if [[ "$@" == *"--build"* ]]; then
+    echo "Building site:"
+    python3 -m mkdocs build
+fi
 
 sudo mkdir -p /var/www/html/$SITE_NAME
 sudo cp -r ./site/* /var/www/html/$SITE_NAME/
