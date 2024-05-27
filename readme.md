@@ -12,11 +12,26 @@ The project source is split into three parts: the ANTLR code, the website compil
 ![LexiTrain Preview](./preview.gif)
 
 ## Tools Used
-[![ANTLR logo](https://www.svgrepo.com/show/373431/antlr.svg)](https://www.antlr.org/)
+<p style="text-align: center;">
+  <img src="https://www.svgrepo.com/show/373431/antlr.svg" alt="ANTLR logo" width="70" height="70" />
+  <a href="https://www.antlr.org/">
+    ANTLR 4
+  </a>
+</p>
 
-[![Svelte logo](https://www.devoteam.com/wp-content/uploads/2024/02/svelte-logo.png)](https://svelte.dev/)
+<p style="text-align: center;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Svelte_logo_by_gengns.svg/640px-Svelte_logo_by_gengns.svg.png" alt="Svelte logo" width="64" height="74" />
+  <a href="https://svelte.dev/">
+    Svelte
+  </a>
+</p>
 
-[![TypeScript logo](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/512px-Typescript_logo_2020.svg.png)](https://www.typescriptlang.org/)
+<p style="text-align: center;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/512px-Typescript_logo_2020.svg.png" alt="TypeScript logo" width="70" height="70" />
+  <a href="https://www.typescriptlang.org/">
+    TypeScript
+  </a>
+</p>
 
 ## Running ANTLR Code
 In the Examples directory, the test.sh file will run the test file in ANTLR/examples with the specified grammar. ([ANTLR](https://www.antlr.org/download.html) and Java needs to be installed to run this)
