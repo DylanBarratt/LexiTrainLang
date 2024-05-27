@@ -4,8 +4,7 @@ if [ "$(basename "$PWD")" != "ANTLR" ]; then
     cd "ANTLR" || exit 1
 fi
 
-./check_lib.sh
-./out.sh
+sudo ./check_lib.sh
 
 rm -rf ../WEB/SRC/lib/lt
 
