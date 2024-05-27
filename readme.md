@@ -41,11 +41,6 @@ The project source is split into three parts: the ANTLR code, the website compil
 ## Running ANTLR Code
 In the Examples directory, the test.sh file will run the test file in ANTLR/examples with the specified grammar. ([ANTLR](https://github.com/antlr/antlr4/blob/master/doc/getting-started.md) and Java needs to be installed to run this)
 
-```sh
-cd /usr/local/lib 
-curl -O http://www.antlr.org/download/antlr-4.0-complete.jar
-```
-
 ## Running the WEB Compiler Code
 The web code is run using [Node](https://nodejs.org/en/download/). The first time will need an npm install (`npm i`).
 `npm run dev` will locally run a development build for testing
