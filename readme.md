@@ -9,6 +9,7 @@
 LexiTrain is a formal language used to describe training plans for endurance athletes, enabling the compilation of detailed and attractive training plans.
 LexiTrain was created as a dissertation project in my final year as a computer science undergraduate at Swansea University.
 The full dissertation can be read [here](./dissertation.pdf).
+Overall, the dissertation achieved an 80% grade. 
 
 The project source is split into three parts: the ANTLR code, the compiler code, and the documentation code.
 The ANTLR code is the raw grammar files for the language with a few example files. It can be viewed [here](/ANTLR)
